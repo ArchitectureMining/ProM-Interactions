@@ -1,0 +1,19 @@
+<ivy-module version="2.0">
+    <info organisation="prom" module="Workshop" revision="latest">
+    	<description>
+    		Version VERSION
+    	</description>
+    </info>
+    <configurations>
+   		<conf name="default" extends="lib" />
+   		<conf name="lib" />
+	</configurations>  
+    <dependencies defaultconf="default">
+       <dependency org="prom" name="ProM-Plugins" rev="latest" changing="true" transitive="true" />
+       <dependency org="prom" name="Log" rev="latest" changing="true" transitive="true" />
+       <dependency org="prom" name="TransitionSystems" rev="latest" changing="true"/>
+       <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		<dependency org="org.junit.jupiter" name="junit-jupiter-api" rev="5.3.1"/>
+		<dependency org="org.junit.jupiter" name="junit-jupiter-engine" rev="5.3.1"/>
+    </dependencies>
+</ivy-module>
