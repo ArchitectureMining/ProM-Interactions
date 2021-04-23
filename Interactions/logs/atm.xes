@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file has been generated with the OpenXES library. It conforms -->
+<!-- to the XML serialization of the XES standard for log storage and -->
+<!-- management. -->
+<!-- XES standard version: 1.0 -->
+<!-- OpenXES library version: 1.0RC7 -->
+<!-- OpenXES is available from http://www.openxes.org/ -->
+<log xes.version="1.0" xes.features="nested-attributes" openxes.version="1.0RC7">
+	<extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext"/>
+	<extension name="Lifecycle" prefix="lifecycle" uri="http://www.xes-standard.org/lifecycle.xesext"/>
+	<extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext"/>
+	<classifier name="Event Name" keys="concept:name"/>
+	<classifier name="(Event Name AND Lifecycle transition)" keys="concept:name lifecycle:transition"/>
+	<string key="concept:name" value="XES Event Log"/>
+	<trace>
+		<string key="concept:name" value="id-1617267497122"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:17.121"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:17.859"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="auth-server"/>
+			<string key="concept:name" value="autenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:18.046"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267500490"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="checkBalance"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:20.490"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="checkBalance"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:20.494"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="balance-service"/>
+			<string key="concept:name" value="checkBalance"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:20.497"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267507429"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:27.428"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:27.434"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="balance-service"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:27.437"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267509076"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="printReceipt"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:29.075"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="printReceipt"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:29.081"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267512676"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="withdrawalRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:32.676"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="withdrawalRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:32.683"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="balance-service"/>
+			<string key="concept:name" value="withdrawalRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:32.687"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267514147"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:34.147"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:34.151"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="auth-server"/>
+			<string key="concept:name" value="autenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:34.154"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267515523"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:35.523"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:35.526"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="balance-service"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:35.529"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267516268"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="printReceipt"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:36.267"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="printReceipt"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:36.272"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267517647"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:37.647"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:37.651"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="auth-server"/>
+			<string key="concept:name" value="autenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:37.654"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267518159"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="checkBalance"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:38.158"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="checkBalance"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:38.163"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="balance-service"/>
+			<string key="concept:name" value="checkBalance"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:38.164"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267519994"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:39.993"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:39.999"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="auth-server"/>
+			<string key="concept:name" value="autenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:40.000"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267521303"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:41.302"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:41.306"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="balance-service"/>
+			<string key="concept:name" value="depositRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:41.309"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267522024"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="printReceipt"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:42.023"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="printReceipt"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:42.032"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267527547"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:47.546"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="authenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:47.551"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="auth-server"/>
+			<string key="concept:name" value="autenticationRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:47.553"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="id-1617267529976"/>
+		<event>
+			<string key="Callee" value="terminal-proxy"/>
+			<string key="concept:name" value="withdrawalRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:49.976"/>
+			<string key="Source" value="atm-terminal"/>
+		</event>
+		<event>
+			<string key="Callee" value="bank-service"/>
+			<string key="concept:name" value="withdrawalRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:49.982"/>
+			<string key="Source" value="terminal-proxy"/>
+		</event>
+		<event>
+			<string key="Callee" value="balance-service"/>
+			<string key="concept:name" value="withdrawalRequest"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Timestamp" value="03:58:49.983"/>
+			<string key="Source" value="bank-service"/>
+		</event>
+	</trace>
+</log>
