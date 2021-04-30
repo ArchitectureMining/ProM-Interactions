@@ -15,8 +15,9 @@ import org.deckfour.xes.model.XTrace;
 public class PointerList {
 
 	PointerListNode root;
-	Map<String, PointerListNode> tracemap = new HashMap<String, PointerListNode>();
-	List<PointerListNode> traceComposition;
+	Map<String, PointerListNode> traceNodes = new HashMap<String, PointerListNode>();
+	List<PointerListEdge> traceEdges = new ArrayList<PointerListEdge>();
+	
 	String callerTag;
 	String calleeTag;
 
@@ -36,34 +37,25 @@ public class PointerList {
 		Set<String> uniquevalues = new HashSet<String>();
 		uniquevalues.addAll(sourceValues);
 		uniquevalues.addAll(sinkValues);
-		traceComposition = new ArrayList<PointerListNode>();
-		tracemap.put("start", new PointerListNode("start"));
+		traceNodes.put("start", new PointerListNode("start"));
 		for(String s: uniquevalues) {
-			tracemap.put(s, new PointerListNode(s));
+			traceNodes.put(s, new PointerListNode(s));
 		}
-		tracemap.put("end", new PointerListNode("end"));
+		traceNodes.put("end", new PointerListNode("end"));
 		
 		for(XEvent e: trace) {
 			XAttributeMap att = e.getAttributes();
 			String source = att.get(this.callerTag).toString();
 			String sink = att.get(this.calleeTag).toString();
-			tracemap.get(source).nextNodes.add(tracemap.get(sink));
+			traceEdges.add(new PointerListEdge(traceNodes.get(source), traceNodes.get(sink)));
 		}
 		for(String s: getStarterNodes(sinkValues, uniquevalues)) {
-			tracemap.get("start").nextNodes.add(tracemap.get(s));
+			traceEdges.add(new PointerListEdge(traceNodes.get("start"), traceNodes.get(s)));
 		}
 		for(String s: getEndNodes(sourceValues, uniquevalues)) {
-			tracemap.get(s).nextNodes.add(tracemap.get("end"));
+			traceEdges.add(new PointerListEdge(traceNodes.get(s), traceNodes.get("end")));
 		}		
-		root = tracemap.get("start");
-	}
-
-	public List<PointerListNode> getTraceComposition() {
-		return traceComposition;
-	}
-
-	public void setTraceComposition(List<PointerListNode> traceComposition) {
-		this.traceComposition = traceComposition;
+		root = traceNodes.get("start");
 	}
 	
 	private Set<String> getSourceAttributeValues(XTrace trace) {
@@ -102,20 +94,11 @@ public class PointerList {
 	}
 	
 	@Override
-	public String toString() {		
-		return printBranch(root);
-	}
-	
-	String printBranch(PointerListNode s) {
-		String retString;
-		if(s.current == "end")
-			retString = s.current;
-		else 
-			retString = s.current + " -> ";
-		for(PointerListNode pln: s.nextNodes) {
-			retString += printBranch(pln);
-		}	
+	public String toString() {
+		String retString = traceEdges.get(0).source.current;
+		for(PointerListEdge plE: traceEdges) {
+			retString += " -> " + plE.target.current;
+		}
 		return retString;
-	}
-	
+	}	
 }
