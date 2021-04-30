@@ -1,0 +1,6 @@
+Source;Callee;MessageType;SeqenceID;Timestamp
+atm-terminal;terminal-proxy;checkBalance;id-1617267500490;03:58:20.490
+terminal-proxy;bank-service;checkBalance;id-1617267500490;03:58:20.494
+bank-service;balance-service;checkBalance;id-1617267500490;03:58:20.497
+atm-terminal;bank-service;checkBalance;id-16172675091;03:58:20.490
+bank-service;balance-service;checkBalance;id-16172675091;03:58:20.497

@@ -37,7 +37,7 @@ public class ModelDiscoveryPlugin {
 	public static InteractionModel modelDiscovery(final UIPluginContext context, ParameterSettings iSettings) {	
 
 		ArrayList<String> s = uniqueEntities(iSettings);
-		InteractionModel iModel = new InteractionModel(s);
+		InteractionModel iModel = new InteractionModel(s, iSettings);
 		iModel.setConnectionMatrix(createMatrix(iModel.entities, iSettings));
 		return iModel;
 		
