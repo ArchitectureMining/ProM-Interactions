@@ -2,11 +2,7 @@ package org.architecturemining.interactionCentric.visualizer.graph;
 
 import java.text.DecimalFormat;
 
-import javax.swing.SwingConstants;
-
-import org.processmining.models.graphbased.AttributeMap;
-import org.processmining.models.graphbased.directed.DirectedGraph;
-import org.processmining.models.graphbased.directed.DirectedGraphEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 
 /**
  * Author: Arnout Verhaar
@@ -15,43 +11,25 @@ import org.processmining.models.graphbased.directed.DirectedGraphEdge;
  * Implementaton of the edge used in the InteractionGraph. 
  * An edge consists out of 2 nodes and a weight(strength)
 */
-public class GraphEdge implements DirectedGraphEdge<GraphNode, GraphNode>{
+public class GraphEdge extends DefaultWeightedEdge{
 
 	private GraphNode source, target;
-	private AttributeMap attributes;
+	private double strength;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+
 	
 	public GraphEdge(GraphNode source, GraphNode target, double strength) {
 		this.source = source;
 		this.target = target;
-		
-		attributes = new AttributeMap();
-		getAttributeMap().put(AttributeMap.EDGEEND, AttributeMap.ArrowType.ARROWTYPE_CLASSIC);
-		getAttributeMap().put(AttributeMap.EDGEMIDDLEFILLED, true);
-		
-		DecimalFormat df = new DecimalFormat("#.00");
-		getAttributeMap().put(AttributeMap.LABEL, df.format(strength));
-		getAttributeMap().put(AttributeMap.SHOWLABEL, true);
-		getAttributeMap().put(AttributeMap.LABELALONGEDGE, true);
-		getAttributeMap().put(AttributeMap.PREF_ORIENTATION, SwingConstants.WEST);
-	}
-	
-	public String getLabel() {
-		return source.getLabel() + " -> " + target.getLabel();
+		this.strength = strength;
 	}
 	
 	@Override
 	public String toString() {
-		return getLabel();
+		return df2.format(strength);
+		//return source.getLabel() + " -> " + target.getLabel();
 	}
 
-	public DirectedGraph<?, ?> getGraph() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public AttributeMap getAttributeMap() {
-		return attributes;
-	}
 
 	public GraphNode getSource() {
 		return source;
@@ -59,6 +37,14 @@ public class GraphEdge implements DirectedGraphEdge<GraphNode, GraphNode>{
 
 	public GraphNode getTarget() {
 		return target;
+	}
+
+	public double getStrength() {
+		return strength;
+	}
+
+	public void setStrength(double strength) {
+		this.strength = strength;
 	}
 
 }

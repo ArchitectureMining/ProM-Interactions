@@ -10,9 +10,7 @@ import java.util.Set;
 import org.architecturemining.interactionCentric.models.InteractionModel;
 import org.architecturemining.interactionCentric.visualizer.graph.GraphEdge;
 import org.architecturemining.interactionCentric.visualizer.graph.GraphNode;
-import org.processmining.models.graphbased.AttributeMap;
-import org.processmining.models.graphbased.directed.DirectedGraph;
-import org.processmining.models.graphbased.directed.DirectedGraphEdge;
+import org.jgrapht.graph.DefaultDirectedGraph;
 import org.processmining.models.graphbased.directed.DirectedGraphNode;
 
 
@@ -23,16 +21,16 @@ import org.processmining.models.graphbased.directed.DirectedGraphNode;
  * Class for creating the InteractionGraph which is based on nodes and edges. 
 */
 
-public class InteractionGraph implements DirectedGraph<GraphNode, GraphEdge>{
+public class InteractionGraph extends DefaultDirectedGraph<GraphNode, GraphEdge>{
+	private static final long serialVersionUID = -749606944194953790L;
 	private HashMap<String, GraphNode> nodes = new HashMap<>();
 	private HashMap<String, GraphEdge> edges = new HashMap<>();
-	private AttributeMap attributes = new AttributeMap();
 	
 	// Create the graph by adding all nodes first
 	// After creating the nodes, all connections from the probability matrix are created.
 	// The built in visualizer shows this in a panel.
 	public InteractionGraph(InteractionModel iModel) {
-		
+		super(GraphEdge.class);
 		List<String> nodeNames = iModel.nodeList;
 		for(Map.Entry<String, Integer> entry : iModel.entities.entrySet()) {
 			nodes.put(entry.getKey(), new GraphNode(entry.getKey()));
@@ -50,26 +48,18 @@ public class InteractionGraph implements DirectedGraph<GraphNode, GraphEdge>{
 				colCounter++;
 			}
 			rowCounter++;
-		}		
+		}
+		
+		System.out.println(nodes.values().toArray());
+		
+		for(GraphNode gn: nodes.values()) {	
+			addVertex(gn);		
+		}
+		for(GraphEdge ge: edges.values()) {
+			addEdge(ge.getSource(), ge.getTarget(), ge);
+		}
 	}
 
-	public String getLabel() {
-		return "Interaction graph";
-	}
-
-	public DirectedGraph<?, ?> getGraph() {
-		return this;
-	}
-
-	public AttributeMap getAttributeMap() {
-		return attributes;
-	}
-
-	public int compareTo(DirectedGraph<GraphNode, GraphEdge> o) {
-		return 0;
-	}
-
-	
 	public Set<GraphNode> getNodes() {
 		return new HashSet<GraphNode>(nodes.values());
 	}
@@ -79,23 +69,11 @@ public class InteractionGraph implements DirectedGraph<GraphNode, GraphEdge>{
 	}
 
 	public Collection<GraphEdge> getInEdges(DirectedGraphNode node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public Collection<GraphEdge> getOutEdges(DirectedGraphNode node) {
-		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@SuppressWarnings({ "unlikely-arg-type", "rawtypes" })
-	public void removeEdge(DirectedGraphEdge edge) {
-		edges.remove(edge);
-		
-	}
-
-	public void removeNode(DirectedGraphNode cell) {
-		nodes.remove(cell.getLabel());		
 	}
 
 }

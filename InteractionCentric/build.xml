@@ -10,9 +10,15 @@
 	<property name="version" value="${major_minor}.${env.BUILD_NUMBER}" />
 	<property name="project" value="InteractionCentric" />
 
+<<<<<<< Updated upstream
 	<property name="author" value="W.D. Verhaar" />
 	<property name="organization" value="Utrecht University" />
 	<property name="description" value="InteractionCentric" />
+=======
+	<property name="author" value="Arnout Verhaar" />
+	<property name="organization" value="Utrecht University" />
+	<property name="description" value="Master Thesis plugins" />
+>>>>>>> Stashed changes
 	<property name="license" value="L-GPL" />
 	<property name="logo" value="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png" />
 
