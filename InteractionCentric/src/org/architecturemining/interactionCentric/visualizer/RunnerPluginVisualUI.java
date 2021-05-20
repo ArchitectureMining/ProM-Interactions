@@ -2,11 +2,15 @@ package org.architecturemining.interactionCentric.visualizer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -18,6 +22,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.architecturemining.interactionCentric.models.TracesLikelihood;
+import org.architecturemining.interactionCentric.visualizer.graph.GraphEdge;
+import org.architecturemining.interactionCentric.visualizer.graph.GraphNode;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.processmining.framework.plugin.PluginContext;
@@ -32,9 +38,12 @@ import com.mxgraph.view.mxGraph;
 
 public class RunnerPluginVisualUI extends JPanel {
 	private final JPanel topbar = new JPanel();
+	private boolean showEnd, showStart;
 	public RunnerPluginVisualUI(PluginContext context, TracesLikelihood tL) {
 		topbar.setBackground(Color.GRAY);
 		this.setBackground(Color.white);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		JPanel contentPanel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -43,8 +52,8 @@ public class RunnerPluginVisualUI extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(5)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(contentPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(topbar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(contentPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, (int) screenSize.getWidth(), Short.MAX_VALUE)
+						.addComponent(topbar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, (int) screenSize.getWidth(), Short.MAX_VALUE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -53,8 +62,7 @@ public class RunnerPluginVisualUI extends JPanel {
 					.addContainerGap()
 					.addComponent(topbar, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(113, Short.MAX_VALUE))
+					.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, (screenSize.height - 200), GroupLayout.PREFERRED_SIZE))
 		);
 		
 		JSplitPane splitPane = new JSplitPane();
@@ -90,13 +98,13 @@ public class RunnerPluginVisualUI extends JPanel {
 		list_title.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GroupLayout gl_left_list_panel = new GroupLayout(left_list_panel);
 		gl_left_list_panel.setHorizontalGroup(
-			gl_left_list_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_left_list_panel.createSequentialGroup()
+			gl_left_list_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_left_list_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_left_list_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(tracesList, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
 						.addComponent(list_title))
-					.addContainerGap(380, Short.MAX_VALUE))
+					.addContainerGap(162, Short.MAX_VALUE))
 		);
 		gl_left_list_panel.setVerticalGroup(
 			gl_left_list_panel.createParallelGroup(Alignment.LEADING)
@@ -104,8 +112,8 @@ public class RunnerPluginVisualUI extends JPanel {
 					.addContainerGap()
 					.addComponent(list_title)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(tracesList, GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(tracesList, GroupLayout.PREFERRED_SIZE, 902, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		left_list_panel.setLayout(gl_left_list_panel);
 		contentPanel.setLayout(gl_contentPanel);
@@ -138,24 +146,71 @@ public class RunnerPluginVisualUI extends JPanel {
 		
 		JLabel traceLabel = new JLabel("Select a trace");
 		traceLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		
+		JCheckBox removeEnd = new JCheckBox("Remove End node");
+		removeEnd.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {			
+				showEnd = removeEnd.isSelected();
+				int index = tracesList.getSelectedIndex();
+				tracesList.clearSelection();
+				tracesList.setSelectedIndex(index);
+			}
+		});
+		
+		JCheckBox removeStart = new JCheckBox("Remove Start node");
+		removeStart.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				showStart = removeStart.isSelected();
+				int index = tracesList.getSelectedIndex();
+				tracesList.clearSelection();
+				tracesList.setSelectedIndex(index);
+			}
+		});
 		GroupLayout gl_right_panel = new GroupLayout(right_panel);
 		gl_right_panel.setHorizontalGroup(
-			gl_right_panel.createParallelGroup(Alignment.TRAILING)
+			gl_right_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_right_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_right_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(traceLabel)
-						.addComponent(graph_panel, GroupLayout.PREFERRED_SIZE, 579, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(346, Short.MAX_VALUE))
+						.addGroup(gl_right_panel.createSequentialGroup()
+							.addComponent(traceLabel)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_right_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_right_panel.createSequentialGroup()
+									.addComponent(removeStart)
+									.addGap(32))
+								.addGroup(Alignment.TRAILING, gl_right_panel.createSequentialGroup()
+									.addComponent(removeEnd, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+									.addContainerGap())))
+						.addGroup(gl_right_panel.createSequentialGroup()
+							.addComponent(graph_panel, GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+							.addContainerGap())))
 		);
 		gl_right_panel.setVerticalGroup(
-			gl_right_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_right_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(traceLabel)
-					.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-					.addComponent(graph_panel, GroupLayout.PREFERRED_SIZE, 437, GroupLayout.PREFERRED_SIZE))
+			gl_right_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_right_panel.createSequentialGroup()
+					.addGroup(gl_right_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_right_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(traceLabel))
+						.addGroup(gl_right_panel.createSequentialGroup()
+							.addComponent(removeEnd)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(removeStart)))
+					.addGap(18)
+					.addComponent(graph_panel, GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+					.addGap(287))
 		);
+		GroupLayout gl_graph_panel = new GroupLayout(graph_panel);
+		gl_graph_panel.setHorizontalGroup(
+			gl_graph_panel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 135, Short.MAX_VALUE)
+		);
+		gl_graph_panel.setVerticalGroup(
+			gl_graph_panel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 437, Short.MAX_VALUE)
+		);
+		graph_panel.setLayout(gl_graph_panel);
 		right_panel.setLayout(gl_right_panel);
 		
 	//  Compose panel
@@ -165,19 +220,18 @@ public class RunnerPluginVisualUI extends JPanel {
 		
 		tracesList.addListSelectionListener(new ListSelectionListener() {		
 			public void valueChanged(ListSelectionEvent e) {
-				if(e.getValueIsAdjusting()) {
+				if(tracesList.getSelectedIndex() >= 0) {
 					graph_panel.removeAll();				
 			    	InteractionGraph graph = new InteractionGraph(tL.traces.get(tracesList.getSelectedIndex()));
-					mxGraphComponent graph_visual = createGraphPanel(graph);				
+					mxGraphComponent graph_visual = createGraphPanel(graph, showEnd, showStart);				
 					GroupLayout gl_graph_panel = new GroupLayout(graph_panel);
-					
 					gl_graph_panel.setHorizontalGroup(
 						gl_graph_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(graph_visual, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+							.addComponent(graph_visual, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, right_panel.getWidth(), Short.MAX_VALUE)
 					);
 					gl_graph_panel.setVerticalGroup(
 						gl_graph_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(graph_visual, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+							.addComponent(graph_visual, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, right_panel.getHeight(), Short.MAX_VALUE)
 					);
 					graph_panel.setLayout(gl_graph_panel);
 					splitPane.resetToPreferredSizes();
@@ -185,9 +239,9 @@ public class RunnerPluginVisualUI extends JPanel {
 					String likelihood = df2.format(tL.traces.get(tracesList.getSelectedIndex()).getLikelihood());
 					
 					traceLabel.setText("Trace " + (tracesList.getSelectedIndex() + 1) + " | Computed Likelihood: " + likelihood);
-					
-				}	
-			}
+					System.out.println(tracesList.getSelectedIndex());
+				}
+			}			
 		});
 		
 		splitPane.resetToPreferredSizes();
@@ -200,15 +254,38 @@ public class RunnerPluginVisualUI extends JPanel {
 		
 	}
 	
-	private mxGraphComponent createGraphPanel(DefaultDirectedGraph ddg) {
-        // create a visualization using JGraph, via an adapter
+	private mxGraphComponent createGraphPanel(DefaultDirectedGraph<GraphNode, GraphEdge> ddg, boolean withoutEnd, boolean withoutStart) {
+        // create a visualization using JGraph, via an adapter		
+		GraphNode endNode = null, startNode = null;
+		if(withoutEnd) {		
+			for(GraphNode x: ddg.vertexSet()) {
+				if(x.fullName.equals("end")) {
+					endNode = x;			
+					break;
+				}
+			}			       	
+        }
+		
+		if(withoutStart) {		
+			for(GraphNode x: ddg.vertexSet()) {
+				if(x.fullName.equals("start")) {
+					startNode = x;
+					break;
+				}
+			}			       	
+        }
+		
+		ddg.removeVertex(startNode);
+		ddg.removeVertex(endNode);
+		
         JGraphXAdapter jgxAdapter = new JGraphXAdapter<>(ddg);
 
         mxGraphComponent component = new mxGraphComponent(jgxAdapter);
         component.setConnectable(false);
         mxGraph graphVisual = component.getGraph();
         graphVisual.setAllowDanglingEdges(false);
-
+        graphVisual.setCellsEditable(true);
+        
         // positioning via jgraphx layouts
         mxFastOrganicLayout layout = new mxFastOrganicLayout(jgxAdapter);
 

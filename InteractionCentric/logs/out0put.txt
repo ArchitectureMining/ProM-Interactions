@@ -1,2 +1,0 @@
-0.4666666666666667 | start -> atm-terminal -> terminal-proxy -> bank-service -> balance-service -> end
-0.0 | start -> atm-terminal -> bank-service -> balance-service -> end

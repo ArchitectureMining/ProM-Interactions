@@ -2,12 +2,22 @@ package org.architecturemining.interactionCentric.visualizer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Hashtable;
 import java.util.Map;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 import org.architecturemining.interactionCentric.models.InteractionModel;
+import org.architecturemining.interactionCentric.visualizer.graph.GraphEdge;
+import org.architecturemining.interactionCentric.visualizer.graph.GraphNode;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.processmining.framework.plugin.PluginContext;
@@ -34,8 +44,15 @@ public class ModelVisualizationUI extends JPanel {
 
 	// generated serial id
 	private static final long serialVersionUID = 1757843017222865547L;
+	private boolean hideStart, hideEnd;
+	private mxGraphComponent graphPanel;
 	
 	public ModelVisualizationUI(PluginContext context, InteractionModel iModel) {
+		
+		JPanel mainPanel = new JPanel(new BorderLayout());
+		JPanel optionsPanel = new JPanel();
+		JPanel graph_wrapper = new JPanel();
+		
 		this.setBackground(Color.white);
 				
 		// Create graph
@@ -48,30 +65,112 @@ public class ModelVisualizationUI extends JPanel {
 		
 		
 		// Compose panel
-		mxGraphComponent graphPanel = createGraphPanel(graph);
-		this.add(graphPanel, BorderLayout.CENTER);	
+		graphPanel = createGraphPanel(graph);
+			
+		mainPanel.add(optionsPanel, BorderLayout.WEST);
+		
+		JCheckBox hideStartCheckbox = new JCheckBox("Hide 'start' node");
+		hideStartCheckbox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				hideStart = e.getStateChange() == ItemEvent.SELECTED;
+				graph_wrapper.removeAll();
+				InteractionGraph graph = new InteractionGraph(iModel);
+				graphPanel = createGraphPanel(graph);				
+				graph_wrapper.add(graphPanel, BorderLayout.CENTER);
+				graph_wrapper.revalidate();
+				graph_wrapper.repaint();
+			}
+		});
+		
+		JLabel lblNewLabel = new JLabel("Graph Options");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		
+		JCheckBox hideEndCheckbox = new JCheckBox("Hide 'end' node");
+		hideEndCheckbox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				hideEnd = e.getStateChange() == ItemEvent.SELECTED;
+				graph_wrapper.removeAll();
+				InteractionGraph graph = new InteractionGraph(iModel);
+				graphPanel = createGraphPanel(graph);				
+				graph_wrapper.add(graphPanel, BorderLayout.CENTER);
+				graph_wrapper.revalidate();
+				graph_wrapper.repaint();
+			}
+		});
+		GroupLayout gl_optionsPanel = new GroupLayout(optionsPanel);
+		gl_optionsPanel.setHorizontalGroup(
+			gl_optionsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_optionsPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_optionsPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(hideStartCheckbox, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+						.addComponent(hideEndCheckbox, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(66, Short.MAX_VALUE))
+		);
+		gl_optionsPanel.setVerticalGroup(
+			gl_optionsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_optionsPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel)
+					.addGap(19)
+					.addComponent(hideStartCheckbox)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(hideEndCheckbox)
+					.addContainerGap(759, Short.MAX_VALUE))
+		);
+		optionsPanel.setLayout(gl_optionsPanel);	
+		graph_wrapper.setLayout(new BorderLayout(0, 0));
+		graph_wrapper.add(graphPanel);
+		mainPanel.add(graph_wrapper, BorderLayout.CENTER);
+		this.add(mainPanel, BorderLayout.CENTER);
 	}
 	
 	
-	private mxGraphComponent createGraphPanel(DefaultDirectedGraph ddg) {
-		JPanel jp = new JPanel();
+	private mxGraphComponent createGraphPanel(DefaultDirectedGraph<GraphNode, GraphEdge> ddg) {
+		
+		GraphNode endNode = null, startNode = null;
+		System.out.println(hideEnd);
+		System.out.println(hideStart);
+		
+		if(hideEnd) {		
+			for(GraphNode x: ddg.vertexSet()) {
+				if(x.fullName.equals("end")) {
+					endNode = x;			
+					break;
+				}
+			}			       	
+        }
+		
+		if(hideStart) {		
+			for(GraphNode x: ddg.vertexSet()) {
+				if(x.fullName.equals("start")) {
+					startNode = x;
+					break;
+				}
+			}			       	
+        }
+		
+		ddg.removeVertex(startNode);
+		ddg.removeVertex(endNode);
+		
         // create a visualization using JGraph, via an adapter
-        JGraphXAdapter jgxAdapter = new JGraphXAdapter<>(ddg);
+        JGraphXAdapter<GraphNode, GraphEdge> jgxAdapter = new JGraphXAdapter<GraphNode, GraphEdge>(ddg);
+       
 
-        mxGraphComponent component = new mxGraphComponent(jgxAdapter);
-        component.setConnectable(false);
-        mxGraph graphVisual = component.getGraph();
+        mxGraphComponent graph_instance = new mxGraphComponent(jgxAdapter);
+        graph_instance.setConnectable(false);
+        mxGraph graphVisual = graph_instance.getGraph();
         graphVisual.setAllowDanglingEdges(false);
         
   		graphVisual.setStylesheet(createDefaultEdgeStyle());
   		jgxAdapter.setStylesheet(createDefaultEdgeStyle());
-        jp.add(component);
 
         // positioning via jgraphx layouts
         mxFastOrganicLayout layout = new mxFastOrganicLayout(jgxAdapter);
 
         layout.execute(jgxAdapter.getDefaultParent());
-        layout.setForceConstant(500); // the higher, the more separated
+        layout.setForceConstant(60 + ddg.vertexSet().size() * 2); // the higher, the more separated
         layout.setDisableEdgeStyle(true); // true transforms the edges and makes them direct lines
         
      // layout using morphing
@@ -79,7 +178,7 @@ public class ModelVisualizationUI extends JPanel {
         try {
             layout.execute(graphVisual.getDefaultParent());
         } finally {
-            mxMorphing morph = new mxMorphing(component, 4, 5, 70);
+            mxMorphing morph = new mxMorphing(graph_instance, 4, 50, 70);
 
             morph.addListener(mxEvent.DONE, new mxIEventListener() {
                 @Override
@@ -92,8 +191,8 @@ public class ModelVisualizationUI extends JPanel {
             morph.startAnimation();
         }
         
-        //jgxAdapter.getStylesheet().setDefaultVertexStyle(nodeStyle);
-        return component;
+        graph_instance.setZoomPolicy(1);
+        return graph_instance;
 	}
 	
 	
@@ -112,5 +211,4 @@ public class ModelVisualizationUI extends JPanel {
         
         return mxStyle;
     }
-
 }

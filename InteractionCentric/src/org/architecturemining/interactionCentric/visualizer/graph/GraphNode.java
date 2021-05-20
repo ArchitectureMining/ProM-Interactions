@@ -14,7 +14,7 @@ public class GraphNode{
 
 	private NodeID id;
 	// The FQN including ID of the object represented in this node. The label is more concise
-	private String fullName;
+	public String fullName;
 
 	
 	public GraphNode(String name) {

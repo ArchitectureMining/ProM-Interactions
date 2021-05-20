@@ -85,9 +85,7 @@ public class TraceRunnerPlugin {
 				likelihoods.put("start" + "->" + x, singleLikelihood);
 			}
 			
-			System.out.println("sink");
 			for(String x: xes.getEndNodes(sourceValues, uniquevalues)) {
-				System.out.println(x);
 				source = iMod.entities.get(x);
 				sink = iMod.entities.get("end");
 				double singleLikelihood = iMod.probabilityMatrix[source][sink];

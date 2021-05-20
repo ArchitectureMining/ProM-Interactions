@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file has been generated with the OpenXES library. It conforms -->
+<!-- to the XML serialization of the XES standard for log storage and -->
+<!-- management. -->
+<!-- XES standard version: 1.0 -->
+<!-- OpenXES library version: 1.0RC7 -->
+<!-- OpenXES is available from http://www.openxes.org/ -->
+<log xes.version="1.0" xes.features="nested-attributes" openxes.version="1.0RC7">
+	<extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext"/>
+	<extension name="Lifecycle" prefix="lifecycle" uri="http://www.xes-standard.org/lifecycle.xesext"/>
+	<extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext"/>
+	<classifier name="Event Name" keys="concept:name"/>
+	<classifier name="(Event Name AND Lifecycle transition)" keys="concept:name lifecycle:transition"/>
+	<string key="concept:name" value="XES Event Log"/>
+	<trace>
+		<string key="concept:name" value="52d812eea13442f1ba832e8a8feab320"/>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="PlayerOnbekendRollen.PlayerOnbekendRollenProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.590"/>
+			<string key="Tag_Type" value="OnbekendRollen.OnbekendRollenPlayerApply_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="OnbekendRollen.OnbekendRollenAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="OnbekendRollen.OnbekendRollenRouter"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.574"/>
+			<string key="Tag_Type" value="Onbekend.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command"/>
+			<string key="Tag_StreamTypeName" value="Onbekend.OnbekendProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Onbekend.OnbekendSyncRouter"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.560"/>
+			<string key="Tag_Type" value="Onbekend.OnbekendCreated_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command"/>
+			<string key="Tag_StreamTypeName" value="Onbekend.OnbekendAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Onbekend.OnbekendProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.560"/>
+			<string key="Tag_Type" value="Onbekend.OnbekendCreated_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Onbekend.OnbekendAggregateRoot"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="8556923113d94d38a6a4c98167496d16"/>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="InputGbrtnsMtPlchldrs.InputGbrtnsMtPlchldrsProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.703"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpGewijzigdEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpSyncProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpSyncProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.700"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpApplyEndEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpProcessingProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="InputGbrtnsMtPlchldrs.InputGbrtnsMtPlchldrsProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.697"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudGewijzigdEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudSyncProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudSyncProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.697"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudApplyEndEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudProcessingProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpSyncProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.694"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpApplyEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpProcessingProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudSyncProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.691"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudApplyEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudProcessingProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpViewProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.685"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpApplyEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpProcessingProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpSyncProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.685"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpApplyStartEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpProcessingProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudViewProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.685"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudApplyEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudProcessingProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudSyncProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.684"/>
+			<string key="Tag_Type" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudApplyStartEvent"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudProcessingProjector"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_InhoudProcessingProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="InputPakbon.InputPakbonProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="GbrtnsMtPlchldrs.GbrtnsMtPlchldrsProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="PlayerOnbekendRollen.PlayerOnbekendRollenProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="PlayerOverigRollen.PlayerOverigRollenProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="VoorraadProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Pakbon.PakbonProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Gs.ViewProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpProcessingProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="InputGbrtnsMtPlchldrs.InputGbrtnsMtPlchldrsProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.640"/>
+			<string key="Tag_Type" value="Magazijn.Sync_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnProcessManager"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="PlayerOnbekendRollen.PlayerOnbekendRollenProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.631"/>
+			<string key="Tag_Type" value="OnbekendRollen.OnbekendRollenApply_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="OnbekendRollen.OnbekendRollenAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Magazijn.MagazijnSyncRouter"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.631"/>
+			<string key="Tag_Type" value="Magazijn.MagazijnChanged_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Magazijn.MagazijnProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.631"/>
+			<string key="Tag_Type" value="Magazijn.MagazijnChanged_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Signal.SignalProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.630"/>
+			<string key="Tag_Type" value="Signal.SignalResolved_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Magazijn.MagazijnRouter"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.621"/>
+			<string key="Tag_Type" value="Magazijn.OnbekendRollenCreatedForMagazijn_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command"/>
+			<string key="Tag_StreamTypeName" value="OnbekendRollen.OnbekendRollenAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="OnbekendRollen.OnbekendRollenRouter"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.590"/>
+			<string key="Tag_Type" value="Magazijn.MagazijnCreatedForOnbekendRollen_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Magazijn.MagazijnProjector"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.584"/>
+			<string key="Tag_Type" value="Magazijn.MagazijnCreated_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnAggregateRoot"/>
+		</event>
+		<event>
+			<string key="MetricName" value="Event"/>
+			<string key="Tag_EventHandlerInstance" value="Magazijn.MagazijnSyncRouter"/>
+			<string key="concept:name" value=""/>
+			<string key="X.timestamp" value="May 20, 2021 @ 12:19:11.584"/>
+			<string key="Tag_Type" value="Magazijn.MagazijnCreated_Event"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Tag_EventHandlerName" value="Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command"/>
+			<string key="Tag_StreamTypeName" value="Magazijn.MagazijnAggregateRoot"/>
+		</event>
+	</trace>
+</log>
