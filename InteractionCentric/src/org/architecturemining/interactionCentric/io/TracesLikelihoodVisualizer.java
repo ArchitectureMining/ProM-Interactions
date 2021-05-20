@@ -3,7 +3,7 @@ package org.architecturemining.interactionCentric.io;
 import javax.swing.JComponent;
 
 import org.architecturemining.interactionCentric.models.TracesLikelihood;
-import org.architecturemining.interactionCentric.visualizer.LikelihoodVisualUI;
+import org.architecturemining.interactionCentric.visualizer.RunnerPluginVisualUI;
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
 import org.processmining.contexts.uitopia.annotations.Visualizer;
@@ -24,7 +24,7 @@ public class TracesLikelihoodVisualizer {
             email = "w.d.verhaar@students.uu.nl"
     )
 	@Visualizer
-	public static LikelihoodVisualUI visualizer(final UIPluginContext context, TracesLikelihood tL) {	
-		return new LikelihoodVisualUI(context, tL);
+	public static RunnerPluginVisualUI visualizer(final UIPluginContext context, TracesLikelihood tL) {	
+		return new RunnerPluginVisualUI(context, tL);
 	}
 }

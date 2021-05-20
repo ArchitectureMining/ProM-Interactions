@@ -71,7 +71,7 @@ public class ModelVisualizationUI extends JPanel {
         mxFastOrganicLayout layout = new mxFastOrganicLayout(jgxAdapter);
 
         layout.execute(jgxAdapter.getDefaultParent());
-        layout.setForceConstant(150); // the higher, the more separated
+        layout.setForceConstant(500); // the higher, the more separated
         layout.setDisableEdgeStyle(true); // true transforms the edges and makes them direct lines
         
      // layout using morphing

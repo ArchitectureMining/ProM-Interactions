@@ -23,6 +23,7 @@ public class InteractionModel {
 
 	// maps a entity name to an index.
 	public Map<String, Integer> entities = new HashMap<String, Integer>();
+	public Map<Integer, String> entitiesIndexMapping = new HashMap<Integer, String>();
 	// list of all entities.
 	public ArrayList<String> nodeList;
 	// connection matrix which counts the amount of connections between two nodes within a network. row is caller, column is callee.
@@ -43,6 +44,7 @@ public class InteractionModel {
 		int cnt = 0;
 		for(String x: entityList) {
 			this.entities.put(x, cnt);
+			this.entitiesIndexMapping.put(cnt, x);
 			cnt++;
 		}
 		this.callerTag = iSettings.callerTag;
@@ -74,19 +76,37 @@ public class InteractionModel {
 	
 	// Sets the connectionmatrix and computes the probabiltymatrix which is always based on the connectionmatrix.
 	public void setConnectionMatrix(int[][] connectionMatrix) {
-		this.connectionMatrix = connectionMatrix;
+		this.connectionMatrix = connectionMatrix;		
+	}
+	
+	public void computeProbabilityMatrix(Map<String, Integer> nodesCounter) {
 		this.probabilityMatrix = new double[this.entities.size()][this.entities.size()];
-		int x = 0;
-		for(int[] row: connectionMatrix) {
-			int total = IntStream.of(row).sum();
-			if(total != 0) {
+		
+		// old method
+		if(false) {
+			int x = 0;		
+			for(int[] row: connectionMatrix) {
+				int total = IntStream.of(row).sum();
+				if(total != 0) {
+					int y = 0;
+					for(int value: row) {
+						this.probabilityMatrix[x][y] = (double)value / (double)total;
+						y++;
+					}
+				}
+				x++;
+			}
+		}else {
+			int x = 0;
+			for(int[] row: connectionMatrix) {
+				String source = entitiesIndexMapping.get(x);
 				int y = 0;
 				for(int value: row) {
-					this.probabilityMatrix[x][y] = (double)value / (double)total;
+					this.probabilityMatrix[x][y] = (double)value / (double)nodesCounter.get(source);
 					y++;
-				}
+				}				
+				x++;
 			}
-			x++;
 		}
 	}
 

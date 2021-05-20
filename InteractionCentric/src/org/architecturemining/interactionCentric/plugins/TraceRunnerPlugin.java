@@ -1,11 +1,16 @@
 package org.architecturemining.interactionCentric.plugins;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.architecturemining.interactionCentric.models.InteractionModel;
 import org.architecturemining.interactionCentric.models.SingleLikelihood;
 import org.architecturemining.interactionCentric.models.TracesLikelihood;
+import org.architecturemining.interactionCentric.util.XESFunctions;
 import org.deckfour.xes.model.XAttributeLiteral;
 import org.deckfour.xes.model.XAttributeMap;
 import org.deckfour.xes.model.XEvent;
@@ -42,21 +47,56 @@ public class TraceRunnerPlugin {
 		
 		return new TracesLikelihood(l);
 	}
-	
 	public static List<SingleLikelihood> computeLikelihoodPerTrace(InteractionModel iMod, XLog traces){	
+		XESFunctions xes = new XESFunctions(iMod.callerTag, iMod.calleeTag);
 		int source, sink;
+		
+		
+		
 		List<SingleLikelihood> computations = new ArrayList<SingleLikelihood>();
 		for(XTrace trace: traces) {
-			double likelihood = 1;
+			double likelihood = 0;
+			Map<String, Double> likelihoods = new HashMap<String, Double>();
+			
+			Set<String> sourceValues = xes.getSourceAttributeValues(trace);
+			Set<String> sinkValues = xes.getSinkAttributeValues(trace);
+			
+			Set<String> uniquevalues = new HashSet<String>();
+			uniquevalues.addAll(sourceValues);
+			uniquevalues.addAll(sinkValues);
 			for(XEvent event: trace) {
 				XAttributeMap attributes = event.getAttributes();
-				XAttributeLiteral callerAttribute = (XAttributeLiteral) attributes.get(iMod.callerTag);
-				XAttributeLiteral calleeAttribute = (XAttributeLiteral) attributes.get(iMod.calleeTag);			
-				source = iMod.entities.get(callerAttribute.toString());
-				sink = iMod.entities.get(calleeAttribute.toString());			
-				likelihood *= iMod.probabilityMatrix[source][sink];
+				String callerAttribute = ((XAttributeLiteral) attributes.get(iMod.callerTag)).toString();
+				String calleeAttribute = ((XAttributeLiteral) attributes.get(iMod.calleeTag)).toString();			
+				source = iMod.entities.get(callerAttribute);
+				sink = iMod.entities.get(calleeAttribute);
+				
+				double singleLikelihood = iMod.probabilityMatrix[source][sink];
+				
+				//likelihood *= iMod.probabilityMatrix[source][sink];
+				likelihood += singleLikelihood;
+				likelihoods.put(callerAttribute + "->" + calleeAttribute,singleLikelihood);
 			}
-			computations.add(new SingleLikelihood(likelihood, trace, iMod.callerTag, iMod.calleeTag));
+			for(String x: xes.getStarterNodes(sinkValues, uniquevalues)) {		
+				source = iMod.entities.get("start");
+				sink = iMod.entities.get(x);
+				double singleLikelihood = iMod.probabilityMatrix[source][sink];
+				likelihood += singleLikelihood;
+				likelihoods.put("start" + "->" + x, singleLikelihood);
+			}
+			
+			System.out.println("sink");
+			for(String x: xes.getEndNodes(sourceValues, uniquevalues)) {
+				System.out.println(x);
+				source = iMod.entities.get(x);
+				sink = iMod.entities.get("end");
+				double singleLikelihood = iMod.probabilityMatrix[source][sink];
+				likelihood += singleLikelihood;
+				likelihoods.put(x + "->" + "end", singleLikelihood);
+			}
+			
+			likelihood = likelihood / (trace.size() + 2);
+			computations.add(new SingleLikelihood(likelihood, trace, iMod.callerTag, iMod.calleeTag, likelihoods));
 		}
 		
 		return computations;

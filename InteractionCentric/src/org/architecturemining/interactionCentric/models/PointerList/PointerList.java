@@ -7,16 +7,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.deckfour.xes.model.XAttributeLiteral;
+import org.architecturemining.interactionCentric.util.XESFunctions;
+import org.architecturemining.interactionCentric.visualizer.graph.GraphEdge;
+import org.architecturemining.interactionCentric.visualizer.graph.GraphNode;
 import org.deckfour.xes.model.XAttributeMap;
 import org.deckfour.xes.model.XEvent;
 import org.deckfour.xes.model.XTrace;
 
 public class PointerList {
 
-	PointerListNode root;
-	Map<String, PointerListNode> traceNodes = new HashMap<String, PointerListNode>();
-	List<PointerListEdge> traceEdges = new ArrayList<PointerListEdge>();
+	public Map<String, GraphNode> traceNodes = new HashMap<String, GraphNode>();
+	public List<GraphEdge> traceEdges = new ArrayList<GraphEdge>();
+	
 	
 	String callerTag;
 	String calleeTag;
@@ -27,78 +29,34 @@ public class PointerList {
 		this.calleeTag = calleeTag;
 	}
 	
-	public PointerList(XTrace trace, String callerTag, String calleeTag) {
+	public PointerList(XTrace trace, String callerTag, String calleeTag, Map<String, Double> likelihoods) {
+		XESFunctions xes = new XESFunctions(callerTag, calleeTag);
 		this.callerTag = callerTag;
 		this.calleeTag = calleeTag;
 		
-		Set<String> sourceValues = getSourceAttributeValues(trace);
-		Set<String> sinkValues = getSinkAttributeValues(trace);
+		Set<String> sourceValues = xes.getSourceAttributeValues(trace);
+		Set<String> sinkValues = xes.getSinkAttributeValues(trace);
 		
 		Set<String> uniquevalues = new HashSet<String>();
 		uniquevalues.addAll(sourceValues);
 		uniquevalues.addAll(sinkValues);
-		traceNodes.put("start", new PointerListNode("start"));
+		traceNodes.put("start", new GraphNode("start"));
 		for(String s: uniquevalues) {
-			traceNodes.put(s, new PointerListNode(s));
+			traceNodes.put(s, new GraphNode(s));
 		}
-		traceNodes.put("end", new PointerListNode("end"));
+		traceNodes.put("end", new GraphNode("end"));
 		
 		for(XEvent e: trace) {
 			XAttributeMap att = e.getAttributes();
 			String source = att.get(this.callerTag).toString();
 			String sink = att.get(this.calleeTag).toString();
-			traceEdges.add(new PointerListEdge(traceNodes.get(source), traceNodes.get(sink)));
+			traceEdges.add(new GraphEdge(traceNodes.get(source), traceNodes.get(sink), likelihoods.get(source+"->"+sink)));
 		}
-		for(String s: getStarterNodes(sinkValues, uniquevalues)) {
-			traceEdges.add(new PointerListEdge(traceNodes.get("start"), traceNodes.get(s)));
+		for(String s: xes.getStarterNodes(sinkValues, uniquevalues)) {
+			traceEdges.add(new GraphEdge(traceNodes.get("start"), traceNodes.get(s), likelihoods.get("start->"+s)));
 		}
-		for(String s: getEndNodes(sourceValues, uniquevalues)) {
-			traceEdges.add(new PointerListEdge(traceNodes.get(s), traceNodes.get("end")));
+		for(String s: xes.getEndNodes(sourceValues, uniquevalues)) {
+			traceEdges.add(new GraphEdge(traceNodes.get(s), traceNodes.get("end"), likelihoods.get(s+"->end")));
 		}		
-		root = traceNodes.get("start");
-	}
-	
-	private Set<String> getSourceAttributeValues(XTrace trace) {
-		
-		Set<String> attributeKeySet = new HashSet<String>();
-		for(XEvent e: trace) {
-			XAttributeMap att = e.getAttributes();
-			XAttributeLiteral source = (XAttributeLiteral) att.get(callerTag);
-			attributeKeySet.add(source.toString());
-		}
-    	return attributeKeySet;
-	}
-	
-	private Set<String> getSinkAttributeValues(XTrace trace) {
-		Set<String> attributeKeySet = new HashSet<String>();
-		for(XEvent e: trace) {
-			XAttributeMap att = e.getAttributes();
-			XAttributeLiteral sink = (XAttributeLiteral) att.get(calleeTag);
-			attributeKeySet.add(sink.toString());
-		}
-    	return attributeKeySet;
-	}
-	
-	private Set<String> getStarterNodes(Set<String> sinkValues, Set<String> allValues){
-		Set<String> starters = new HashSet<String>();
-		starters.addAll(allValues);
-		starters.removeAll(sinkValues);
-		return starters;
-	}
-	
-	private Set<String> getEndNodes(Set<String> sourceValues, Set<String> allValues){
-		Set<String> starters = new HashSet<String>();
-		starters.addAll(allValues);
-		starters.removeAll(sourceValues);
-		return starters;
-	}
-	
-	@Override
-	public String toString() {
-		String retString = traceEdges.get(0).source.current;
-		for(PointerListEdge plE: traceEdges) {
-			retString += " -> " + plE.target.current;
-		}
-		return retString;
 	}	
 }

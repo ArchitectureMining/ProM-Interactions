@@ -1,6 +1,5 @@
 package org.architecturemining.interactionCentric.plugins;
 
-import java.util.Arrays;
 import java.util.Set;
 
 import org.architecturemining.interactionCentric.models.ParameterSettings;
@@ -37,8 +36,6 @@ public class ParameterSettingsPlugin {
 	public static ParameterSettings parameterPlugin(final UIPluginContext context, XLog log) {	
 		String[] attributes = getAttributeValues(context, log); 
 		ParameterSettings iSettings = new ParameterSettings(attributes, log);
-		System.out.println("we komen hier");
-		System.out.println(Arrays.toString(attributes));
 		
 		ListWizard<ParameterSettings> wizard = new ListWizard<>(
 				new ParameterSettingsWizardBuilder(iSettings, log));
