@@ -1,5 +1,5 @@
 <ivy-module version="2.0">
-    <info organisation="prom" module="Workshop" revision="latest">
+    <info organisation="prom" module="InteractionCentric" revision="latest">
     	<description>
     		Version VERSION
     	</description>
@@ -15,5 +15,8 @@
        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 		<dependency org="org.junit.jupiter" name="junit-jupiter-api" rev="5.3.1"/>
 		<dependency org="org.junit.jupiter" name="junit-jupiter-engine" rev="5.3.1"/>
+		<dependency org="org.jgrapht" name="jgrapht-core" rev="1.5.1"/>
+		<dependency org="org.jgrapht" name="jgrapht-io" rev="1.5.1"/>
+		<dependency org="org.jgrapht" name="jgrapht-ext" rev="1.5.1"/>
     </dependencies>
 </ivy-module>

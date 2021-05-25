@@ -1,0 +1,8 @@
+﻿Source,Target,Type,case
+a,b,x,a
+a,c,x,a
+a,d,x,a
+a,b,x,v
+a,c,x,v
+a,b,y,b
+b,c,y,b

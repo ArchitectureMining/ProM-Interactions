@@ -83,7 +83,6 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 
 		private ProMComboBox<String> setComboBoxValueIfExists(ProMComboBox<String> box, String value) {
 			// Assume that the list of options is not empty
-			// You'd think Java has a ComboBox.getItemList/getItemArray. You'd be wrong...
 			for (int i = 0; i < box.getItemCount(); i++ ) {
 				if (box.getItemAt(i).equals(value)) {
 					box.setSelectedItem(value);

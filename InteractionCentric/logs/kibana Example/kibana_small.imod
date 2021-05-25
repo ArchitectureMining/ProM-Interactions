@@ -1,0 +1,39 @@
+{
+  "entities" : {
+    "Settings.GbrtnsMtPlchldrs_Magazijn_InhoudSyncProjector" : 9,
+    "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector" : 2,
+    "start" : 0,
+    "Onbekend.OnbekendProcessManager" : 3,
+    "Settings.GbrtnsMtPlchldrs_Magazijn_InhoudProcessingProjector" : 10,
+    "Magazijn.MagazijnProcessManager" : 11,
+    "Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpSyncProjector" : 6,
+    "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector" : 7,
+    "Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpProcessingProjector" : 8,
+    "Onbekend.OnbekendAggregateRoot" : 5,
+    "OnbekendRollen.OnbekendRollenAggregateRoot" : 1,
+    "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command" : 4,
+    "end" : 13,
+    "Magazijn.MagazijnAggregateRoot" : 12
+  },
+  "entitiesIndexMapping" : {
+    "0" : "start",
+    "1" : "OnbekendRollen.OnbekendRollenAggregateRoot",
+    "2" : "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector",
+    "3" : "Onbekend.OnbekendProcessManager",
+    "4" : "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command",
+    "5" : "Onbekend.OnbekendAggregateRoot",
+    "6" : "Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpSyncProjector",
+    "7" : "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector",
+    "8" : "Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpProcessingProjector",
+    "9" : "Settings.GbrtnsMtPlchldrs_Magazijn_InhoudSyncProjector",
+    "10" : "Settings.GbrtnsMtPlchldrs_Magazijn_InhoudProcessingProjector",
+    "11" : "Magazijn.MagazijnProcessManager",
+    "12" : "Magazijn.MagazijnAggregateRoot",
+    "13" : "end"
+  },
+  "nodeList" : [ "start", "OnbekendRollen.OnbekendRollenAggregateRoot", "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector", "Onbekend.OnbekendProcessManager", "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command", "Onbekend.OnbekendAggregateRoot", "Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpSyncProjector", "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector", "Settings.GbrtnsMtPlchldrs_Magazijn_OnderwerpProcessingProjector", "Settings.GbrtnsMtPlchldrs_Magazijn_InhoudSyncProjector", "Settings.GbrtnsMtPlchldrs_Magazijn_InhoudProcessingProjector", "Magazijn.MagazijnProcessManager", "Magazijn.MagazijnAggregateRoot", "end" ],
+  "connectionMatrix" : [ [ 0, 2, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0 ], [ 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 ], [ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 ], [ 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ], [ 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 5, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] ],
+  "probabilityMatrix" : [ [ 0.0, 1.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0 ], [ 0.0, 0.0, 1.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 ], [ 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 ], [ 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 ], [ 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 3.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN" ] ],
+  "callerTag" : "Tag_StreamTypeName",
+  "calleeTag" : "Tag_EventHandlerName"
+}
