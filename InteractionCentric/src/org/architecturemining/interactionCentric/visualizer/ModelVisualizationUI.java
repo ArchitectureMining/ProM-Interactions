@@ -91,7 +91,8 @@ public class ModelVisualizationUI extends JPanel {
 				hideEnd = e.getStateChange() == ItemEvent.SELECTED;
 				graph_wrapper.removeAll();
 				InteractionGraph graph = new InteractionGraph(iModel);
-				graphPanel = createGraphPanel(graph);				
+				graphPanel = createGraphPanel(graph);	
+				graphPanel.setGridStyle(graphPanel.GRID_STYLE_DASHED);
 				graph_wrapper.add(graphPanel, BorderLayout.CENTER);
 				graph_wrapper.revalidate();
 				graph_wrapper.repaint();
