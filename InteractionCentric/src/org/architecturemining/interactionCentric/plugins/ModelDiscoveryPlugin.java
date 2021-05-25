@@ -2,6 +2,7 @@ package org.architecturemining.interactionCentric.plugins;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 import org.architecturemining.interactionCentric.models.InteractionModel;
 import org.architecturemining.interactionCentric.models.ParameterSettings;
+import org.architecturemining.interactionCentric.util.XESFunctions;
 import org.deckfour.xes.model.XAttributeLiteral;
 import org.deckfour.xes.model.XAttributeMap;
 import org.deckfour.xes.model.XEvent;
@@ -56,20 +58,22 @@ public class ModelDiscoveryPlugin {
 	// build the matrix and fill it by counting the connections between nodes. 
 	// The start and end node connections are made outside of the loop.
 	private static int[][] createMatrix(Map<String, Integer> entities, ParameterSettings iSettings) {
+		XESFunctions xes = new XESFunctions(iSettings.callerTag, iSettings.calleeTag);
+		
+		
 		int source, sink;
 		int[][] cMatrix = new int[entities.size()][entities.size()];	
 		for(String x: entities.keySet()) {
 			entityCounter.put(x, 0);
 		}
 		for (XTrace trace : iSettings.log) {
-			Set<String> uniqueValuesTrace = uniqueEntitiesPerTrace(trace, iSettings);
-			//System.out.println("start -> " + start_callerAttribute.toString());
-			Map<String, Integer> incomingCalls = new HashMap<String, Integer>();
-			Map<String, Integer> outgoingCalls = new HashMap<String, Integer>();
-			for(String e: uniqueValuesTrace) {
-				incomingCalls.put(e, 0);
-				outgoingCalls.put(e, 0);				
-			}
+			
+			Set<String> sourceValues = xes.getSourceAttributeValues(trace);
+			Set<String> sinkValues = xes.getSinkAttributeValues(trace);
+			
+			Set<String> uniquevalues = new HashSet<String>();
+			uniquevalues.addAll(sourceValues);
+			uniquevalues.addAll(sinkValues);
 			
 			int sourceNodeCount = entityCounter.get("start");
 			entityCounter.put("start", sourceNodeCount + 1);
@@ -81,11 +85,6 @@ public class ModelDiscoveryPlugin {
 				source = entities.get(callerAttribute);
 				sink = entities.get(calleeAttribute);			
 				cMatrix[source][sink]++;
-				
-				int incCount = incomingCalls.get(calleeAttribute);
-				int outCount = outgoingCalls.get(callerAttribute);
-				incomingCalls.put(calleeAttribute, incCount + 1);
-				outgoingCalls.put(callerAttribute, outCount + 1);
 				if(!added.contains(callerAttribute)){
 					added.add(callerAttribute);
 					sourceNodeCount = entityCounter.get(callerAttribute);
@@ -97,23 +96,18 @@ public class ModelDiscoveryPlugin {
 			}
 			
 			// add connections from start node to all entities without having incoming connections
-			for(Map.Entry<String, Integer> ent: incomingCalls.entrySet()) {
-				if(ent.getValue() == 0) {
-					source = entities.get("start");
-					sink = entities.get(ent.getKey());			
-					cMatrix[source][sink]++;
-				}
+			for(String x: xes.getStarterNodes(sinkValues, uniquevalues)) {		
+				source = entities.get("start");
+				sink = entities.get(x);			
+				cMatrix[source][sink]++;
 			}
 			
 			// add connections from all nodes which do not have outgoing connections, these will be connected to the end node.
-			for(Map.Entry<String, Integer> ent: outgoingCalls.entrySet()) {
-				if(ent.getValue() == 0) {
-					source = entities.get(ent.getKey());
-					sink = entities.get("end");
-					cMatrix[source][sink]++;
-					entityCounter.put(ent.getKey(), entityCounter.get(ent.getKey()) + 1);
-					
-				}
+			for(String x: xes.getEndNodes(sourceValues, uniquevalues)) {
+				source = entities.get(x);
+				sink = entities.get("end");
+				cMatrix[source][sink]++;
+				entityCounter.put(x, entityCounter.get(x) + 1);
 			}
 		}	
 		return cMatrix;
