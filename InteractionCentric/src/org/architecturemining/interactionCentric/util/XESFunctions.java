@@ -50,4 +50,16 @@ public class XESFunctions {
 		return starters;
 	}
 	
+	public String getCaller(XEvent ev) {
+		XAttributeMap att = ev.getAttributes();
+		XAttributeLiteral source = (XAttributeLiteral) att.get(callerTag);
+		return source.toString();
+	}
+	
+	public String getCallee(XEvent ev) {
+		XAttributeMap att = ev.getAttributes();
+		XAttributeLiteral sink = (XAttributeLiteral) att.get(calleeTag);
+		return sink.toString();
+	}
+	
 }

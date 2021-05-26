@@ -12,6 +12,7 @@ import org.architecturemining.interactionCentric.visualizer.graph.GraphEdge;
 import org.architecturemining.interactionCentric.visualizer.graph.GraphNode;
 import org.deckfour.xes.model.XAttributeMap;
 import org.deckfour.xes.model.XEvent;
+import org.deckfour.xes.model.XLog;
 import org.deckfour.xes.model.XTrace;
 
 public class PointerList {
@@ -24,6 +25,12 @@ public class PointerList {
 	String calleeTag;
 
 	public PointerList(String callerTag, String calleeTag) {
+		super();
+		this.callerTag = callerTag;
+		this.calleeTag = calleeTag;		
+	}
+	
+	public PointerList(String callerTag, String calleeTag, XLog log) {
 		super();
 		this.callerTag = callerTag;
 		this.calleeTag = calleeTag;
@@ -58,5 +65,5 @@ public class PointerList {
 		for(String s: xes.getEndNodes(sourceValues, uniquevalues)) {
 			traceEdges.add(new GraphEdge(traceNodes.get(s), traceNodes.get("end"), likelihoods.get(s+"->end")));
 		}		
-	}	
+	}
 }

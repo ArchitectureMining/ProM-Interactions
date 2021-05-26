@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import org.processmining.framework.annotations.AuthoredType;
-import org.processmining.framework.annotations.Icon;
 
 /**
  * Author: Arnout Verhaar
@@ -18,7 +17,6 @@ import org.processmining.framework.annotations.Icon;
 affiliation = "Utrecht University", 
 author = "Arnout Verhaar", 
 email = "w.d.verhaar@students.uu.nl")
-@Icon(icon = "https://i.pinimg.com/originals/d1/d7/aa/d1d7aa09b6d555cdeee7e5d28c5690b8.png")
 public class InteractionModel {
 
 	// maps a entity name to an index.

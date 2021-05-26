@@ -1,8 +1,8 @@
 ﻿Source,Target,Type,case
-a,b,x,a
-a,c,x,a
-a,d,x,a
-a,b,x,v
-a,c,x,v
-a,b,y,b
-b,c,y,b
+a,b,x,trace1
+a,c,x,trace1
+a,d,x,trace1
+a,b,x,trace3
+a,c,x,trace3
+a,b,y,trace2
+b,c,y,trace2
