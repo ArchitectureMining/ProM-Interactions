@@ -10,21 +10,24 @@ import org.deckfour.xes.model.XAttributeMap;
 import org.deckfour.xes.model.XEvent;
 import org.deckfour.xes.model.XTrace;
 
-public class InteractionModelV2 {
+public class InteractionNetwork {
 
 	public CustomLinkedList network;
 	public ArrayList<String> nodes;
+	public String callerTag, calleeTag;
 	
 	
 	//needed for building model from file by json object.
-	public InteractionModelV2() {
+	public InteractionNetwork() {
 		super();
 	}
 
-	public InteractionModelV2(ParameterSettings iSettings) {
+	public InteractionNetwork(ParameterSettings iSettings) {
 		this.nodes = uniqueEntities(iSettings);
 		network = new CustomLinkedList(iSettings.callerTag, iSettings.calleeTag, this.nodes);
-		network.computeNetwork(iSettings.log);	
+		network.computeNetwork(iSettings.log);
+		this.callerTag = iSettings.callerTag;
+		this.calleeTag = iSettings.calleeTag;
 	}
 	
 	public static ArrayList<String> uniqueEntities(ParameterSettings iSettings) {
@@ -65,5 +68,22 @@ public class InteractionModelV2 {
 	public void setNodes(ArrayList<String> nodes) {
 		this.nodes = nodes;
 	}
+
+	public String getCallerTag() {
+		return callerTag;
+	}
+
+	public void setCallerTag(String callerTag) {
+		this.callerTag = callerTag;
+	}
+
+	public String getCalleeTag() {
+		return calleeTag;
+	}
+
+	public void setCalleeTag(String calleeTag) {
+		this.calleeTag = calleeTag;
+	}
+
 	
 }

@@ -2,7 +2,7 @@ package org.architecturemining.interactionCentric.io;
 
 import java.io.InputStream;
 
-import org.architecturemining.interactionCentric.models.InteractionModelV2;
+import org.architecturemining.interactionCentric.models.InteractionNetwork;
 import org.processmining.contexts.uitopia.annotations.UIImportPlugin;
 import org.processmining.framework.abstractplugins.AbstractImportPlugin;
 import org.processmining.framework.plugin.PluginContext;
@@ -11,18 +11,20 @@ import org.processmining.framework.plugin.annotations.Plugin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Plugin(
-		name = "Import InteractionModelV2",
+		name = "Import Interaction Network",
 		parameterLabels = { "Filename" },
-		returnLabels = { "InteractionModelV2" },
-		returnTypes = { InteractionModelV2.class })
+		returnLabels = { "InteractionNetwork" },
+		returnTypes = { InteractionNetwork.class })
 @UIImportPlugin(description = "InteractionModel importer", extensions = {"imod2"})
-public class InteractionModelV2Importer extends AbstractImportPlugin{
+public class InteractionNetworkImporter extends AbstractImportPlugin{
 	
 	@Override
-	protected InteractionModelV2 importFromStream(PluginContext context, InputStream input, String filename, long fileSizeInBytes) throws Exception {		
+	protected InteractionNetwork importFromStream(PluginContext context, InputStream input, String filename, long fileSizeInBytes) throws Exception {		
 		// Fill in object from input
 		ObjectMapper objectReader = new ObjectMapper();
-		InteractionModelV2 i = objectReader.readValue(input, InteractionModelV2.class);	
+		InteractionNetwork i = objectReader.readValue(input, InteractionNetwork.class);	
+		System.out.println("Imported Interaction Network:");
+		System.out.println(i.network.traceNodes.toString());
 		return i;
 	}
 

@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.architecturemining.interactionCentric.models.InteractionModelV2;
+import org.architecturemining.interactionCentric.models.InteractionNetwork;
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UIExportPlugin;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
@@ -16,23 +16,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 @Plugin( 
-		name="Interaction Model V2 Exporter", 
+		name="Interaction Network Exporter", 
 		returnLabels = {}, 
 		returnTypes = {}, 
-		parameterLabels = {"InteractionModelV2", "File"}, 
+		parameterLabels = {"InteractionNetwork", "File"}, 
 		userAccessible= true
 	)
 	@UIExportPlugin( 
-			description="Interaction Model Exporter", 
+			description="Interaction Network Exporter", 
 	        extension = "imod2"
 	)
-public class InteractionModelV2Exporter {
+public class InteractionNetworkExporter {
 
 	@UITopiaVariant(affiliation = "Utrecht University",
 			author = "W.D. Verhaar",
 			email = "w.d.verhaar@students.uu.nl")
 	@PluginVariant(requiredParameterLabels = { 0, 1 })
-	public void exportModel(UIPluginContext context, InteractionModelV2 onto, File file) throws IOException {
+	public void exportModel(UIPluginContext context, InteractionNetwork onto, File file) throws IOException {
 		System.out.println("inhere");
 		FileWriter writer = new FileWriter(file);
 		PrintWriter pwriter = new PrintWriter(writer);

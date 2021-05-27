@@ -1,45 +1,61 @@
 package org.architecturemining.interactionCentric.models;
 
 import java.util.Map;
+import java.util.Set;
 
-import org.architecturemining.interactionCentric.models.PointerList.PointerList;
 import org.deckfour.xes.model.XTrace;
 
 public class SingleLikelihood {
 
-	double computedLikelihood;
-	Map<String, Double> likelihoodPerInteraction; 
+	
+	Map<String, Set<String>> edgeMap;
+	Map<String, Double> likelihoods;
 	XTrace trace;
-	public PointerList pointers;
 	
 	public SingleLikelihood() {
 		super();
 	}
-	public SingleLikelihood(double computedLikelihood, XTrace trace, String caller, String callee, Map<String, Double> likelihoodPerInteraction) {
+	
+	public SingleLikelihood(Map<String, Set<String>> edgeMap, Map<String, Double> likelihoods, XTrace trace) {
 		super();
-		this.computedLikelihood = computedLikelihood;
+		this.edgeMap = edgeMap;
+		this.likelihoods = likelihoods;
 		this.trace = trace;
-		this.pointers = new PointerList(trace, caller, callee, likelihoodPerInteraction);
-		this.likelihoodPerInteraction = likelihoodPerInteraction;
 	}
-	public double getLikelihood() {
-		return computedLikelihood;
+
+
+
+	public Map<String, Double> getLikelihood() {
+		return likelihoods;
 	}
-	public void setLikelihood(double computedLikelihood) {
-		this.computedLikelihood = computedLikelihood;
+	public Double getLikelihood(String function) {
+		return likelihoods.get(function);
 	}
+
+	public void setLikelihood(Map<String, Double> likelihood) {
+		this.likelihoods = likelihood;
+	}
+
+	public Map<String, Set<String>> getEdgeMap() {
+		return edgeMap;
+	}
+
+	public void setEdgeMap(Map<String, Set<String>> edgeMap) {
+		this.edgeMap = edgeMap;
+	}
+
 	public XTrace getTrace() {
 		return trace;
 	}
+
 	public void setTrace(XTrace trace) {
 		this.trace = trace;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(computedLikelihood + " | ");
-		sb.append(pointers.toString());
+		sb.append(getLikelihood() + " | ");
 		return sb.toString();
 	}
 	

@@ -12,6 +12,8 @@ import org.processmining.framework.annotations.AuthoredType;
  * email: w.d.verhaar@students.uu.nl
  * 
  * Model containing all interactions parsed from a single event log containing interactions.
+ * Old class for storing the connection data. 
+ * See InteractionNetwork for the updated version.
 */
 @AuthoredType(typeName = "Interaction Model",
 affiliation = "Utrecht University", 

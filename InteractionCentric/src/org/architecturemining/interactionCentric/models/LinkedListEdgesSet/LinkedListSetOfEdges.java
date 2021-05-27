@@ -39,7 +39,7 @@ public class LinkedListSetOfEdges {
 		for(String s: targetNodes) {
 			retString += s + ", ";
 		}		
-		return retString.substring(0, retString.length() - 2);
+		return retString.substring(0, retString.length() - 2) + " {"+occurenceCounter+"}";
 		
 	}
 	

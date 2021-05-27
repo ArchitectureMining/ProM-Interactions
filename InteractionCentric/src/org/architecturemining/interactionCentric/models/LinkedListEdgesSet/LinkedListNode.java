@@ -1,12 +1,14 @@
 package org.architecturemining.interactionCentric.models.LinkedListEdgesSet;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LinkedListNode {
 	public String current;
-	public Map<String, Map<String, LinkedListSetOfEdges>> outgoingEdgesSets;
+	public Map<String, List<LinkedListSetOfEdges>> outgoingEdgesSets;
 	
 	public LinkedListNode() {
 		super();		
@@ -15,7 +17,7 @@ public class LinkedListNode {
 	public LinkedListNode(String current) {
 		super();
 		this.current = current;
-		this.outgoingEdgesSets = new HashMap<String, Map<String, LinkedListSetOfEdges>>();
+		this.outgoingEdgesSets = new HashMap<String, List<LinkedListSetOfEdges>>();
 	}
 	public String getCurrent() {
 		return current;
@@ -24,39 +26,44 @@ public class LinkedListNode {
 		this.current = current;
 	}
 
-	public Map<String, Map<String, LinkedListSetOfEdges>> getOutgoingEdgesSets() {
+	public Map<String, List<LinkedListSetOfEdges>> getOutgoingEdgesSets() {
 		return outgoingEdgesSets;
 	}
-	public void setOutgoingEdgesSets(Map<String, Map<String, LinkedListSetOfEdges>> outgoingEdgesSets) {
+	public void setOutgoingEdgesSets(Map<String, List<LinkedListSetOfEdges>> outgoingEdgesSets) {
 		this.outgoingEdgesSets = outgoingEdgesSets;
 	}
-	public void addOutgoingNode(String prevNode, String trackingID, String nodeToAdd) {
-		// check if both maps contain the desired keys.
-		// Otherwise add the key with an empty list and rerun the method.
-		if(outgoingEdgesSets.containsKey(prevNode)) {
-			if(outgoingEdgesSets.get(prevNode).containsKey(trackingID)) {
-				outgoingEdgesSets.get(prevNode).get(trackingID).targetNodes.add(nodeToAdd);
-				
-			}else {
-				outgoingEdgesSets.get(prevNode).put(trackingID, new LinkedListSetOfEdges(new HashSet<String>(), 0));
-				addOutgoingNode(prevNode, trackingID, nodeToAdd);
-			}
-			
-		}else {
-			outgoingEdgesSets.put(prevNode, new HashMap<String, LinkedListSetOfEdges>());
-			addOutgoingNode(prevNode, trackingID, nodeToAdd);
+
+	public void addOutgoingNodeSet(String prevNode, Set<String> edges) {
+		if(!outgoingEdgesSets.containsKey(prevNode))
+			outgoingEdgesSets.put(prevNode, new ArrayList<LinkedListSetOfEdges>());
+		
+		boolean found = false;
+		List<LinkedListSetOfEdges> currentEntry = outgoingEdgesSets.get(prevNode);
+		for(LinkedListSetOfEdges ent: currentEntry) {		
+			if(ent.targetNodes.equals(edges)) {
+				ent.occurenceCounter++;
+				found = true;
+				break;
+			}		
+		}	
+		if(!found) {
+			currentEntry.add(new LinkedListSetOfEdges(edges, 1));
 		}
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for(Map<String, LinkedListSetOfEdges> set: outgoingEdgesSets.values()) {
-			for(Map.Entry<String, LinkedListSetOfEdges> ent: set.entrySet()){
-				sb.append(ent.getKey() + " = [ " + ent.getValue().toString() + " ]");
+		for(List<LinkedListSetOfEdges> set: outgoingEdgesSets.values()) {
+			for(LinkedListSetOfEdges ent: set){
+				sb.append("[ " + ent.toString() + " ] & ");
 			}
 		}
-		return sb.toString();
+		String s = sb.toString();
+		if(s.length() > 2)
+			return s.substring(0, sb.toString().length() - 2);
+		else
+			return s;
 	}
 	
 }

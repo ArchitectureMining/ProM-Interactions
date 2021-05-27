@@ -1,0 +1,142 @@
+{
+  "network" : {
+    "nodeNames" : [ "start", "Settings.Verkooporder_Klant_KortingSyncProjector", "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector", "Settings.Verkooporder_Klant_KortingProcessingProjector", "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector", "Klant.KlantProcessManager", "Betaler.BetalerProcessManager", "PersoonRollen.PersoonRollenAggregateRoot", "Klant.KlantAggregateRoot", "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command", "Betaler.BetalerAggregateRoot", "Persoon.PersoonProcessManager", "Persoon.PersoonAggregateRoot", "end" ],
+    "traceNodes" : {
+      "PersoonRollen.PersoonRollenAggregateRoot" : {
+        "current" : "PersoonRollen.PersoonRollenAggregateRoot",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector", "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command" ],
+            "occurenceCounter" : 2
+          }, {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "Klant.KlantAggregateRoot" : {
+        "current" : "Klant.KlantAggregateRoot",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector", "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "Persoon.PersoonAggregateRoot" : {
+        "current" : "Persoon.PersoonAggregateRoot",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector", "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command" ],
+            "occurenceCounter" : 2
+          } ]
+        }
+      },
+      "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector" : {
+        "current" : "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 3
+          } ]
+        }
+      },
+      "start" : {
+        "current" : "start",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "PersoonRollen.PersoonRollenAggregateRoot", "Klant.KlantAggregateRoot", "Persoon.PersoonAggregateRoot", "Betaler.BetalerAggregateRoot", "Settings.Verkooporder_Klant_KortingProcessingProjector", "Persoon.PersoonProcessManager", "Klant.KlantProcessManager", "Settings.Verkooporder_Klant_KortingSyncProjector", "Betaler.BetalerProcessManager" ],
+            "occurenceCounter" : 1
+          }, {
+            "targetNodes" : [ "PersoonRollen.PersoonRollenAggregateRoot", "Betaler.BetalerAggregateRoot", "Betaler.BetalerProcessManager" ],
+            "occurenceCounter" : 1
+          }, {
+            "targetNodes" : [ "PersoonRollen.PersoonRollenAggregateRoot", "Persoon.PersoonAggregateRoot", "Persoon.PersoonProcessManager" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "Settings.Verkooporder_Klant_KortingProcessingProjector" : {
+        "current" : "Settings.Verkooporder_Klant_KortingProcessingProjector",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector", "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "Betaler.BetalerProcessManager" : {
+        "current" : "Betaler.BetalerProcessManager",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector", "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector" ],
+            "occurenceCounter" : 2
+          } ]
+        }
+      },
+      "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector" : {
+        "current" : "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 3
+          } ]
+        }
+      },
+      "Betaler.BetalerAggregateRoot" : {
+        "current" : "Betaler.BetalerAggregateRoot",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector", "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command" ],
+            "occurenceCounter" : 2
+          } ]
+        }
+      },
+      "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command" : {
+        "current" : "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 3
+          } ]
+        }
+      },
+      "end" : {
+        "current" : "end",
+        "outgoingEdgesSets" : { }
+      },
+      "Persoon.PersoonProcessManager" : {
+        "current" : "Persoon.PersoonProcessManager",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector", "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector", "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command" ],
+            "occurenceCounter" : 2
+          } ]
+        }
+      },
+      "Klant.KlantProcessManager" : {
+        "current" : "Klant.KlantProcessManager",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector", "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "Settings.Verkooporder_Klant_KortingSyncProjector" : {
+        "current" : "Settings.Verkooporder_Klant_KortingSyncProjector",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector", "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      }
+    },
+    "callerTag" : "Tag_StreamTypeName",
+    "calleeTag" : "Tag_EventHandlerName"
+  },
+  "nodes" : [ "start", "Settings.Verkooporder_Klant_KortingSyncProjector", "Afas.Runtime.Projector.Standard.StandardQueryProjector, Afas.Runtime.Projector", "Settings.Verkooporder_Klant_KortingProcessingProjector", "Afas.Runtime.Projector.Standard.StandardStreamProjector, Afas.Runtime.Projector", "Klant.KlantProcessManager", "Betaler.BetalerProcessManager", "PersoonRollen.PersoonRollenAggregateRoot", "Klant.KlantAggregateRoot", "Afas.Runtime.Command.Standard.DynamicStreamItemRouter, Afas.Runtime.Command", "Betaler.BetalerAggregateRoot", "Persoon.PersoonProcessManager", "Persoon.PersoonAggregateRoot", "end" ],
+  "callerTag" : "Tag_StreamTypeName",
+  "calleeTag" : "Tag_EventHandlerName"
+}

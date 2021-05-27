@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.architecturemining.interactionCentric.models.InteractionModel;
@@ -61,9 +62,19 @@ public class InteractionGraph extends DefaultDirectedGraph<GraphNode, GraphEdge>
 	public InteractionGraph(SingleLikelihood sL) {
 		super(GraphEdge.class);
 		
-		this.nodes = sL.pointers.traceNodes;
-		this.edges = sL.pointers.traceEdges;
+		Map<String, Set<String>> edgemap = sL.getEdgeMap();
+		for(Entry<String, Set<String>> entry : edgemap.entrySet()) {
+			nodes.put(entry.getKey(), new GraphNode(entry.getKey()));
+		}
 		
+		for(Entry<String, Set<String>> entry : edgemap.entrySet()) {
+			for(String s: entry.getValue()) {
+				GraphNode source = nodes.get(entry.getKey());
+				GraphNode target = nodes.get(s);
+				GraphEdge e = new GraphEdge(source, target, 0);
+				edges.add(e);
+			}
+		}	
 		this.fillGraph();
 		
 	}
