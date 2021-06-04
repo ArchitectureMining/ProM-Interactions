@@ -1,4 +1,5 @@
 package org.architecturemining.interactionCentric.visualizer;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -7,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -14,10 +16,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -47,24 +48,6 @@ public class RunnerPluginVisualUI extends JPanel {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		JPanel contentPanel = new JPanel();
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(5)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(contentPanel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 1079, GroupLayout.PREFERRED_SIZE)
-						.addComponent(topbar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1079, Short.MAX_VALUE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(topbar, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 952, GroupLayout.PREFERRED_SIZE))
-		);
 		
 		DefaultListModel<String> traceList = new DefaultListModel<String>();
 		for(int cnt = 1; cnt <= tL.traces.size(); cnt++){
@@ -72,38 +55,19 @@ public class RunnerPluginVisualUI extends JPanel {
 		}
 		
 		JPanel left_list_panel = new JPanel();
-		left_list_panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		left_list_panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		JList<String> tracesList = new JList<String>(traceList);
+		tracesList.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		
 		
 		JLabel list_title = new JLabel("Inserted traces");
 		list_title.setFont(new Font("Tahoma", Font.BOLD, 18));
+		list_title.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		JPanel LikelihoodCalculationPanel = new JPanel();
-		GroupLayout gl_left_list_panel = new GroupLayout(left_list_panel);
-		gl_left_list_panel.setHorizontalGroup(
-			gl_left_list_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_left_list_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_left_list_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_left_list_panel.createSequentialGroup()
-							.addComponent(tracesList, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(LikelihoodCalculationPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(list_title))
-					.addContainerGap(16, Short.MAX_VALUE))
-		);
-		gl_left_list_panel.setVerticalGroup(
-			gl_left_list_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_left_list_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(list_title)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_left_list_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(LikelihoodCalculationPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
-						.addComponent(tracesList, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE))
-					.addContainerGap())
-		);
+		LikelihoodCalculationPanel.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 5));
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("Likelihood Calculation");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -111,32 +75,10 @@ public class RunnerPluginVisualUI extends JPanel {
 		JLabel likelihoodCalculation = new JLabel("");
 		likelihoodCalculation.setVerticalAlignment(SwingConstants.TOP);
 		likelihoodCalculation.setFont(new Font("Tahoma", Font.ITALIC, 12));
-		GroupLayout gl_LikelihoodCalculationPanel = new GroupLayout(LikelihoodCalculationPanel);
-		gl_LikelihoodCalculationPanel.setHorizontalGroup(
-			gl_LikelihoodCalculationPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_LikelihoodCalculationPanel.createSequentialGroup()
-					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-					.addGap(20))
-				.addGroup(gl_LikelihoodCalculationPanel.createSequentialGroup()
-					.addGap(10)
-					.addComponent(likelihoodCalculation, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_LikelihoodCalculationPanel.setVerticalGroup(
-			gl_LikelihoodCalculationPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_LikelihoodCalculationPanel.createSequentialGroup()
-					.addComponent(lblNewLabel_1)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(likelihoodCalculation, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		LikelihoodCalculationPanel.setLayout(gl_LikelihoodCalculationPanel);
-		left_list_panel.setLayout(gl_left_list_panel);
 		//this.add(textField, BorderLayout.CENTER);
 		
 		JPanel right_panel = new JPanel();
-		right_panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		right_panel.setPreferredSize(new Dimension(700, 486));
+		right_panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		JPanel graph_panel = new JPanel();
 		
 		
@@ -144,6 +86,7 @@ public class RunnerPluginVisualUI extends JPanel {
 
 		
 		JLabel traceLabel = new JLabel("Select a trace");
+		traceLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		traceLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JCheckBox removeEnd = new JCheckBox("Remove End node");
@@ -165,38 +108,6 @@ public class RunnerPluginVisualUI extends JPanel {
 				tracesList.setSelectedIndex(index);
 			}
 		});
-		GroupLayout gl_right_panel = new GroupLayout(right_panel);
-		gl_right_panel.setHorizontalGroup(
-			gl_right_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_right_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_right_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(graph_panel, GroupLayout.PREFERRED_SIZE, 652, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_right_panel.createSequentialGroup()
-							.addComponent(traceLabel)
-							.addPreferredGap(ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
-							.addGroup(gl_right_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(removeEnd, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-								.addComponent(removeStart, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap())
-		);
-		gl_right_panel.setVerticalGroup(
-			gl_right_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_right_panel.createSequentialGroup()
-					.addGap(12)
-					.addGroup(gl_right_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_right_panel.createSequentialGroup()
-							.addComponent(removeEnd)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(removeStart)
-							.addGap(6))
-						.addGroup(gl_right_panel.createSequentialGroup()
-							.addComponent(traceLabel)
-							.addGap(18)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(graph_panel, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-					.addContainerGap())
-		);
 		GroupLayout gl_graph_panel = new GroupLayout(graph_panel);
 		gl_graph_panel.setHorizontalGroup(
 			gl_graph_panel.createParallelGroup(Alignment.LEADING)
@@ -207,28 +118,6 @@ public class RunnerPluginVisualUI extends JPanel {
 				.addGap(0, 437, Short.MAX_VALUE)
 		);
 		graph_panel.setLayout(gl_graph_panel);
-		right_panel.setLayout(gl_right_panel);
-		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
-		gl_contentPanel.setHorizontalGroup(
-			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(left_list_panel, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)
-					.addGap(15)
-					.addComponent(right_panel, GroupLayout.PREFERRED_SIZE, 672, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_contentPanel.setVerticalGroup(
-			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(left_list_panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(right_panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE))
-					.addGap(287))
-		);
-
-		contentPanel.setLayout(gl_contentPanel);
 		
 		JLabel lblNewLabel = new JLabel("Runner Plugin Results");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -251,8 +140,35 @@ public class RunnerPluginVisualUI extends JPanel {
 					.addContainerGap(24, Short.MAX_VALUE))
 		);
 		topbar.setLayout(gl_topbar);
-		setLayout(groupLayout);
+		setLayout(new BorderLayout(5, 5));
+		add(contentPanel);
+		contentPanel.setLayout(new BorderLayout(5, 5));
+		contentPanel.add(left_list_panel, BorderLayout.WEST);
+		left_list_panel.setLayout(new BorderLayout(5, 5));
+		left_list_panel.add(tracesList, BorderLayout.WEST);
+		left_list_panel.add(new JScrollPane(tracesList));
+		left_list_panel.add(LikelihoodCalculationPanel, BorderLayout.EAST);
+		LikelihoodCalculationPanel.setLayout(new BorderLayout(5, 5));
+		LikelihoodCalculationPanel.add(lblNewLabel_1, BorderLayout.NORTH);
+		LikelihoodCalculationPanel.add(likelihoodCalculation);
+		left_list_panel.add(list_title, BorderLayout.NORTH);
+		contentPanel.add(right_panel);
+		right_panel.setLayout(new BorderLayout(5, 5));
+		right_panel.add(graph_panel, BorderLayout.CENTER);
 		
+		
+		
+		JPanel optionsPanel = new JPanel();
+		right_panel.add(optionsPanel, BorderLayout.NORTH);
+		optionsPanel.setLayout(new BorderLayout(5, 5));
+		add(topbar, BorderLayout.NORTH);
+		
+		optionsPanel.add(traceLabel);
+		
+		JPanel checkBoxesPanel = new JPanel();
+		optionsPanel.add(checkBoxesPanel, BorderLayout.EAST);
+		checkBoxesPanel.add(removeEnd, BorderLayout.NORTH);
+		checkBoxesPanel.add(removeStart, BorderLayout.SOUTH);
 	//  Compose panel
 		JTextArea textField = new JTextArea();
 		textField.setText(tL.toString());		
@@ -338,7 +254,7 @@ public class RunnerPluginVisualUI extends JPanel {
         mxFastOrganicLayout layout = new mxFastOrganicLayout(jgxAdapter);
 
         layout.execute(jgxAdapter.getDefaultParent());
-        layout.setForceConstant(90); // the higher, the more separated
+        layout.setForceConstant(150); // the higher, the more separated
         layout.setDisableEdgeStyle(true); // true transforms the edges and makes them direct lines
         
      // layout using morphing

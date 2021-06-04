@@ -9,3 +9,5 @@ b,c,y,trace2
 a,b,z,trace4
 a,c,z,trace4
 a,d,x,trace5
+a,b,x,trace6
+a,x,x,trace6

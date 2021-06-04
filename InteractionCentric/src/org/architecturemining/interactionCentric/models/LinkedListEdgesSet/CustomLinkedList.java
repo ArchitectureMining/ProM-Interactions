@@ -1,13 +1,14 @@
 package org.architecturemining.interactionCentric.models.LinkedListEdgesSet;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.architecturemining.interactionCentric.util.HelperFunctions;
 import org.architecturemining.interactionCentric.util.XESFunctions;
-import org.deckfour.xes.model.XEvent;
 import org.deckfour.xes.model.XLog;
 import org.deckfour.xes.model.XTrace;
 
@@ -41,10 +42,18 @@ public class CustomLinkedList {
 		}
 		int cnt = 1;
 		for(XTrace trace: log) {	
-			Map<String, Set<String>> edgeMap = buildEdgeMap(trace, xes);
+			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, nodeNames);
 			String prevNode = "prev";
-			for(Map.Entry<String, Set<String>> node: edgeMap.entrySet()) {
+			System.out.println(edgeMap.prevNodes);
+			for(Map.Entry<String, Set<String>> node: edgeMap.edges.entrySet()) {
 				if(node.getValue().size() > 0) {
+					if(edgeMap.getPrevNodes().containsKey(node.getKey()) && edgeMap.prevNodes.get(node.getKey()).size() > 0) {
+						List<String> sortedList = new ArrayList<String>(edgeMap.prevNodes.get(node.getKey()));
+						Collections.sort(sortedList);
+						prevNode = String.join("", sortedList);
+					}else {
+						prevNode = "prev";
+					}
 					traceNodes.get(node.getKey()).addOutgoingNodeSet(prevNode, node.getValue());
 				}
 			}
@@ -52,37 +61,6 @@ public class CustomLinkedList {
 		
 		System.out.println(traceNodes.toString());
 		
-	}
-
-
-	private Map<String, Set<String>> buildEdgeMap(XTrace trace, XESFunctions xes){
-		
-		Set<String> sourceValues = xes.getSourceAttributeValues(trace);
-		Set<String> sinkValues = xes.getSinkAttributeValues(trace);
-		
-		Set<String> uniquevalues = new HashSet<String>();
-		uniquevalues.addAll(sourceValues);
-		uniquevalues.addAll(sinkValues);
-		
-		Map<String, Set<String>> edgeMap = new HashMap<String, Set<String>>();
-		for(String node: nodeNames) {
-			edgeMap.put(node, new HashSet<String>());
-		}
-
-		
-		for(XEvent ev: trace) {
-			edgeMap.get(xes.getCaller(ev)).add(xes.getCallee(ev));
-		}
-		
-		for(String x: xes.getStarterNodes(sinkValues, uniquevalues)) {		
-			edgeMap.get("start").add(x);
-		}
-		
-		for(String x: xes.getEndNodes(sourceValues, uniquevalues)) {
-			edgeMap.get(x).add("end");
-		}
-		
-		return edgeMap;
 	}
 	
 	public ArrayList<String> getNodeNames() {

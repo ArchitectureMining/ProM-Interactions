@@ -5,7 +5,7 @@
       "a" : {
         "current" : "a",
         "outgoingEdgesSets" : {
-          "prev" : [ {
+          "start" : [ {
             "targetNodes" : [ "b", "c", "d" ],
             "occurenceCounter" : 1
           }, {
@@ -20,7 +20,7 @@
       "b" : {
         "current" : "b",
         "outgoingEdgesSets" : {
-          "prev" : [ {
+          "a" : [ {
             "targetNodes" : [ "end" ],
             "occurenceCounter" : 3
           }, {
@@ -32,16 +32,20 @@
       "c" : {
         "current" : "c",
         "outgoingEdgesSets" : {
-          "prev" : [ {
+          "a" : [ {
             "targetNodes" : [ "end" ],
-            "occurenceCounter" : 4
+            "occurenceCounter" : 3
+          } ],
+          "b" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 1
           } ]
         }
       },
       "d" : {
         "current" : "d",
         "outgoingEdgesSets" : {
-          "prev" : [ {
+          "a" : [ {
             "targetNodes" : [ "end" ],
             "occurenceCounter" : 1
           } ]

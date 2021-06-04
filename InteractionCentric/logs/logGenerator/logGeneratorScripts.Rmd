@@ -1,0 +1,62 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(foreach)
+library(doParallel)
+registerDoParallel(4)
+```
+
+
+```{r}
+rangeOfStartNodes <- 4
+inputnodes <- letters[0:20]
+possible_startNodes <- letters[0:rangeOfStartNodes]
+amount_of_traces <- 10
+networkDensity <- 0.2
+
+resultTable <- data.frame(source=character(), target=character(), type=character(), case=character());
+
+for(i in 1:amount_of_traces){
+  
+  nodesToUse <- inputnodes;
+  amount_startNodes <- sample.int(rangeOfStartNodes, 1)
+  startNodes <- c()
+  for(j in 1:amount_startNodes){
+    selected_node <- sample(possible_startNodes, 1)
+    startNodes <- c(startNodes, selected_node)
+    nodesToUse <- nodesToUse[nodesToUse != selected_node]
+  }
+
+ 
+  
+  
+  while(length(startNodes) > 0){
+    elem <-  startNodes[1];
+    startNodes <-  startNodes[-1]
+    nodesToUse <- nodesToUse[nodesToUse != elem]
+    target_nodes_to_use <- nodesToUse
+    runOnce = TRUE;
+    while((runOnce || runif(1) < networkDensity) & length(target_nodes_to_use) > 0 & length(nodesToUse > 0)){
+      selected_node <- sample(target_nodes_to_use, 1)
+      startNodes <- c(startNodes, selected_node)
+      newRow <- list(source=elem, target=selected_node, type="random", case=paste("trace", i, sep = ""))
+      resultTable = rbind(resultTable, newRow, stringsAsFactors=FALSE)
+      target_nodes_to_use <- target_nodes_to_use[target_nodes_to_use != selected_node]
+      runOnce = FALSE
+    }
+    
+  }
+
+}
+
+write.csv2(resultTable, "generatedOutput.csv", row.names=FALSE)
+
+```
+
+```{r}
+
+
+```
+

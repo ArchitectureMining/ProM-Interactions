@@ -26,7 +26,10 @@ public class GraphEdge extends DefaultWeightedEdge{
 	
 	@Override
 	public String toString() {
-		return "";//df2.format(strength);
+		if(strength > 0) {
+			return df2.format(strength);
+		}else
+			return "";//df2.format(strength);
 		//return source.getLabel() + " -> " + target.getLabel();
 	}
 
