@@ -1,0 +1,30 @@
+---
+title: "Reading kibana log files"
+output: html_notebook
+---
+
+```{r}
+library(dplyr)
+```
+
+
+```{r}
+
+kibana <- read.csv2("kibana_output.csv", sep=",")
+
+useful_columns <- c("X.timestamp", "MetricName", "Tag_EventHandlerInstance", "Tag_MC.TrackingId", "Tag_StreamTypeName", "Tag_Type")
+
+kibana_cleaned <- dplyr::select(kibana, useful_columns)
+kibana_cleaned <- kibana_cleaned %>% filter(Tag_EventHandlerInstance != "") 
+kibana_cleaned <- kibana_cleaned %>% filter(Tag_StreamTypeName != "") 
+kibana_cleaned <- kibana_cleaned %>% filter(MetricName != "EventProcessingDelay") 
+
+kibana_cleaned <- kibana_cleaned %>% filter(MetricName != "CreatedCommittable") 
+kibana_cleaned <- kibana_cleaned %>% filter(MetricName != "RepositoryExecuteEvent")
+
+# Get rid of the second part in tag_Streamtypename (,AFAS.runtime)
+kibana_cleaned$Tag_StreamTypeName = sub("\\,.*", "", as.character(kibana_cleaned$Tag_StreamTypeName))
+
+write.csv2(kibana_cleaned, "kibana_cleaned.csv", row.names = FALSE)
+
+```
