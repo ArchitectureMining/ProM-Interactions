@@ -1,0 +1,3 @@
+Rscript eventLogFlattener.R
+
+pause

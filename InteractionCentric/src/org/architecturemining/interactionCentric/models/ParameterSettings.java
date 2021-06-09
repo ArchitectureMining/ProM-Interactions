@@ -1,6 +1,7 @@
 package org.architecturemining.interactionCentric.models;
 
 import org.deckfour.xes.model.XLog;
+import org.processmining.log.csv.CSVFile;
 
 
 /**
@@ -12,12 +13,14 @@ import org.deckfour.xes.model.XLog;
 public class ParameterSettings {
 	public String callerTag;
 	public String calleeTag;
+	public String caseID;
 	public String[] possibleOptions;
+	public CSVFile csvLog;
 	public XLog log;
 	
-	public ParameterSettings(String[] attributes, XLog log) {
+	public ParameterSettings(String[] attributes, CSVFile csvLog) {
 		this.possibleOptions = attributes;
-		this.log = log;
+		this.csvLog = csvLog;
 	}
 
 	public String getCallerTag() {
@@ -35,6 +38,29 @@ public class ParameterSettings {
 	public void setCalleeTag(String calleeTag) {
 		this.calleeTag = calleeTag;
 	}
+
+	public CSVFile getCsvLog() {
+		return csvLog;
+	}
+
+	public void setCsvLog(CSVFile csvLog) {
+		this.csvLog = csvLog;
+	}
+
+	public XLog getLog() {
+		return log;
+	}
+
+	public void setLog(XLog log) {
+		this.log = log;
+	}
 	
+	public String getCaseID() {
+		return caseID;
+	}
+
+	public void setCaseID(String caseID) {
+		this.caseID = caseID;
+	}
 	
 }

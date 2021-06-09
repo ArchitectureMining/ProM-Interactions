@@ -3,7 +3,6 @@ package org.architecturemining.interactionCentric.wizard;
 import javax.swing.JComponent;
 
 import org.architecturemining.interactionCentric.models.ParameterSettings;
-import org.deckfour.xes.model.XLog;
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.framework.util.ui.widgets.ProMComboBox;
 import org.processmining.framework.util.ui.widgets.ProMPropertiesPanel;
@@ -19,11 +18,9 @@ import org.processmining.framework.util.ui.wizard.ProMWizardStep;
 
 public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterSettings>{
 	public UIPluginContext context;
-	private XLog log;
 	
-	public ParameterSettingsWizardBuilder(ParameterSettings config, XLog log) {
+	public ParameterSettingsWizardBuilder(ParameterSettings config) {
 		super();
-		this.log = log;
 	}
 
 	public ParameterSettings apply(ParameterSettings model, JComponent component) {
@@ -59,6 +56,7 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 		private static final long serialVersionUID = -9075293113478737296L;
 		private ProMComboBox<String> caller;
 		private ProMComboBox<String> callee;
+		private ProMComboBox<String> caseField;
 		private ParameterSettings config;
 
 
@@ -66,6 +64,7 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 			super(getTitle());
 			this.caller = this.addComboBox("Caller", config.possibleOptions);
 			this.callee = this.addComboBox("Callee", config.possibleOptions);
+			this.caseField = this.addComboBox("Tracking ID", config.possibleOptions);
 			
 			this.caller = setComboBoxValueIfExists(caller, "Caller");
 	        this.callee = setComboBoxValueIfExists(callee, "Callee");
@@ -76,8 +75,8 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 		
 		public ParameterSettings getConfig() {
 			config.setCallerTag((String) caller.getSelectedItem());
-        	config.setCalleeTag((String) callee.getSelectedItem());   
-        	System.out.println(config.getCalleeTag());
+        	config.setCalleeTag((String) callee.getSelectedItem());  
+        	config.setCaseID((String) caseField.getSelectedItem());
 			return config;
 		}
 

@@ -1,0 +1,74 @@
+{
+  "network" : {
+    "nodeNames" : [ "start", "a", "b", "c", "d", "end" ],
+    "traceNodes" : {
+      "a" : {
+        "current" : "a",
+        "outgoingEdgesSets" : {
+          "start" : [ {
+            "targetNodes" : [ "b", "c", "d" ],
+            "occurenceCounter" : 1
+          }, {
+            "targetNodes" : [ "b" ],
+            "occurenceCounter" : 1
+          }, {
+            "targetNodes" : [ "b", "c" ],
+            "occurenceCounter" : 2
+          } ]
+        }
+      },
+      "b" : {
+        "current" : "b",
+        "outgoingEdgesSets" : {
+          "a" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 3
+          }, {
+            "targetNodes" : [ "c" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "c" : {
+        "current" : "c",
+        "outgoingEdgesSets" : {
+          "a" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 3
+          } ],
+          "b" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "d" : {
+        "current" : "d",
+        "outgoingEdgesSets" : {
+          "a" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "start" : {
+        "current" : "start",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "a" ],
+            "occurenceCounter" : 4
+          } ]
+        }
+      },
+      "end" : {
+        "current" : "end",
+        "outgoingEdgesSets" : { }
+      }
+    },
+    "callerTag" : "Source",
+    "calleeTag" : "Target"
+  },
+  "nodes" : [ "start", "a", "b", "c", "d", "end" ],
+  "callerTag" : "Source",
+  "calleeTag" : "Target"
+}

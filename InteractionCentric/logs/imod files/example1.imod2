@@ -1,0 +1,101 @@
+{
+  "network" : {
+    "nodeNames" : [ "start", "a", "b", "c", "d", "end" ],
+    "traceNodes" : {
+      "a" : {
+        "current" : "a",
+        "outgoingEdgesSets" : {
+          "prev" : {
+            "trace3" : {
+              "targetNodes" : [ "b", "c" ],
+              "occurenceCounter" : 0
+            },
+            "trace1" : {
+              "targetNodes" : [ "b", "c", "d" ],
+              "occurenceCounter" : 0
+            },
+            "trace2" : {
+              "targetNodes" : [ "b" ],
+              "occurenceCounter" : 0
+            }
+          }
+        }
+      },
+      "b" : {
+        "current" : "b",
+        "outgoingEdgesSets" : {
+          "prev" : {
+            "trace3" : {
+              "targetNodes" : [ "end" ],
+              "occurenceCounter" : 0
+            },
+            "trace1" : {
+              "targetNodes" : [ "end" ],
+              "occurenceCounter" : 0
+            },
+            "trace2" : {
+              "targetNodes" : [ "c" ],
+              "occurenceCounter" : 0
+            }
+          }
+        }
+      },
+      "c" : {
+        "current" : "c",
+        "outgoingEdgesSets" : {
+          "prev" : {
+            "trace3" : {
+              "targetNodes" : [ "end" ],
+              "occurenceCounter" : 0
+            },
+            "trace1" : {
+              "targetNodes" : [ "end" ],
+              "occurenceCounter" : 0
+            },
+            "trace2" : {
+              "targetNodes" : [ "end" ],
+              "occurenceCounter" : 0
+            }
+          }
+        }
+      },
+      "d" : {
+        "current" : "d",
+        "outgoingEdgesSets" : {
+          "prev" : {
+            "trace1" : {
+              "targetNodes" : [ "end" ],
+              "occurenceCounter" : 0
+            }
+          }
+        }
+      },
+      "start" : {
+        "current" : "start",
+        "outgoingEdgesSets" : {
+          "prev" : {
+            "trace3" : {
+              "targetNodes" : [ "a" ],
+              "occurenceCounter" : 0
+            },
+            "trace1" : {
+              "targetNodes" : [ "a" ],
+              "occurenceCounter" : 0
+            },
+            "trace2" : {
+              "targetNodes" : [ "a" ],
+              "occurenceCounter" : 0
+            }
+          }
+        }
+      },
+      "end" : {
+        "current" : "end",
+        "outgoingEdgesSets" : { }
+      }
+    },
+    "callerTag" : "Source",
+    "calleeTag" : "Target"
+  },
+  "nodes" : [ "start", "a", "b", "c", "d", "end" ]
+}

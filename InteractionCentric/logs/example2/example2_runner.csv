@@ -1,0 +1,13 @@
+﻿Source,Target,Type,case
+a,b,x,trace1
+a,c,x,trace1
+a,d,x,trace1
+a,b,x,trace3
+a,c,x,trace3
+a,b,y,trace2
+b,c,y,trace2
+a,b,z,trace4
+a,c,z,trace4
+a,d,x,trace5
+a,b,x,trace6
+a,x,x,trace6

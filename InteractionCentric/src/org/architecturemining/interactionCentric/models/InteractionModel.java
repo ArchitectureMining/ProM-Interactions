@@ -6,19 +6,19 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import org.processmining.framework.annotations.AuthoredType;
-import org.processmining.framework.annotations.Icon;
 
 /**
  * Author: Arnout Verhaar
  * email: w.d.verhaar@students.uu.nl
  * 
  * Model containing all interactions parsed from a single event log containing interactions.
+ * Old class for storing the connection data. 
+ * See InteractionNetwork for the updated version.
 */
 @AuthoredType(typeName = "Interaction Model",
 affiliation = "Utrecht University", 
 author = "Arnout Verhaar", 
 email = "w.d.verhaar@students.uu.nl")
-@Icon(icon = "https://i.pinimg.com/originals/d1/d7/aa/d1d7aa09b6d555cdeee7e5d28c5690b8.png")
 public class InteractionModel {
 
 	// maps a entity name to an index.

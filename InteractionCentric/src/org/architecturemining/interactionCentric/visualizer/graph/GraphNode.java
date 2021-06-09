@@ -32,7 +32,7 @@ public class GraphNode{
 	}
 	
 	public String toString() {
-		return this.fullName;
+		return   "<html><b style='color:white'>" + this.fullName + "</b></html>";
 	}
 
 
