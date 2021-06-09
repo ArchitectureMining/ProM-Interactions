@@ -18,26 +18,18 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.architecturemining.interactionCentric.models.SingleLikelihood;
 import org.architecturemining.interactionCentric.models.TracesLikelihood;
-import org.architecturemining.interactionCentric.visualizer.graph.GraphEdge;
-import org.architecturemining.interactionCentric.visualizer.graph.GraphNode;
-import org.jgrapht.ext.JGraphXAdapter;
-import org.jgrapht.graph.DefaultDirectedGraph;
+import org.architecturemining.interactionCentric.util.HelperFunctions;
 import org.processmining.framework.plugin.PluginContext;
 import org.python.icu.text.DecimalFormat;
 
-import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.swing.util.mxMorphing;
-import com.mxgraph.util.mxEvent;
-import com.mxgraph.util.mxEventObject;
-import com.mxgraph.util.mxEventSource.mxIEventListener;
-import com.mxgraph.view.mxGraph;
 
 public class RunnerPluginVisualUI extends JPanel {
 	private final JPanel topbar = new JPanel();
@@ -58,6 +50,10 @@ public class RunnerPluginVisualUI extends JPanel {
 		left_list_panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		JList<String> tracesList = new JList<String>(traceList);
+		tracesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		Dimension listDim = tracesList.getPreferredSize();
+		listDim.width = 150;
+		tracesList.setPreferredSize(listDim);
 		tracesList.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		
@@ -80,11 +76,7 @@ public class RunnerPluginVisualUI extends JPanel {
 		JPanel right_panel = new JPanel();
 		right_panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		JPanel graph_panel = new JPanel();
-		
-		
-		
-
-		
+				
 		JLabel traceLabel = new JLabel("Select a trace");
 		traceLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		traceLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -179,7 +171,7 @@ public class RunnerPluginVisualUI extends JPanel {
 					SingleLikelihood selection = tL.traces.get(tracesList.getSelectedIndex());
 					graph_panel.removeAll();				
 			    	InteractionGraph graph = new InteractionGraph(tL.traces.get(tracesList.getSelectedIndex()));
-					mxGraphComponent graph_visual = createGraphPanel(graph, showEnd, showStart);				
+					mxGraphComponent graph_visual = HelperFunctions.createGraphPanel(graph, showStart, showEnd);				
 					GroupLayout gl_graph_panel = new GroupLayout(graph_panel);
 					gl_graph_panel.setHorizontalGroup(
 						gl_graph_panel.createParallelGroup(Alignment.LEADING)
@@ -211,71 +203,5 @@ public class RunnerPluginVisualUI extends JPanel {
 			}			
 		});
 		
-		// Create graph
-		/*InteractionGraph graph = new InteractionGraph(tL.traces.get(0));
-		graph_panel.add(createGraphPanel(graph));*/
-			
-		
-	}
-	
-	private mxGraphComponent createGraphPanel(DefaultDirectedGraph<GraphNode, GraphEdge> ddg, boolean withoutEnd, boolean withoutStart) {
-        // create a visualization using JGraph, via an adapter		
-		GraphNode endNode = null, startNode = null;
-		if(withoutEnd) {		
-			for(GraphNode x: ddg.vertexSet()) {
-				if(x.fullName.equals("end")) {
-					endNode = x;			
-					break;
-				}
-			}			       	
-        }
-		
-		if(withoutStart) {		
-			for(GraphNode x: ddg.vertexSet()) {
-				if(x.fullName.equals("start")) {
-					startNode = x;
-					break;
-				}
-			}			       	
-        }
-		
-		ddg.removeVertex(startNode);
-		ddg.removeVertex(endNode);
-		
-        JGraphXAdapter jgxAdapter = new JGraphXAdapter<>(ddg);
-
-        mxGraphComponent component = new mxGraphComponent(jgxAdapter);
-        component.setConnectable(false);
-        mxGraph graphVisual = component.getGraph();
-        graphVisual.setAllowDanglingEdges(false);
-        graphVisual.setCellsEditable(true);
-        
-        // positioning via jgraphx layouts
-        mxFastOrganicLayout layout = new mxFastOrganicLayout(jgxAdapter);
-
-        layout.execute(jgxAdapter.getDefaultParent());
-        layout.setForceConstant(150); // the higher, the more separated
-        layout.setDisableEdgeStyle(true); // true transforms the edges and makes them direct lines
-        
-     // layout using morphing
-        graphVisual.getModel().beginUpdate();
-        try {
-            layout.execute(graphVisual.getDefaultParent());
-        } finally {
-            mxMorphing morph = new mxMorphing(component, 4, 5, 70);
-
-            morph.addListener(mxEvent.DONE, new mxIEventListener() {
-                @Override
-                public void invoke(Object arg0, mxEventObject arg1) {
-                	graphVisual.getModel().endUpdate();
-                }
-
-            });
-
-            morph.startAnimation();
-        }
-        
-        //jgxAdapter.getStylesheet().setDefaultVertexStyle(nodeStyle);
-        return component;
 	}
 }

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.architecturemining.interactionCentric.models.InteractionNetwork;
+import org.architecturemining.interactionCentric.models.ParameterSettings;
 import org.architecturemining.interactionCentric.models.SingleLikelihood;
 import org.architecturemining.interactionCentric.models.TracesLikelihood;
 import org.architecturemining.interactionCentric.models.LinkedListEdgesSet.CustomLinkedList;
@@ -16,7 +17,6 @@ import org.architecturemining.interactionCentric.models.LinkedListEdgesSet.EdgeM
 import org.architecturemining.interactionCentric.models.LinkedListEdgesSet.LinkedListSetOfEdges;
 import org.architecturemining.interactionCentric.util.HelperFunctions;
 import org.architecturemining.interactionCentric.util.XESFunctions;
-import org.deckfour.xes.model.XLog;
 import org.deckfour.xes.model.XTrace;
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
@@ -32,7 +32,7 @@ public class TraceRunnerPlugin {
 
 	@Plugin(
 			name = "Trace Runner Plugin",
-			parameterLabels = { "Interaction Network", "XLog"},
+			parameterLabels = { "Interaction Network", "ParameterSettings"},
 			returnLabels = { "Likelihood per Trace" },
 			returnTypes = { TracesLikelihood.class },
 			userAccessible = true,
@@ -43,18 +43,18 @@ public class TraceRunnerPlugin {
             author = "Arnout Verhaar", 
             email = "w.d.verhaar@students.uu.nl"
     )
-	public static TracesLikelihood modelDiscovery(final UIPluginContext context, InteractionNetwork iNetwork, XLog traces) {	
+	public static TracesLikelihood modelDiscovery(final UIPluginContext context, InteractionNetwork iNetwork, ParameterSettings iSettings) {	
 		
 		context.getProgress().setMinimum(0);
-        context.getProgress().setMaximum(traces.size());
+        context.getProgress().setMaximum(iSettings.log.size());
         context.getProgress().setCaption("Running single traces");
         context.getProgress().setIndeterminate(false);
 		
-        System.out.println("Er zijn traces: " + traces.size());
+        System.out.println("Er zijn traces: " + iSettings.log.size());
         
 		List<SingleLikelihood> computations = new ArrayList<SingleLikelihood>();
 		XESFunctions xes = new XESFunctions(iNetwork.callerTag, iNetwork.calleeTag);
-		for(XTrace trace: traces) {
+		for(XTrace trace: iSettings.log) {
 			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iNetwork.nodes);
 			Map<String, Double> traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);
 			computations.add(new SingleLikelihood(edgeMap.edges, traceLikelihood, trace));
