@@ -10,10 +10,11 @@ import org.deckfour.xes.model.XTrace;
 
 public class XESFunctions {
 
-	public String callerTag, calleeTag;
-	public XESFunctions(String cllrTag, String clleeTag) {
+	public String callerTag, calleeTag, eventTypeTag;
+	public XESFunctions(String cllrTag, String clleeTag, String eventTypeTag) {
 		this.calleeTag = clleeTag;
 		this.callerTag = cllrTag;
+		this.eventTypeTag = eventTypeTag;
 	};
 	
 	public Set<String> getSourceAttributeValues(XTrace trace) {
@@ -59,6 +60,12 @@ public class XESFunctions {
 	public String getCallee(XEvent ev) {
 		XAttributeMap att = ev.getAttributes();
 		XAttributeLiteral sink = (XAttributeLiteral) att.get(calleeTag);
+		return sink.toString();
+	}
+	
+	public String getEventType(XEvent ev) {
+		XAttributeMap att = ev.getAttributes();
+		XAttributeLiteral sink = (XAttributeLiteral) att.get(eventTypeTag);
 		return sink.toString();
 	}
 	

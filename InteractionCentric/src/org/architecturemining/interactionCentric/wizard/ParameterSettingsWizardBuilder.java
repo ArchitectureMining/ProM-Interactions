@@ -1,6 +1,7 @@
 package org.architecturemining.interactionCentric.wizard;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 import org.architecturemining.interactionCentric.models.ParameterSettings;
 import org.processmining.contexts.uitopia.UIPluginContext;
@@ -35,9 +36,9 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 		
 		String caller = model.getCallerTag();
 		String callee = model.getCalleeTag();
-		
-		// TODO Auto-generated method stub
-		return caller != null && callee != null && !caller.equals(callee);
+		String caseField = model.getCaseID();
+		String eventType = model.getEventTypeTag();
+		return caller != null && callee != null && !caller.equals(callee) && caseField != null && eventType != null;
 	}
 
 	public JComponent getComponent(ParameterSettings config) {
@@ -57,14 +58,17 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 		private ProMComboBox<String> caller;
 		private ProMComboBox<String> callee;
 		private ProMComboBox<String> caseField;
+		private ProMComboBox<String> eventField;
 		private ParameterSettings config;
 
 
 		public ParameterWizard(ParameterSettings config) {
 			super(getTitle());
-			this.caller = this.addComboBox("Caller", config.possibleOptions);
-			this.callee = this.addComboBox("Callee", config.possibleOptions);
 			this.caseField = this.addComboBox("Tracking ID", config.possibleOptions);
+			this.caller = this.addComboBox("Caller", config.possibleOptions);
+			this.callee = this.addComboBox("Callee", config.possibleOptions);	
+			this.eventField = this.addComboBox("Event Type (leave empty if necessary)", config.possibleOptions);
+			this.add(new JLabel("leave empty if necessary"));
 			
 			this.caller = setComboBoxValueIfExists(caller, "Caller");
 	        this.callee = setComboBoxValueIfExists(callee, "Callee");
@@ -77,6 +81,8 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 			config.setCallerTag((String) caller.getSelectedItem());
         	config.setCalleeTag((String) callee.getSelectedItem());  
         	config.setCaseID((String) caseField.getSelectedItem());
+        	config.setEventTypeTag((String) eventField.getSelectedItem());
+
 			return config;
 		}
 

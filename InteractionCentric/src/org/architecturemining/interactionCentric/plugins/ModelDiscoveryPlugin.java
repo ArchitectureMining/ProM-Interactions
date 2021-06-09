@@ -58,7 +58,7 @@ public class ModelDiscoveryPlugin {
 	// build the matrix and fill it by counting the connections between nodes. 
 	// The start and end node connections are made outside of the loop.
 	private static int[][] createMatrix(Map<String, Integer> entities, ParameterSettings iSettings) {
-		XESFunctions xes = new XESFunctions(iSettings.callerTag, iSettings.calleeTag);
+		XESFunctions xes = new XESFunctions(iSettings.callerTag, iSettings.calleeTag, iSettings.getEventTypeTag());
 		
 		
 		int source, sink;

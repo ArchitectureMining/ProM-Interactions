@@ -42,6 +42,11 @@ public class HelperFunctions {
 		}
 
 		for(XEvent ev: trace) {
+			
+			String caller = xes.getCaller(ev);
+			String callee = xes.getCallee(ev);
+			String event = xes.getEventType(ev);
+			
 			edges.get(xes.getCaller(ev)).add(xes.getCallee(ev));
 			
 			if(prevNodes.containsKey(xes.getCallee(ev)))

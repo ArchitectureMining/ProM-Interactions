@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.architecturemining.interactionCentric.models.LinkedListEdgesSet.CustomLinkedList;
+import org.architecturemining.interactionCentric.util.XESFunctions;
 import org.deckfour.xes.model.XAttributeLiteral;
 import org.deckfour.xes.model.XAttributeMap;
 import org.deckfour.xes.model.XEvent;
@@ -24,7 +25,7 @@ public class InteractionNetwork {
 
 	public InteractionNetwork(ParameterSettings iSettings) {
 		this.nodes = uniqueEntities(iSettings);
-		network = new CustomLinkedList(iSettings.callerTag, iSettings.calleeTag, this.nodes);
+		network = new CustomLinkedList(new XESFunctions(iSettings.callerTag, iSettings.calleeTag, iSettings.eventTypeTag), this.nodes);
 		network.computeNetwork(iSettings.log);
 		this.callerTag = iSettings.callerTag;
 		this.calleeTag = iSettings.calleeTag;

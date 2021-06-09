@@ -15,36 +15,26 @@ import org.deckfour.xes.model.XTrace;
 public class CustomLinkedList {
 
 	public ArrayList<String> nodeNames;
-	
 	public Map<String, LinkedListNode> traceNodes = new HashMap<String, LinkedListNode>();
-	
-	
-	private String callerTag;
-	private String calleeTag;
-	private LinkedListSetOfEdges currentListSet;
+	public XESFunctions xes;
 		
 	public CustomLinkedList() {
 		super();
 	}
 
-	public CustomLinkedList(String callerTag, String calleeTag, ArrayList<String> nodes) {
+	public CustomLinkedList(XESFunctions xes, ArrayList<String> nodes) {
 		super();
-		this.callerTag = callerTag;
-		this.calleeTag = calleeTag;		
 		this.nodeNames = nodes;
-		
+		this.xes = xes;
 	}
 	
 	public void computeNetwork(XLog log) {
-		XESFunctions xes = new XESFunctions(callerTag, calleeTag);
 		for(String s: nodeNames) {
 			traceNodes.put(s, new LinkedListNode(s));
 		}
-		int cnt = 1;
 		for(XTrace trace: log) {	
 			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, nodeNames);
 			String prevNode = "prev";
-			System.out.println(edgeMap.prevNodes);
 			for(Map.Entry<String, Set<String>> node: edgeMap.edges.entrySet()) {
 				if(node.getValue().size() > 0) {
 					if(edgeMap.getPrevNodes().containsKey(node.getKey()) && edgeMap.prevNodes.get(node.getKey()).size() > 0) {
@@ -79,20 +69,6 @@ public class CustomLinkedList {
 		this.traceNodes = traceNodes;
 	}
 
-	public String getCallerTag() {
-		return callerTag;
-	}
-
-	public void setCallerTag(String callerTag) {
-		this.callerTag = callerTag;
-	}
-
-	public String getCalleeTag() {
-		return calleeTag;
-	}
-
-	public void setCalleeTag(String calleeTag) {
-		this.calleeTag = calleeTag;
-	}
+	
 	
 }
