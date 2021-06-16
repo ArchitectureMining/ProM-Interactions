@@ -26,7 +26,7 @@ import com.mxgraph.view.mxGraph;
 
 public class HelperFunctions {
 
-	public static EdgeMap buildEdgeMap(XTrace trace, XESFunctions xes, List<String> nodeNames){
+	public static EdgeMap buildEdgeMap(XTrace trace, XESFunctions xes, List<String> nodeNames, boolean incorporateMessageTypes){
 		
 		Set<String> sourceValues = xes.getSourceAttributeValues(trace);
 		Set<String> sinkValues = xes.getSinkAttributeValues(trace);
@@ -45,15 +45,28 @@ public class HelperFunctions {
 			
 			String caller = xes.getCaller(ev);
 			String callee = xes.getCallee(ev);
-			String event = xes.getEventType(ev);
-			
-			edges.get(xes.getCaller(ev)).add(xes.getCallee(ev));
-			
-			if(prevNodes.containsKey(xes.getCallee(ev)))
-				prevNodes.get(xes.getCallee(ev)).add(xes.getCaller(ev));
-			else
-				prevNodes.put(xes.getCallee(ev), new HashSet<String>(Arrays.asList(xes.getCaller(ev))));
-			
+			String message;
+			if(incorporateMessageTypes) {
+				message = xes.getEventType(ev) + "_event";
+				edges.get(caller).add(message);
+				edges.get(message).add(callee);
+				
+				if(prevNodes.containsKey(message))
+					prevNodes.get(message).add(caller);
+				else
+					prevNodes.put(message, new HashSet<String>(Arrays.asList(caller)));
+				
+				if(prevNodes.containsKey(callee))
+					prevNodes.get(callee).add(message);
+				else
+					prevNodes.put(callee, new HashSet<String>(Arrays.asList(message)));
+			}else {
+				edges.get(caller).add(callee);
+				if(prevNodes.containsKey(callee))
+					prevNodes.get(callee).add(caller);
+				else
+					prevNodes.put(callee, new HashSet<String>(Arrays.asList(caller)));
+			}	
 		}
 		
 		for(String x: xes.getStarterNodes(sinkValues, uniquevalues)) {		

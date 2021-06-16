@@ -55,7 +55,7 @@ public class TraceRunnerPlugin {
 		List<SingleLikelihood> computations = new ArrayList<SingleLikelihood>();
 		XESFunctions xes = new XESFunctions(iNetwork.callerTag, iNetwork.calleeTag, iSettings.getEventTypeTag());
 		for(XTrace trace: iSettings.log) {
-			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iNetwork.nodes);
+			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iNetwork.network.nodeNames, iSettings.getEventTypeTag() != "(empty)");
 			Map<String, Double> traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);
 			computations.add(new SingleLikelihood(edgeMap.edges, traceLikelihood, trace));
 			context.getProgress().inc();
@@ -142,7 +142,12 @@ public class TraceRunnerPlugin {
 						customProbability *= 1 - (edgeMap.edges.get(currentNode).size() / minimalDistance == 1 ? 0.95 : edgeMap.edges.get(currentNode).size() / minimalDistance);
 						timesProbability *= 0.1;
 						addedProbability += 0;
-						nodeStack.addAll(edgeMap.edges.get(currentNode));
+						for(String node: edgeMap.edges.get(currentNode)) {
+							if(!passedNodes.contains(node)) {
+								nodeStack.add(node);
+								passedNodes.add(node);
+							}
+						}
 					}
 				}
 			}

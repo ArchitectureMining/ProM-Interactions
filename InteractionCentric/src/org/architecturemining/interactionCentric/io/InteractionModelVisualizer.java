@@ -1,4 +1,4 @@
-package org.architecturemining.interactionCentric.plugins;
+package org.architecturemining.interactionCentric.io;
 
 import javax.swing.JComponent;
 
@@ -16,7 +16,7 @@ import org.processmining.framework.plugin.annotations.Plugin;
  * 
  * Plugin that visualizes the found probability matrix within a graph view. 
 */
-public class ModelVisualizerPlugin {
+public class InteractionModelVisualizer {
 	@Plugin(
 			name = "Interaction Model Visualization plugin",
 			parameterLabels = { "Interaction model"},
@@ -30,27 +30,8 @@ public class ModelVisualizerPlugin {
             author = "Arnout Verhaar", 
             email = "w.d.verhaar@students.uu.nl"
     )
+	@Visualizer
 	public static ModelVisualizationUI visualizeModel(final UIPluginContext context, InteractionModel iModel) {	
 		return new ModelVisualizationUI(context, iModel);	
-	}
-	
-	
-	// Workaround for visualizing a model visualization ui while also saving the component.
-	@Plugin(
-			name = "Visualization for ModelVisualizationUI",
-			parameterLabels = { "JComponent"},
-			returnLabels = { "Graph view" },
-			returnTypes = { JComponent.class },
-			userAccessible = true,
-			help = ""
-	)
-	@UITopiaVariant(
-            affiliation = "Utrecht University", 
-            author = "Arnout Verhaar", 
-            email = "w.d.verhaar@students.uu.nl"
-    )
-	@Visualizer
-	public static ModelVisualizationUI visualizer(final UIPluginContext context, ModelVisualizationUI iModel) {	
-		return iModel;	
 	}
 }

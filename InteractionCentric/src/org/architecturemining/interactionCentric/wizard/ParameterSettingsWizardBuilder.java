@@ -1,7 +1,10 @@
 package org.architecturemining.interactionCentric.wizard;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 
 import org.architecturemining.interactionCentric.models.ParameterSettings;
 import org.processmining.contexts.uitopia.UIPluginContext;
@@ -14,11 +17,13 @@ import org.processmining.framework.util.ui.wizard.ProMWizardStep;
  * email: w.d.verhaar@students.uu.nl
  * 
  * Class for implementing the wizard used by the ParameterSettingsPlugin.
+ * @param <ProMCheckBox>
  *  
 */
 
-public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterSettings>{
+public class ParameterSettingsWizardBuilder<ProMCheckBox> implements ProMWizardStep<ParameterSettings>{
 	public UIPluginContext context;
+	public boolean chooseEventType = true;
 	
 	public ParameterSettingsWizardBuilder(ParameterSettings config) {
 		super();
@@ -59,6 +64,7 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 		private ProMComboBox<String> callee;
 		private ProMComboBox<String> caseField;
 		private ProMComboBox<String> eventField;
+		private ProMCheckBox f;
 		private ParameterSettings config;
 
 
@@ -66,10 +72,11 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 			super(getTitle());
 			this.caseField = this.addComboBox("Tracking ID", config.possibleOptions);
 			this.caller = this.addComboBox("Caller", config.possibleOptions);
-			this.callee = this.addComboBox("Callee", config.possibleOptions);	
-			this.eventField = this.addComboBox("Event Type (leave empty if necessary)", config.possibleOptions);
-			this.add(new JLabel("leave empty if necessary"));
+			this.callee = this.addComboBox("Callee", config.possibleOptions);				
+			List<String> optionalOption = new ArrayList<String>(Arrays.asList(config.possibleOptions));
+			optionalOption.add(0, "(empty)");
 			
+			this.eventField = this.addComboBox("Event Type (optional)", optionalOption);			
 			this.caller = setComboBoxValueIfExists(caller, "Caller");
 	        this.callee = setComboBoxValueIfExists(callee, "Callee");
 	        
