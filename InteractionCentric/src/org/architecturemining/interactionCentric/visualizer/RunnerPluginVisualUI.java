@@ -1,6 +1,7 @@
 package org.architecturemining.interactionCentric.visualizer;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -9,10 +10,13 @@ import java.awt.event.ItemListener;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -34,6 +38,7 @@ import com.mxgraph.swing.mxGraphComponent;
 public class RunnerPluginVisualUI extends JPanel {
 	private final JPanel topbar = new JPanel();
 	private boolean showEnd, showStart;
+	private String selectedCostFunction = "addedProbability";
 	public RunnerPluginVisualUI(PluginContext context, TracesLikelihood tL) {
 		topbar.setBackground(Color.GRAY);
 		this.setBackground(Color.white);
@@ -51,6 +56,28 @@ public class RunnerPluginVisualUI extends JPanel {
 		
 		JList<String> tracesList = new JList<String>(traceList);
 		tracesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tracesList.setCellRenderer(new DefaultListCellRenderer() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                 Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                 SingleLikelihood listItem = tL.traces.get(index);
+                 if (listItem != null) {
+                      setText("Trace "+ (index + 1));
+                      if (listItem.getBehaviour().get(selectedCostFunction)) {
+                    	  setBackground(new Color(103, 194, 93)); // light green
+                      } else {
+                    	  setBackground(new Color(194, 74, 66)); // light red
+                      }
+                      if (isSelected) {
+                           setBackground(getBackground().darker());
+                      }
+                 }
+                 return c;
+            }
+
+       });
 		Dimension listDim = tracesList.getPreferredSize();
 		listDim.width = 150;
 		tracesList.setPreferredSize(listDim);
@@ -63,14 +90,6 @@ public class RunnerPluginVisualUI extends JPanel {
 		
 		JPanel LikelihoodCalculationPanel = new JPanel();
 		LikelihoodCalculationPanel.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 5));
-		
-		
-		JLabel lblNewLabel_1 = new JLabel("Likelihood Calculation");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
-		JLabel likelihoodCalculation = new JLabel("");
-		likelihoodCalculation.setVerticalAlignment(SwingConstants.TOP);
-		likelihoodCalculation.setFont(new Font("Tahoma", Font.ITALIC, 12));
 		//this.add(textField, BorderLayout.CENTER);
 		
 		JPanel right_panel = new JPanel();
@@ -141,8 +160,42 @@ public class RunnerPluginVisualUI extends JPanel {
 		left_list_panel.add(new JScrollPane(tracesList));
 		left_list_panel.add(LikelihoodCalculationPanel, BorderLayout.EAST);
 		LikelihoodCalculationPanel.setLayout(new BorderLayout(5, 5));
-		LikelihoodCalculationPanel.add(lblNewLabel_1, BorderLayout.NORTH);
-		LikelihoodCalculationPanel.add(likelihoodCalculation);
+		
+		JPanel functionSelectionPanel = new JPanel();
+		LikelihoodCalculationPanel.add(functionSelectionPanel, BorderLayout.NORTH);
+		functionSelectionPanel.setLayout(new BorderLayout(10, 10));
+		
+		JLabel lblNewLabel_2 = new JLabel("Select cost function");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		functionSelectionPanel.add(lblNewLabel_2, BorderLayout.NORTH);
+		
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {		
+				if(e.getStateChange() == ItemEvent.SELECTED) {
+					System.out.println(comboBox.getSelectedItem());
+					selectedCostFunction = (String) comboBox.getSelectedItem();
+					tracesList.repaint();
+					tracesList.updateUI();
+				}
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"addedProbability", "timesProbability", "customProbability"}));
+		functionSelectionPanel.add(comboBox, BorderLayout.CENTER);
+		
+		JPanel panel = new JPanel();
+		functionSelectionPanel.add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new BorderLayout(10, 10));
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("Likelihood Calculation");
+		panel.add(lblNewLabel_1, BorderLayout.NORTH);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		JLabel likelihoodCalculation = new JLabel("");
+		panel.add(likelihoodCalculation, BorderLayout.SOUTH);
+		likelihoodCalculation.setVerticalAlignment(SwingConstants.TOP);
+		likelihoodCalculation.setFont(new Font("Tahoma", Font.ITALIC, 12));
 		left_list_panel.add(list_title, BorderLayout.NORTH);
 		contentPanel.add(right_panel);
 		right_panel.setLayout(new BorderLayout(5, 5));

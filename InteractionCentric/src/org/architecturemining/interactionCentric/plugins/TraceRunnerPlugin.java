@@ -57,14 +57,16 @@ public class TraceRunnerPlugin {
 		for(XTrace trace: iSettings.log) {
 			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iNetwork.network.nodeNames, iSettings.getEventTypeTag() != "(empty)");
 			Map<String, Double> traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);
-			computations.add(new SingleLikelihood(edgeMap.edges, traceLikelihood, trace));
+			Map<String, Boolean> analysisResults = analyzeBehaviour(traceLikelihood, edgeMap);
+			computations.add(new SingleLikelihood(edgeMap.edges, traceLikelihood, trace, analysisResults));
+			
 			context.getProgress().inc();
 		}
 				
 		return new TracesLikelihood(computations);
 	}
-	
-	
+
+
 	private static Map<String, Double> computeLikelihoodsForSingleTrace(EdgeMap edgeMap, CustomLinkedList network) {
 		
 		Stack<String> nodeStack = new Stack<String>();
@@ -163,6 +165,29 @@ public class TraceRunnerPlugin {
 		
 		return returnMap;
 		
+	}
+	
+	private static Map<String, Boolean> analyzeBehaviour(Map<String, Double> traceLikelihood, EdgeMap edgemap) {
+		Map<String, Boolean> analysis = new HashMap<String, Boolean>();
+		
+		for(Map.Entry<String, Double> ent: traceLikelihood.entrySet()) {
+			boolean thresholdValue = false;
+			switch(ent.getKey()) {
+				case "addedProbability":
+					thresholdValue = ent.getValue() > 0.5;
+					break;
+				case "timesProbability":
+					thresholdValue = ent.getValue() > 0.5;
+					break;
+				case "customProbability":
+					thresholdValue = ent.getValue() > 0.5;
+					break;
+				
+			}
+			
+			analysis.put(ent.getKey(), thresholdValue);
+		}
+		return analysis;
 	}
 	
 	private static int setEditDistance(List<Object> a, List<Object> b) {
