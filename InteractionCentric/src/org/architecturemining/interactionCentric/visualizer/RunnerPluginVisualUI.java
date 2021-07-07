@@ -5,9 +5,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -15,6 +20,7 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -22,14 +28,18 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.PlainDocument;
 
 import org.architecturemining.interactionCentric.models.SingleLikelihood;
 import org.architecturemining.interactionCentric.models.TracesLikelihood;
 import org.architecturemining.interactionCentric.util.HelperFunctions;
+import org.architecturemining.interactionCentric.util.IntegerFilter;
 import org.processmining.framework.plugin.PluginContext;
 import org.python.icu.text.DecimalFormat;
 
@@ -38,8 +48,13 @@ import com.mxgraph.swing.mxGraphComponent;
 public class RunnerPluginVisualUI extends JPanel {
 	private final JPanel topbar = new JPanel();
 	private boolean showEnd, showStart;
+	private boolean statisticalAnalysisSelected;
 	private String selectedCostFunction = "addedProbability";
+	private TracesLikelihood tL;
+	private Double statisticalThresholdValue;
+	private JTextField textField_1;
 	public RunnerPluginVisualUI(PluginContext context, TracesLikelihood tL) {
+		this.tL = tL;
 		topbar.setBackground(Color.GRAY);
 		this.setBackground(Color.white);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -65,10 +80,19 @@ public class RunnerPluginVisualUI extends JPanel {
                  SingleLikelihood listItem = tL.traces.get(index);
                  if (listItem != null) {
                       setText("Trace "+ (index + 1));
-                      if (listItem.getBehaviour().get(selectedCostFunction)) {
-                    	  setBackground(new Color(103, 194, 93)); // light green
-                      } else {
-                    	  setBackground(new Color(194, 74, 66)); // light red
+                      
+                      if(statisticalAnalysisSelected) {
+                    	  if(listItem.getLikelihood(selectedCostFunction) > statisticalThresholdValue)
+                    		  setBackground(new Color(103, 194, 93)); // light green
+                    	  else{
+                    		  setBackground(new Color(194, 74, 66)); // light red
+                    	  }
+                      }else {	                      
+	                      if (listItem.getBehaviour().get(selectedCostFunction)) {
+	                    	  setBackground(new Color(103, 194, 93)); // light green
+	                      } else {
+	                    	  setBackground(new Color(194, 74, 66)); // light red
+	                      }
                       }
                       if (isSelected) {
                            setBackground(getBackground().darker());
@@ -196,6 +220,85 @@ public class RunnerPluginVisualUI extends JPanel {
 		panel.add(likelihoodCalculation, BorderLayout.SOUTH);
 		likelihoodCalculation.setVerticalAlignment(SwingConstants.TOP);
 		likelihoodCalculation.setFont(new Font("Tahoma", Font.ITALIC, 12));
+		
+		JPanel StatisticalPanel = new JPanel();
+		LikelihoodCalculationPanel.add(StatisticalPanel, BorderLayout.CENTER);
+		StatisticalPanel.setPreferredSize(new Dimension(200, 200));
+		
+		JLabel lblNewLabel_3 = new JLabel("Statistical Anomaly Detection");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Use statistical analysis");
+		chckbxNewCheckBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(chckbxNewCheckBox.isSelected()) {
+					textField_1.setEditable(true);
+					textField_1.setEnabled(true);
+					statisticalAnalysisSelected = true;
+					computeStatisticalAnalysis(Integer.parseInt(textField_1.getText()));
+				}else {
+					textField_1.setEditable(false);
+					textField_1.setEnabled(false);
+					statisticalAnalysisSelected = false;
+				}
+				
+				tracesList.repaint();
+				tracesList.updateUI();
+			}
+			
+			
+		});
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		textField_1 = new JTextField();
+		PlainDocument doc = (PlainDocument) textField_1.getDocument();
+		doc.setDocumentFilter(new IntegerFilter()); // custom filter only allows for integers.
+		textField_1.setText("5");
+		textField_1.setEditable(false);
+		textField_1.setEnabled(false);
+		panel_1.add(textField_1, BorderLayout.CENTER);
+		textField_1.setColumns(10);
+		
+		JLabel lblNewLabel_4 = new JLabel("Percentage worst traces:");
+		panel_1.add(lblNewLabel_4, BorderLayout.NORTH);
+		
+		JButton applyButton = new JButton("Apply");
+		applyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				computeStatisticalAnalysis(Integer.parseInt(textField_1.getText()));
+				tracesList.repaint();
+				tracesList.updateUI();
+			}
+		});
+		GroupLayout gl_StatisticalPanel = new GroupLayout(StatisticalPanel);
+		gl_StatisticalPanel.setHorizontalGroup(
+			gl_StatisticalPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_StatisticalPanel.createSequentialGroup()
+					.addGroup(gl_StatisticalPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_3)
+						.addComponent(chckbxNewCheckBox)
+						.addGroup(gl_StatisticalPanel.createSequentialGroup()
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(applyButton)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_StatisticalPanel.setVerticalGroup(
+			gl_StatisticalPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_StatisticalPanel.createSequentialGroup()
+					.addGap(5)
+					.addComponent(lblNewLabel_3)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(chckbxNewCheckBox)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_StatisticalPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(applyButton))
+					.addGap(260))
+		);
+		StatisticalPanel.setLayout(gl_StatisticalPanel);
 		left_list_panel.add(list_title, BorderLayout.NORTH);
 		contentPanel.add(right_panel);
 		right_panel.setLayout(new BorderLayout(5, 5));
@@ -256,5 +359,16 @@ public class RunnerPluginVisualUI extends JPanel {
 			}			
 		});
 		
+	}
+	protected void computeStatisticalAnalysis(int parseInt) {
+		if(statisticalAnalysisSelected) {
+			List<Double> currentList = tL.traces.stream().map(sl -> sl.getLikelihood(selectedCostFunction)).collect(Collectors.toList());
+			Collections.sort(currentList);		
+			int thresholdIndex = (int) Math.ceil((double)parseInt * currentList.size() / 100);
+			System.out.println(thresholdIndex);
+			thresholdIndex = thresholdIndex > currentList.size()-1 ? currentList.size()-1 : thresholdIndex; 
+			statisticalThresholdValue = currentList.get(thresholdIndex - 1);
+			System.out.println(statisticalThresholdValue);
+		}
 	}
 }
