@@ -128,11 +128,6 @@ public class TraceRunnerPlugin {
 							Arrays.sort(first);
 							Object[] second =  edgeMap.edges.get(currentNode).toArray();
 							Arrays.sort(second);
-							
-							
-							System.out.println(lis.targetNodes.toString());
-							System.out.println(edgeMap.edges.get(currentNode).toString());
-							System.out.println(setEditDistance(Arrays.asList(first), Arrays.asList(second)));	
 							int dist = setEditDistance(Arrays.asList(first), Arrays.asList(second));
 							if(dist < minimalDistance)
 								minimalDistance = dist;

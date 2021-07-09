@@ -1,0 +1,103 @@
+{
+  "network" : {
+    "nodeNames" : [ "start", "a", "b", "c", "d", "e", "f", "end" ],
+    "traceNodes" : {
+      "a" : {
+        "current" : "a",
+        "outgoingEdgesSets" : {
+          "start" : [ {
+            "targetNodes" : [ "b", "d" ],
+            "occurenceCounter" : 2
+          } ]
+        }
+      },
+      "b" : {
+        "current" : "b",
+        "outgoingEdgesSets" : {
+          "a" : [ {
+            "targetNodes" : [ "c" ],
+            "occurenceCounter" : 2
+          } ],
+          "start" : [ {
+            "targetNodes" : [ "c" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "c" : {
+        "current" : "c",
+        "outgoingEdgesSets" : {
+          "b" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 2
+          }, {
+            "targetNodes" : [ "e" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "d" : {
+        "current" : "d",
+        "outgoingEdgesSets" : {
+          "a" : [ {
+            "targetNodes" : [ "e" ],
+            "occurenceCounter" : 1
+          }, {
+            "targetNodes" : [ "f" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "e" : {
+        "current" : "e",
+        "outgoingEdgesSets" : {
+          "c" : [ {
+            "targetNodes" : [ "f" ],
+            "occurenceCounter" : 1
+          } ],
+          "d" : [ {
+            "targetNodes" : [ "f" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "f" : {
+        "current" : "f",
+        "outgoingEdgesSets" : {
+          "d" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 1
+          } ],
+          "e" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 2
+          } ]
+        }
+      },
+      "start" : {
+        "current" : "start",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "a" ],
+            "occurenceCounter" : 2
+          }, {
+            "targetNodes" : [ "b" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "end" : {
+        "current" : "end",
+        "outgoingEdgesSets" : { }
+      }
+    },
+    "xes" : {
+      "callerTag" : "source",
+      "calleeTag" : "target",
+      "eventTypeTag" : "(empty)"
+    },
+    "eventTypesUsed" : false
+  },
+  "callerTag" : "source",
+  "calleeTag" : "target"
+}
