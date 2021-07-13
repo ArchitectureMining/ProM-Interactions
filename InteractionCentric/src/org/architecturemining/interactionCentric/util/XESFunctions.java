@@ -1,6 +1,9 @@
 package org.architecturemining.interactionCentric.util;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.deckfour.xes.model.XAttributeLiteral;
@@ -69,4 +72,17 @@ public class XESFunctions {
 		return sink.toString();
 	}
 	
+	public List<String> uniqueEntitiesPerTrace(XTrace trace) {
+		Set<String> list = new LinkedHashSet<String>();
+		for (XEvent event : trace) {
+			list.add(getCaller(event));
+			list.add(getCallee(event));
+			if(!eventTypeTag.equals("(empty)")) {
+				list.add(getEventType(event) + "_event");
+			}
+		}
+		List<String> mainList = new ArrayList<String>();
+		mainList.addAll(list);
+		return mainList;
+	}
 }

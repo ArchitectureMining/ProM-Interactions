@@ -26,7 +26,7 @@ import com.mxgraph.view.mxGraph;
 
 public class HelperFunctions {
 
-	public static EdgeMap buildEdgeMap(XTrace trace, XESFunctions xes, List<String> nodeNames, boolean incorporateMessageTypes){
+	public static EdgeMap buildEdgeMap(XTrace trace, XESFunctions xes, boolean incorporateMessageTypes){
 		
 		Set<String> sourceValues = xes.getSourceAttributeValues(trace);
 		Set<String> sinkValues = xes.getSinkAttributeValues(trace);
@@ -37,9 +37,11 @@ public class HelperFunctions {
 		
 		Map<String, Set<String>> edges = new HashMap<String, Set<String>>();
 		Map<String, Set<String>> prevNodes =  new HashMap<String, Set<String>>();
-		for(String node: nodeNames) {
+		for(String node: uniquevalues) {
 			edges.put(node, new HashSet<String>());
 		}
+		edges.put("start", new HashSet<String>());
+		edges.put("end", new HashSet<String>());
 
 		for(XEvent ev: trace) {
 			
