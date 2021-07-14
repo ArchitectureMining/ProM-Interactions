@@ -22,6 +22,6 @@
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.processmining.contexts.uitopia.UI"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="InteractionCentric"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="InteractionCentric"/>
-    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea -Xmx6G -Djava.library.path=.//lib;.//stdlib&#13;&#10;-Djava.system.class.loader=org.processmining.framework.util.ProMClassLoader"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea -Xmx30G -Djava.library.path=.//lib;.//stdlib&#13;&#10;-Djava.system.class.loader=org.processmining.framework.util.ProMClassLoader"/>
     <stringAttribute key="yk-options" value="&#13;&#10;additional-options=&#13;&#10;snapshots-dir=&#13;&#10;"/>
 </launchConfiguration>

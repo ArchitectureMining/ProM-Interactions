@@ -2,14 +2,14 @@ package org.architecturemining.interactionCentric.plugins;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.architecturemining.interactionCentric.models.InteractionModel;
 import org.architecturemining.interactionCentric.models.ParameterSettings;
+import org.architecturemining.interactionCentric.models.LinkedListEdgesSet.EdgeMap;
+import org.architecturemining.interactionCentric.util.HelperFunctions;
 import org.architecturemining.interactionCentric.util.XESFunctions;
 import org.deckfour.xes.model.XAttributeLiteral;
 import org.deckfour.xes.model.XAttributeMap;
@@ -67,47 +67,21 @@ public class ModelDiscoveryPlugin {
 			entityCounter.put(x, 0);
 		}
 		for (XTrace trace : iSettings.log) {
+			EdgeMap edgie = HelperFunctions.buildEdgeMap(trace, xes, iSettings.getEventTypeTag() != "(empty)");
 			
-			Set<String> sourceValues = xes.getSourceAttributeValues(trace);
-			Set<String> sinkValues = xes.getSinkAttributeValues(trace);
-			
-			Set<String> uniquevalues = new HashSet<String>();
-			uniquevalues.addAll(sourceValues);
-			uniquevalues.addAll(sinkValues);
-			
-			int sourceNodeCount = entityCounter.get("start");
-			entityCounter.put("start", sourceNodeCount + 1);
-			List<String> added = new ArrayList<String>();
-			for (XEvent event : trace) {			
-				XAttributeMap attributes = event.getAttributes();
-				String callerAttribute = ((XAttributeLiteral) attributes.get(iSettings.callerTag)).toString();
-				String calleeAttribute = ((XAttributeLiteral) attributes.get(iSettings.calleeTag)).toString();			
-				source = entities.get(callerAttribute);
-				sink = entities.get(calleeAttribute);			
-				cMatrix[source][sink]++;
-				if(!added.contains(callerAttribute)){
-					added.add(callerAttribute);
-					sourceNodeCount = entityCounter.get(callerAttribute);
-					entityCounter.put(callerAttribute, sourceNodeCount + 1);
+			for(String node: entities.keySet()) {
+				if(edgie.edges.containsKey(node)) {
+					int sourceNodeCount = entityCounter.get(node);
+					entityCounter.put(node, sourceNodeCount + 1);
 				}
-				
-				
-				//System.out.println(callerAttribute.toString() + " -> " + calleeAttribute.toString());
-			}
-			
-			// add connections from start node to all entities without having incoming connections
-			for(String x: xes.getStarterNodes(sinkValues, uniquevalues)) {		
-				source = entities.get("start");
-				sink = entities.get(x);			
-				cMatrix[source][sink]++;
-			}
-			
-			// add connections from all nodes which do not have outgoing connections, these will be connected to the end node.
-			for(String x: xes.getEndNodes(sourceValues, uniquevalues)) {
-				source = entities.get(x);
-				sink = entities.get("end");
-				cMatrix[source][sink]++;
-				entityCounter.put(x, entityCounter.get(x) + 1);
+				Set<String> edges = edgie.edges.get(node);
+				if(edges != null) {
+					for(String e : edges) {
+						source = entities.get(node);
+						sink = entities.get(e);	
+						cMatrix[source][sink]++;
+					}
+				}
 			}
 		}	
 		return cMatrix;

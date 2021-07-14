@@ -340,7 +340,8 @@ public class RunnerPluginVisualUI extends JPanel {
 					graph_panel.setLayout(gl_graph_panel);
 		
 					DecimalFormat df2 = new DecimalFormat("#.###");
-					//String likelihood = df2.format(selection.getLikelihood(selectedLikelihoodFunction));
+
+					//String likelihood = df2.format(selection.getEdgeProbabilities().get(likelihoodCalculation));
 					
 					
 					StringBuilder sb = new StringBuilder();

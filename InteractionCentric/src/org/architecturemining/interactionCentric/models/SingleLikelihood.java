@@ -10,6 +10,7 @@ public class SingleLikelihood {
 	
 	Map<String, Set<String>> edgeMap;
 	Map<String, Double> likelihoods;
+	Map<String, Double> edgeProbabilities;
 	XTrace trace;
 	Map<String, Boolean> behaviour;
 	
@@ -17,12 +18,13 @@ public class SingleLikelihood {
 		super();
 	}
 	
-	public SingleLikelihood(Map<String, Set<String>> edgeMap, Map<String, Double> likelihoods, XTrace trace, Map<String, Boolean> behaviour) {
+	public SingleLikelihood(Map<String, Set<String>> edgeMap, Map<String, Double> likelihoods, Map<String, Double> edgeProbabilities, XTrace trace, Map<String, Boolean> behaviour) {
 		super();
 		this.edgeMap = edgeMap;
 		this.likelihoods = likelihoods;
 		this.trace = trace;
 		this.behaviour = behaviour;
+		this.edgeProbabilities = edgeProbabilities;
 	}
 
 
@@ -64,6 +66,14 @@ public class SingleLikelihood {
 
 	public void setBehaviour(Map<String, Boolean> behaviour) {
 		this.behaviour = behaviour;
+	}
+
+	public Map<String, Double> getEdgeProbabilities() {
+		return edgeProbabilities;
+	}
+
+	public void setEdgeProbabilities(Map<String, Double> edgeProbabilities) {
+		this.edgeProbabilities = edgeProbabilities;
 	}
 
 	@Override

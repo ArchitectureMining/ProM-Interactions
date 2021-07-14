@@ -71,7 +71,12 @@ public class InteractionGraph extends DefaultDirectedGraph<GraphNode, GraphEdge>
 			for(String s: entry.getValue()) {
 				GraphNode source = nodes.get(entry.getKey());
 				GraphNode target = nodes.get(s);
-				GraphEdge e = new GraphEdge(source, target, 0);
+				Double probability = (double) 0;
+				if(sL.getEdgeProbabilities().containsKey(entry.getKey()+ "_" + s)) {
+					probability = sL.getEdgeProbabilities().get(entry.getKey() + "_" + s);
+				}
+				
+				GraphEdge e = new GraphEdge(source, target, probability);
 				edges.add(e);
 			}
 		}	

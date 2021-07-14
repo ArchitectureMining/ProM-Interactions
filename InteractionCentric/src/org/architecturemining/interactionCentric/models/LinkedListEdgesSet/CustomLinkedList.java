@@ -40,7 +40,7 @@ public class CustomLinkedList {
 			traceNodes.put(s, new LinkedListNode(s));
 		}
 		for(XTrace trace: log) {	
-			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, nodeNames, eventTypesUsed);
+			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, eventTypesUsed);
 			String prevNode;
 			for(Map.Entry<String, Set<String>> node: edgeMap.edges.entrySet()) {
 				if(node.getValue().size() > 0) {
