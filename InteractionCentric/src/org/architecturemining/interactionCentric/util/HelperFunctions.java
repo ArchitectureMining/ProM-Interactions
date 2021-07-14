@@ -166,6 +166,8 @@ public class HelperFunctions {
         graphVisual.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#cbb57f", eventNodes);
         
         component.setBackground(Color.white);
+        component.getViewport().setOpaque(true);
+        component.getViewport().setBackground(Color.white);
         return component;
 	}
 	

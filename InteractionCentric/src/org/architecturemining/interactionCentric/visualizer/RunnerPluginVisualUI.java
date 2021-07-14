@@ -204,7 +204,7 @@ public class RunnerPluginVisualUI extends JPanel {
 				}
 			}
 		});
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"addedProbability", "timesProbability", "customProbability"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"addedProbability", "minimalProbability", "timesProbability", "customProbability"}));
 		functionSelectionPanel.add(comboBox, BorderLayout.CENTER);
 		
 		JPanel panel = new JPanel();

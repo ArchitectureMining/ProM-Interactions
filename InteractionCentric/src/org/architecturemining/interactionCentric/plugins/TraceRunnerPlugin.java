@@ -78,6 +78,7 @@ public class TraceRunnerPlugin {
 		double timesProbability = 1;
 		double addedProbability = 0;
 		double customProbability = 1;
+		double minimalProbability = 1;
 		
 		int customMatchFailedCounter = 0;
 		
@@ -123,6 +124,8 @@ public class TraceRunnerPlugin {
 								timesProbability *= interactionProbability;
 								addedProbability += interactionProbability;		
 								customProbability *= (customProbability * 5 + interactionProbability) / 6;
+								if(interactionProbability < minimalProbability)
+									minimalProbability = interactionProbability;
 								passedNodesCounter++;
 								// implements a weighted probability that is slow to react.
 								matchFound = true;
@@ -150,22 +153,24 @@ public class TraceRunnerPlugin {
 							
 							if(minimalDistance > edgeMap.edges.get(currentNode).size())
 								minimalDistance = edgeMap.edges.get(currentNode).size();
-							
+														
+							if(0.2 < minimalProbability)
+								minimalProbability = 0.2;
 							
 							timesProbability *= 0.1;
 							addedProbability += 0;
-							for(String node: edgeMap.edges.get(currentNode)) {
-								if(!passedNodes.contains(node)) {
-									nodeStack.add(node);
-									passedNodes.add(node);
-								}
-							}
+
 						}
 					}
 				}
 			}else {
-				if(currentNode != "end")
+				if(currentNode != "end") {
 					customMatchFailedCounter++;
+					if(0.2 < minimalProbability)
+						minimalProbability = 0.2;					
+					timesProbability *= 0.1;
+					addedProbability += 0;
+				}
 					
 			}
 			
@@ -176,6 +181,7 @@ public class TraceRunnerPlugin {
 		
 		returnMap.put("addedProbability", addedProbability / passedNodesCounter);
 		returnMap.put("timesProbability", timesProbability);
+		returnMap.put("minimalProbability", minimalProbability);
 		
 		customProbability = customMatchFailedCounter > 0 ? Math.pow(0.1, customMatchFailedCounter) : customProbability;
 		// the customprobability is overruled if there exist a non existing path, which results in 0.1^customMatchFailedCounter.
@@ -199,11 +205,13 @@ public class TraceRunnerPlugin {
 					thresholdValue = ent.getValue() > 0.5;
 					break;
 				case "timesProbability":
-					thresholdValue = ent.getValue() > (Math.pow(0.5, edgemap.edges.size()));
+					thresholdValue = ent.getValue() > (Math.pow(0.6, edgemap.edges.size() - 2)); // amount of nodes 
 					break;
 				case "customProbability":
 					thresholdValue = ent.getValue() > 0.25;
 					break;
+				case "minimalProbability":
+					thresholdValue = ent.getValue() > 0.2;
 				
 			}
 			
