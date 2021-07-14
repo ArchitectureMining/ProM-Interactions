@@ -1,5 +1,6 @@
 package org.architecturemining.interactionCentric.util;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -139,6 +140,7 @@ public class HelperFunctions {
         layout.setForceConstant(150); // the higher, the more separated
         layout.setMinDistanceLimit(5);
         layout.setMaxIterations(10000);
+      
                 
         Map<String, Object> nodeStyle = graphVisual.getStylesheet().getDefaultVertexStyle();
         graphVisual.setHtmlLabels(true);
@@ -161,7 +163,7 @@ public class HelperFunctions {
         Object[] eventNodes = Arrays.asList(x).stream().filter(v -> StringUtils.containsIgnoreCase(cellToNodeMap.get(v).fullName, "_event")).collect(Collectors.toList()).toArray();
         graphVisual.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#cbb57f", eventNodes);
         
-        
+        component.setBackground(Color.white);
         return component;
 	}
 	
