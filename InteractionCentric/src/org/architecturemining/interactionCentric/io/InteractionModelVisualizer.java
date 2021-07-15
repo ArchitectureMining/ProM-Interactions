@@ -1,7 +1,5 @@
 package org.architecturemining.interactionCentric.io;
 
-import javax.swing.JComponent;
-
 import org.architecturemining.interactionCentric.models.InteractionModel;
 import org.architecturemining.interactionCentric.visualizer.ModelVisualizationUI;
 import org.processmining.contexts.uitopia.UIPluginContext;

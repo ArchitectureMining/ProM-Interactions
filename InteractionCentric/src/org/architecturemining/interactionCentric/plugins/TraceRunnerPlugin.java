@@ -1,7 +1,6 @@
 package org.architecturemining.interactionCentric.plugins;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +62,7 @@ public class TraceRunnerPlugin {
 			context.getProgress().inc();
 		}
 				
-		return new TracesLikelihood(computations);
+		return new TracesLikelihood(computations, xes);
 	}
 
 
@@ -139,7 +138,7 @@ public class TraceRunnerPlugin {
 							customMatchFailedCounter++;
 							System.out.println("match not found");
 							//only lower probability when it follows a path that is not in the learning set.
-							int minimalDistance = 1000000;
+							/*int minimalDistance = 1000000;
 							for(LinkedListSetOfEdges lis : network.traceNodes.get(currentNode).outgoingEdgesSets.get(prevNode)) {
 								
 								Object[] first = lis.targetNodes.toArray();
@@ -152,7 +151,7 @@ public class TraceRunnerPlugin {
 							}
 							
 							if(minimalDistance > edgeMap.edges.get(currentNode).size())
-								minimalDistance = edgeMap.edges.get(currentNode).size();
+								minimalDistance = edgeMap.edges.get(currentNode).size();*/
 														
 							if(0.2 < minimalProbability)
 								minimalProbability = 0.2;

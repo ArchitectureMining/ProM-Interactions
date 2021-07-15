@@ -43,7 +43,14 @@ public class HelperFunctions {
 		}
 		edges.put("start", new HashSet<String>());
 		edges.put("end", new HashSet<String>());
-
+		
+		// add an empty list of outgoing edges for every message type if event types are incorporated.
+		if(incorporateMessageTypes) {
+			for(String eventType: xes.getAllMessageTypes(trace)) {
+				edges.put(eventType, new HashSet<String>());
+			}
+		}
+		
 		for(XEvent ev: trace) {
 			
 			String caller = xes.getCaller(ev);

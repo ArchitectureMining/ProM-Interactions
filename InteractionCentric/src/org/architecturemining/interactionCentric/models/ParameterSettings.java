@@ -23,6 +23,11 @@ public class ParameterSettings {
 		this.possibleOptions = attributes;
 		this.csvLog = csvLog;
 	}
+	
+	public ParameterSettings(String[] attributes, XLog log) {
+		this.possibleOptions = attributes;
+		this.log = log;
+	}
 
 	public String getCallerTag() {
 		return callerTag;

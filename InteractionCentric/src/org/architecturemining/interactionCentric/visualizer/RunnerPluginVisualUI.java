@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -29,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -46,6 +46,10 @@ import org.python.icu.text.DecimalFormat;
 import com.mxgraph.swing.mxGraphComponent;
 
 public class RunnerPluginVisualUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel topbar = new JPanel();
 	private boolean showEnd, showStart;
 	private boolean statisticalAnalysisSelected;
@@ -55,10 +59,7 @@ public class RunnerPluginVisualUI extends JPanel {
 	private JTextField textField_1;
 	public RunnerPluginVisualUI(PluginContext context, TracesLikelihood tL) {
 		this.tL = tL;
-		topbar.setBackground(Color.GRAY);
-		this.setBackground(Color.white);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		
+		topbar.setBackground(Color.GRAY);		
 		JPanel contentPanel = new JPanel();
 		
 		DefaultListModel<String> traceList = new DefaultListModel<String>();
@@ -75,7 +76,7 @@ public class RunnerPluginVisualUI extends JPanel {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                  Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                  SingleLikelihood listItem = tL.traces.get(index);
                  if (listItem != null) {
@@ -120,9 +121,11 @@ public class RunnerPluginVisualUI extends JPanel {
 		right_panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		JPanel graph_panel = new JPanel();
 				
-		JLabel traceLabel = new JLabel("Select a trace");
-		traceLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		JTextPane traceLabel = new JTextPane();
+		traceLabel.setText("Select a trace");
 		traceLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		traceLabel.setEditable(false);
+		traceLabel.setBackground(this.getBackground());
 		
 		JCheckBox removeEnd = new JCheckBox("Remove End node");
 		removeEnd.addItemListener(new ItemListener() {
@@ -355,7 +358,9 @@ public class RunnerPluginVisualUI extends JPanel {
 					sb.append("</html>");
 					
 					likelihoodCalculation.setText(sb.toString());
-					traceLabel.setText("Trace " + (tracesList.getSelectedIndex() + 1));
+					String trackingID = selection.getTrace().getAttributes().get("concept:name").toString();
+					traceLabel.setText("Trace " + (tracesList.getSelectedIndex() + 1) + "(" + trackingID + ")");
+					
 				}
 			}			
 		});

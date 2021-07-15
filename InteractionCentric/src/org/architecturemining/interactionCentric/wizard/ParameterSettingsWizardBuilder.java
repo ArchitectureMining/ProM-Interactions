@@ -64,7 +64,6 @@ public class ParameterSettingsWizardBuilder<ProMCheckBox> implements ProMWizardS
 		private ProMComboBox<String> callee;
 		private ProMComboBox<String> caseField;
 		private ProMComboBox<String> eventField;
-		private ProMCheckBox f;
 		private ParameterSettings config;
 
 

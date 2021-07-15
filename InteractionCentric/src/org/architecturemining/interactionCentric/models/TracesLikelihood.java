@@ -2,13 +2,17 @@ package org.architecturemining.interactionCentric.models;
 
 import java.util.List;
 
+import org.architecturemining.interactionCentric.util.XESFunctions;
+
 public class TracesLikelihood {
 	
 	public List<SingleLikelihood> traces;
+	public XESFunctions xes;
 	
-	public TracesLikelihood(List<SingleLikelihood> traces) {
+	public TracesLikelihood(List<SingleLikelihood> traces, XESFunctions xes) {
 		super();
 		this.traces = traces;
+		this.xes = xes;
 	}
 
 	public List<SingleLikelihood> getTraces() {

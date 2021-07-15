@@ -1,30 +1,44 @@
 {
   "network" : {
-    "nodeNames" : [ "start", "a", "b", "c", "d", "end" ],
+    "nodeNames" : [ "start", "a", "b", "x_event", "c", "d", "y_event", "z_event", "x", "end" ],
     "traceNodes" : {
+      "y_event" : {
+        "current" : "y_event",
+        "outgoingEdgesSets" : {
+          "ab" : [ {
+            "targetNodes" : [ "b", "c" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
       "a" : {
         "current" : "a",
         "outgoingEdgesSets" : {
           "start" : [ {
-            "targetNodes" : [ "b", "c", "d" ],
+            "targetNodes" : [ "x_event" ],
+            "occurenceCounter" : 4
+          }, {
+            "targetNodes" : [ "y_event" ],
             "occurenceCounter" : 1
           }, {
-            "targetNodes" : [ "b" ],
+            "targetNodes" : [ "z_event" ],
             "occurenceCounter" : 1
-          }, {
-            "targetNodes" : [ "b", "c" ],
-            "occurenceCounter" : 2
           } ]
         }
       },
       "b" : {
         "current" : "b",
         "outgoingEdgesSets" : {
-          "a" : [ {
+          "y_event" : [ {
+            "targetNodes" : [ "y_event" ],
+            "occurenceCounter" : 1
+          } ],
+          "x_event" : [ {
             "targetNodes" : [ "end" ],
             "occurenceCounter" : 3
-          }, {
-            "targetNodes" : [ "c" ],
+          } ],
+          "z_event" : [ {
+            "targetNodes" : [ "end" ],
             "occurenceCounter" : 1
           } ]
         }
@@ -32,11 +46,15 @@
       "c" : {
         "current" : "c",
         "outgoingEdgesSets" : {
-          "a" : [ {
+          "y_event" : [ {
             "targetNodes" : [ "end" ],
-            "occurenceCounter" : 3
+            "occurenceCounter" : 1
           } ],
-          "b" : [ {
+          "x_event" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 2
+          } ],
+          "z_event" : [ {
             "targetNodes" : [ "end" ],
             "occurenceCounter" : 1
           } ]
@@ -45,9 +63,9 @@
       "d" : {
         "current" : "d",
         "outgoingEdgesSets" : {
-          "a" : [ {
+          "x_event" : [ {
             "targetNodes" : [ "end" ],
-            "occurenceCounter" : 1
+            "occurenceCounter" : 2
           } ]
         }
       },
@@ -56,19 +74,58 @@
         "outgoingEdgesSets" : {
           "prev" : [ {
             "targetNodes" : [ "a" ],
-            "occurenceCounter" : 4
+            "occurenceCounter" : 6
+          } ]
+        }
+      },
+      "x" : {
+        "current" : "x",
+        "outgoingEdgesSets" : {
+          "x_event" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 1
           } ]
         }
       },
       "end" : {
         "current" : "end",
         "outgoingEdgesSets" : { }
+      },
+      "x_event" : {
+        "current" : "x_event",
+        "outgoingEdgesSets" : {
+          "a" : [ {
+            "targetNodes" : [ "b", "c", "d" ],
+            "occurenceCounter" : 1
+          }, {
+            "targetNodes" : [ "b", "c" ],
+            "occurenceCounter" : 1
+          }, {
+            "targetNodes" : [ "d" ],
+            "occurenceCounter" : 1
+          }, {
+            "targetNodes" : [ "b", "x" ],
+            "occurenceCounter" : 1
+          } ]
+        }
+      },
+      "z_event" : {
+        "current" : "z_event",
+        "outgoingEdgesSets" : {
+          "a" : [ {
+            "targetNodes" : [ "b", "c" ],
+            "occurenceCounter" : 1
+          } ]
+        }
       }
     },
-    "callerTag" : "Source",
-    "calleeTag" : "Target"
+    "xes" : {
+      "callerTag" : "Source",
+      "calleeTag" : "Target",
+      "eventTypeTag" : "Type"
+    },
+    "eventTypesUsed" : true
   },
-  "nodes" : [ "start", "a", "b", "c", "d", "end" ],
   "callerTag" : "Source",
   "calleeTag" : "Target"
 }

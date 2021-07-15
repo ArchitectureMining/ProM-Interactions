@@ -20,6 +20,8 @@ public class XESFunctions {
 		this.eventTypeTag = eventTypeTag;
 	};
 	
+	public XESFunctions() {} // empty constructor needed for loading imod objects into PROM
+	
 	public Set<String> getSourceAttributeValues(XTrace trace) {
 		Set<String> attributeKeySet = new HashSet<String>();
 		for(XEvent e: trace) {
@@ -36,6 +38,16 @@ public class XESFunctions {
 			XAttributeMap att = e.getAttributes();
 			XAttributeLiteral sink = (XAttributeLiteral) att.get(calleeTag);
 			attributeKeySet.add(sink.toString());
+		}
+    	return attributeKeySet;
+	}
+	
+	public Set<String> getAllMessageTypes(XTrace trace){
+		Set<String> attributeKeySet = new HashSet<String>();
+		for(XEvent e: trace) {
+			XAttributeMap att = e.getAttributes();
+			XAttributeLiteral event = (XAttributeLiteral) att.get(eventTypeTag);
+			attributeKeySet.add(event.toString() +  "_event");
 		}
     	return attributeKeySet;
 	}
@@ -85,4 +97,32 @@ public class XESFunctions {
 		mainList.addAll(list);
 		return mainList;
 	}
+	
+	
+	// getters and setters needed for building the object by a json object.
+	public String getCallerTag() {
+		return callerTag;
+	}
+
+	public void setCallerTag(String callerTag) {
+		this.callerTag = callerTag;
+	}
+
+	public String getCalleeTag() {
+		return calleeTag;
+	}
+
+	public void setCalleeTag(String calleeTag) {
+		this.calleeTag = calleeTag;
+	}
+
+	public String getEventTypeTag() {
+		return eventTypeTag;
+	}
+
+	public void setEventTypeTag(String eventTypeTag) {
+		this.eventTypeTag = eventTypeTag;
+	}
+	
+	
 }
