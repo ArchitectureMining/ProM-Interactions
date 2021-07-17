@@ -358,8 +358,8 @@ public class RunnerPluginVisualUI extends JPanel {
 					sb.append("</html>");
 					
 					likelihoodCalculation.setText(sb.toString());
-					String trackingID = selection.getTrace().getAttributes().get("concept:name").toString();
-					traceLabel.setText("Trace " + (tracesList.getSelectedIndex() + 1) + "(" + trackingID + ")");
+					String trackingID = selection.trackingID;
+					traceLabel.setText("Trace " + (tracesList.getSelectedIndex() + 1) + " (" + trackingID + ")");
 					
 				}
 			}			

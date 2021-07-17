@@ -7,7 +7,13 @@ public class EdgeMap {
 	
 	public Map<String, Set<String>> edges;
 	public Map<String, Set<String>> prevNodes;
+	
+	
 		
+	public EdgeMap() {
+		super();
+	}
+
 	public EdgeMap(Map<String, Set<String>> edges, Map<String, Set<String>> prevNodes) {
 		super();
 		this.edges = edges;

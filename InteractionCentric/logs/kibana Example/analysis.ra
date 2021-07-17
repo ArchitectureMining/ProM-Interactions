@@ -1,0 +1,790 @@
+{
+  "vertexAnalysis" : {
+    "balance-service" : {
+      "outgoingTraces" : [ {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254586527"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254589053"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254590480"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592028"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592909"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254595685"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254596594"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597369"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597755"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254600902"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254602592"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254603773"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254604374"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254608870"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254609898"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254610794"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254612738"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254614252"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254616298"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254617421"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254621210"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254622628"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254623776"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254626016"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254627261"
+      } ],
+      "incomingTraces" : [ {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254586527"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254589053"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254590480"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254592028"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254592909"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254595685"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254596594"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254597369"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254597755"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254600902"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254602592"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254603773"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254604374"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254608870"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254609898"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254610794"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254612738"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254614252"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254616298"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254617421"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254621210"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254622628"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254623776"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254626016"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254627261"
+      } ],
+      "vertexName" : "balance-service"
+    },
+    "auth-server" : {
+      "outgoingTraces" : [ {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254579217"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254594820"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254599702"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254606590"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254619112"
+      } ],
+      "incomingTraces" : [ {
+        "likelihood" : 0.25,
+        "trackingID" : "id-1626254579217"
+      }, {
+        "likelihood" : 0.25,
+        "trackingID" : "id-1626254594820"
+      }, {
+        "likelihood" : 0.25,
+        "trackingID" : "id-1626254599702"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254606590"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254619112"
+      } ],
+      "vertexName" : "auth-server"
+    },
+    "end" : {
+      "outgoingTraces" : [ ],
+      "incomingTraces" : [ {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254579217"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254586527"
+      }, {
+        "likelihood" : 0.15625,
+        "trackingID" : "id-1626254587508"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254589053"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254590480"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592028"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592909"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254594820"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254595685"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254596594"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597369"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597755"
+      }, {
+        "likelihood" : 0.15625,
+        "trackingID" : "id-1626254598465"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254599702"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254600902"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254602592"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254603773"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254604374"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254605366"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254606590"
+      }, {
+        "likelihood" : 0.15625,
+        "trackingID" : "id-1626254607715"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254608870"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254609898"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254610794"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254612738"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254613108"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254614252"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254616298"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254617421"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254619112"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254619672"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254621210"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254622628"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254623776"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254626016"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254626532"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254627261"
+      } ],
+      "vertexName" : "end"
+    },
+    "atm-terminal" : {
+      "outgoingTraces" : [ {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254579217"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254586527"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254587508"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254589053"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254590480"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592028"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592909"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254594820"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254595685"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254596594"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597369"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597755"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254598465"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254599702"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254600902"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254602592"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254603773"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254604374"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254605366"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254606590"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254607715"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254608870"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254609898"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254610794"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254612738"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254613108"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254614252"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254616298"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254617421"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254619112"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254619672"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254621210"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254622628"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254623776"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254626016"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254626532"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254627261"
+      } ],
+      "incomingTraces" : [ ],
+      "vertexName" : "atm-terminal"
+    },
+    "terminal-proxy" : {
+      "outgoingTraces" : [ {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254579217"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254586527"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254587508"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254589053"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254590480"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592028"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592909"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254594820"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254595685"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254596594"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597369"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597755"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254598465"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254599702"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254600902"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254607715"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254608870"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254609898"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254610794"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254621210"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254622628"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254623776"
+      } ],
+      "incomingTraces" : [ {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254579217"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254586527"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254587508"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254589053"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254590480"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592028"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592909"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254594820"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254595685"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254596594"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597369"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597755"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254598465"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254599702"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254600902"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254607715"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254608870"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254609898"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254610794"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254621210"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254622628"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254623776"
+      } ],
+      "vertexName" : "terminal-proxy"
+    },
+    "bank-service" : {
+      "outgoingTraces" : [ {
+        "likelihood" : 0.25,
+        "trackingID" : "id-1626254579217"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254586527"
+      }, {
+        "likelihood" : 0.15625,
+        "trackingID" : "id-1626254587508"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254589053"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254590480"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254592028"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254592909"
+      }, {
+        "likelihood" : 0.25,
+        "trackingID" : "id-1626254594820"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254595685"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254596594"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254597369"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254597755"
+      }, {
+        "likelihood" : 0.15625,
+        "trackingID" : "id-1626254598465"
+      }, {
+        "likelihood" : 0.25,
+        "trackingID" : "id-1626254599702"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254600902"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254602592"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254603773"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254604374"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254605366"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254606590"
+      }, {
+        "likelihood" : 0.15625,
+        "trackingID" : "id-1626254607715"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254608870"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254609898"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254610794"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254612738"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254613108"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254614252"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254616298"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254617421"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254619112"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254619672"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254621210"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254622628"
+      }, {
+        "likelihood" : 0.59375,
+        "trackingID" : "id-1626254623776"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254626016"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254626532"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254627261"
+      } ],
+      "incomingTraces" : [ {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254579217"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254586527"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254587508"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254589053"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254590480"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592028"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254592909"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254594820"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254595685"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254596594"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597369"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254597755"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254598465"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254599702"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254600902"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254602592"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254603773"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254604374"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254605366"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254606590"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254607715"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254608870"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254609898"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254610794"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254612738"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254613108"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254614252"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254616298"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254617421"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254619112"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254619672"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254621210"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254622628"
+      }, {
+        "likelihood" : 1.0,
+        "trackingID" : "id-1626254623776"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254626016"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254626532"
+      }, {
+        "likelihood" : 0.0,
+        "trackingID" : "id-1626254627261"
+      } ],
+      "vertexName" : "bank-service"
+    }
+  }
+}

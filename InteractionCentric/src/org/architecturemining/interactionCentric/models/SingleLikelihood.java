@@ -1,33 +1,41 @@
 package org.architecturemining.interactionCentric.models;
 
 import java.util.Map;
-import java.util.Set;
 
+import org.architecturemining.interactionCentric.models.LinkedListEdgesSet.EdgeMap;
 import org.deckfour.xes.model.XTrace;
 
 public class SingleLikelihood {
 
 	
-	Map<String, Set<String>> edgeMap;
-	Map<String, Double> likelihoods;
+	EdgeMap edgeMap;
+	public Map<String, Double> likelihoods;
 	Map<String, Double> edgeProbabilities;
-	XTrace trace;
 	Map<String, Boolean> behaviour;
+	public String trackingID;
 	
 	public SingleLikelihood() {
 		super();
 	}
 	
-	public SingleLikelihood(Map<String, Set<String>> edgeMap, Map<String, Double> likelihoods, Map<String, Double> edgeProbabilities, XTrace trace, Map<String, Boolean> behaviour) {
+	public SingleLikelihood(EdgeMap edgeMap, Map<String, Double> likelihoods, Map<String, Double> edgeProbabilities, XTrace trace, Map<String, Boolean> behaviour) {
 		super();
 		this.edgeMap = edgeMap;
 		this.likelihoods = likelihoods;
-		this.trace = trace;
 		this.behaviour = behaviour;
 		this.edgeProbabilities = edgeProbabilities;
+		this.trackingID = trace.getAttributes().get("concept:name").toString();
+	}
+	
+	
+
+	public String getTrackingID() {
+		return trackingID;
 	}
 
-
+	public void setTrackingID(String trackingID) {
+		this.trackingID = trackingID;
+	}
 
 	public Map<String, Double> getLikelihood() {
 		return likelihoods;
@@ -36,20 +44,12 @@ public class SingleLikelihood {
 		return likelihoods.get(function);
 	}
 
-	public Map<String, Set<String>> getEdgeMap() {
+	public EdgeMap getEdgeMap() {
 		return edgeMap;
 	}
 
-	public void setEdgeMap(Map<String, Set<String>> edgeMap) {
+	public void setEdgeMap(EdgeMap edgeMap) {
 		this.edgeMap = edgeMap;
-	}
-
-	public XTrace getTrace() {
-		return trace;
-	}
-
-	public void setTrace(XTrace trace) {
-		this.trace = trace;
 	}
 
 	public Map<String, Double> getLikelihoods() {

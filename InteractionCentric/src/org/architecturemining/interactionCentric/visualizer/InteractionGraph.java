@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.architecturemining.interactionCentric.models.InteractionModel;
 import org.architecturemining.interactionCentric.models.SingleLikelihood;
+import org.architecturemining.interactionCentric.models.LinkedListEdgesSet.EdgeMap;
 import org.architecturemining.interactionCentric.visualizer.graph.GraphEdge;
 import org.architecturemining.interactionCentric.visualizer.graph.GraphNode;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -62,12 +63,12 @@ public class InteractionGraph extends DefaultDirectedGraph<GraphNode, GraphEdge>
 	public InteractionGraph(SingleLikelihood sL) {
 		super(GraphEdge.class);
 		
-		Map<String, Set<String>> edgemap = sL.getEdgeMap();
-		for(Entry<String, Set<String>> entry : edgemap.entrySet()) {
+		EdgeMap edgemap = sL.getEdgeMap();
+		for(Entry<String, Set<String>> entry : edgemap.edges.entrySet()) {
 			nodes.put(entry.getKey(), new GraphNode(entry.getKey()));
 		}
 		
-		for(Entry<String, Set<String>> entry : edgemap.entrySet()) {
+		for(Entry<String, Set<String>> entry : edgemap.edges.entrySet()) {
 			for(String s: entry.getValue()) {
 				GraphNode source = nodes.get(entry.getKey());
 				GraphNode target = nodes.get(s);

@@ -9,6 +9,8 @@ public class TracesLikelihood {
 	public List<SingleLikelihood> traces;
 	public XESFunctions xes;
 	
+	public TracesLikelihood() {}
+	
 	public TracesLikelihood(List<SingleLikelihood> traces, XESFunctions xes) {
 		super();
 		this.traces = traces;
@@ -21,9 +23,16 @@ public class TracesLikelihood {
 
 	public void setTraces(List<SingleLikelihood> traces) {
 		this.traces = traces;
+	}	
+	
+	public XESFunctions getXes() {
+		return xes;
 	}
-	
-	
+
+	public void setXes(XESFunctions xes) {
+		this.xes = xes;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

@@ -137,6 +137,7 @@ public class HelperFunctions {
 		
         JGraphXAdapter<GraphNode, GraphEdge> jgxAdapter = new JGraphXAdapter<GraphNode, GraphEdge>(ddg);
         HashMap<mxICell, GraphNode> cellToNodeMap = jgxAdapter.getCellToVertexMap();
+        HashMap<GraphEdge, mxICell> edgeToCellMap = jgxAdapter.getEdgeToCellMap();
         mxGraphComponent component = new mxGraphComponent(jgxAdapter);
         component.setConnectable(false);
         mxGraph graphVisual = component.getGraph();
@@ -162,6 +163,11 @@ public class HelperFunctions {
         edgeStyle.put(mxConstants.STYLE_STROKEWIDTH, 4);
         edgeStyle.put(mxConstants.STYLE_STARTSIZE, 8);
         edgeStyle.put(mxConstants.STYLE_ENDSIZE, 8);
+        edgeStyle.put(mxConstants.STYLE_VERTICAL_ALIGN, "top");
+        edgeStyle.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, "bottom");
+        edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#ffffff");
+        edgeStyle.put(mxConstants.STYLE_LABEL_BACKGROUNDCOLOR, "#afb83B");
+        edgeStyle.put(mxConstants.STYLE_FONTSIZE, 16);
 
         layout.execute(jgxAdapter.getDefaultParent());  
         graphVisual.setCellsResizable(false);
@@ -172,7 +178,15 @@ public class HelperFunctions {
         Object[] eventNodes = Arrays.asList(x).stream().filter(v -> StringUtils.containsIgnoreCase(cellToNodeMap.get(v).fullName, "_event")).collect(Collectors.toList()).toArray();
         graphVisual.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#cbb57f", eventNodes);
         
-        component.setBackground(Color.white);
+        //repaint the bad arrows...
+        List<mxICell> edgesCellList = new ArrayList<mxICell>();
+        for(GraphEdge ge: ddg.edgeSet()) {
+        	if(ge.getStrength() < 0.2 && !ge.getSource().getLabel().equals("start")) {
+        		edgesCellList.add(edgeToCellMap.get(ge));
+        	}
+        }
+ 
+        graphVisual.setCellStyles(mxConstants.STYLE_STROKECOLOR, "#ff0000", edgesCellList.toArray());
         component.getViewport().setOpaque(true);
         component.getViewport().setBackground(Color.white);
         return component;

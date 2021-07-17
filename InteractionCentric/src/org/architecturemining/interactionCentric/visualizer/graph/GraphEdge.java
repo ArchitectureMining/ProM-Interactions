@@ -33,7 +33,7 @@ public class GraphEdge extends DefaultWeightedEdge{
 		if(strength > 0) {
 			return df2.format(strength);
 		}else
-			return "";//df2.format(strength);
+			return source.getLabel().equals("start") ? "" : "0";//df2.format(strength);
 		//return source.getLabel() + " -> " + target.getLabel();
 	}
 

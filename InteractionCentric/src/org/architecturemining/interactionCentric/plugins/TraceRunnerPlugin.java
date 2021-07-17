@@ -57,7 +57,7 @@ public class TraceRunnerPlugin {
 			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iSettings.getEventTypeTag() != "(empty)");
 			TraceInformation traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);
 			Map<String, Boolean> analysisResults = analyzeBehaviour(traceLikelihood.likelihoods, edgeMap);
-			computations.add(new SingleLikelihood(edgeMap.edges, traceLikelihood.likelihoods, traceLikelihood.edgeProbability, trace, analysisResults));
+			computations.add(new SingleLikelihood(edgeMap, traceLikelihood.likelihoods, traceLikelihood.edgeProbability, trace, analysisResults));
 			
 			context.getProgress().inc();
 		}
