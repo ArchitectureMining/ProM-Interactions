@@ -52,7 +52,7 @@ public class TraceRunnerPlugin {
         System.out.println("Er zijn traces: " + iSettings.log.size());
         
 		List<SingleLikelihood> computations = new ArrayList<SingleLikelihood>();
-		XESFunctions xes = new XESFunctions(iNetwork.callerTag, iNetwork.calleeTag, iSettings.getEventTypeTag());
+		XESFunctions xes = new XESFunctions(iSettings.callerTag, iSettings.calleeTag, iSettings.getEventTypeTag());
 		for(XTrace trace: iSettings.log) {
 			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iSettings.getEventTypeTag() != "(empty)");
 			TraceInformation traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);

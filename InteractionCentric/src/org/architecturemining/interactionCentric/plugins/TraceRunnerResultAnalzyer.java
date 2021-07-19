@@ -1,13 +1,13 @@
 package org.architecturemining.interactionCentric.plugins;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.architecturemining.interactionCentric.models.RunnerAnalysis;
 import org.architecturemining.interactionCentric.models.SingleLikelihood;
 import org.architecturemining.interactionCentric.models.TracesLikelihood;
+import org.architecturemining.interactionCentric.models.runnerAnalysis.SingleTraceVertexInfo;
+import org.architecturemining.interactionCentric.models.runnerAnalysis.SingleVertexAnalysis;
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
 import org.processmining.framework.plugin.annotations.Plugin;
@@ -43,6 +43,8 @@ public class TraceRunnerResultAnalzyer {
 			
 		Map<String, SingleVertexAnalysis> vertexAnalysis = new HashMap<String, SingleVertexAnalysis>();
 		
+		int totalInteractions = 0;
+		
 		for(SingleLikelihood sl : tLikelihood.traces) {
 			for(String source : sl.getEdgeMap().edges.keySet()) {
 				boolean added = false;
@@ -66,82 +68,12 @@ public class TraceRunnerResultAnalzyer {
 							vertexAnalysis.put(target, new SingleVertexAnalysis(target));
 						}
 						vertexAnalysis.get(target).incomingTraces.add(new SingleTraceVertexInfo(edgeLikelihood, sl.trackingID));
+						totalInteractions++;
 					}
 				}
 			}
 		}
 		
-		return new RunnerAnalysis(vertexAnalysis);
-	}
-
-	
-	public static class SingleVertexAnalysis {
-		
-		List<SingleTraceVertexInfo> outgoingTraces;
-		List<SingleTraceVertexInfo> incomingTraces;
-		String vertexName;
-		
-		public SingleVertexAnalysis(String vertexName) {
-			this.vertexName = vertexName;
-			outgoingTraces = new ArrayList<SingleTraceVertexInfo>();
-			incomingTraces = new ArrayList<SingleTraceVertexInfo>();
-		}
-
-		public List<SingleTraceVertexInfo> getOutgoingTraces() {
-			return outgoingTraces;
-		}
-
-		public void setOutgoingTraces(List<SingleTraceVertexInfo> outgoingTraces) {
-			this.outgoingTraces = outgoingTraces;
-		}
-
-		public List<SingleTraceVertexInfo> getIncomingTraces() {
-			return incomingTraces;
-		}
-
-		public void setIncomingTraces(List<SingleTraceVertexInfo> incomingTraces) {
-			this.incomingTraces = incomingTraces;
-		}
-
-		public String getVertexName() {
-			return vertexName;
-		}
-
-		public void setVertexName(String vertexName) {
-			this.vertexName = vertexName;
-		}
-		
-		
-	}
-	
-	public static class SingleTraceVertexInfo {
-		
-		public double likelihood;
-		public String trackingID;
-
-		public SingleTraceVertexInfo(double likelihood, String trackingID) {
-			super();
-			this.likelihood = likelihood;
-			this.trackingID = trackingID;
-
-		}
-
-		public double getLikelihood() {
-			return likelihood;
-		}
-
-		public void setLikelihood(double likelihood) {
-			this.likelihood = likelihood;
-		}
-
-		public String getTrackingID() {
-			return trackingID;
-		}
-
-		public void setTrackingID(String trackingID) {
-			this.trackingID = trackingID;
-		}
-		
-		
-	}
+		return new RunnerAnalysis(vertexAnalysis, tLikelihood.traces.size(), totalInteractions);
+	}	
 }
