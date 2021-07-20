@@ -37,9 +37,8 @@ public class TracesLikelihoodExporter {
 		PrintWriter pwriter = new PrintWriter(writer);
 		// write object as a json object.
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		String json = ow.writeValueAsString(TL);
-		pwriter.print(json);
-		pwriter.close();
+		ow.writeValue(file, TL);
+		
 	}
 	
 }

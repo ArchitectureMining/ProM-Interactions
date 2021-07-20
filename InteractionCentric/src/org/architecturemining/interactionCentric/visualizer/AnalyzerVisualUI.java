@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -18,9 +20,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import org.architecturemining.interactionCentric.models.RunnerAnalysis;
 import org.architecturemining.interactionCentric.models.runnerAnalysis.SingleTraceVertexInfo;
@@ -73,18 +79,71 @@ public class AnalyzerVisualUI extends JPanel{
 		currentThresholdLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		panel.setLayout(gl_panel);
-		model = new DefaultTableModel(); 	
+		model = new DefaultTableModel(){
+			private static final long serialVersionUID = 1L;
+			Class<?>[] types = new Class [] {
+	            java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
+	        };	         
+	        @Override
+	        public Class<?> getColumnClass(int columnIndex) {
+	            switch (columnIndex) {
+	            	case 0: 
+	            		return String.class;
+	            	case 1:
+	            		return Double.class;
+	            	case 2: 
+	            		return Double.class;
+	            	case 3:
+	            		return Double.class;
+	            	case 4: 
+	            		return Integer.class;
+	            	case 5: 
+	            		return String.class;
+	            	default:
+	            		return String.class;
+	            	
+	            }
+	        }
+		};	
 		model.addColumn("<html><b>Node name</b></html>");
 		model.addColumn("<html><b>Average Total</b></html>");
 		model.addColumn("<html><b>Average Incoming interactions</b></html>");
 		model.addColumn("<html><b>Average outgoing interactions</b></html>");
 		model.addColumn("<html><b># Anomalous interactions</b></html>");
+		model.addColumn("<html><b>% Anomalous interactions</b></html>");
 
 		ResultTable = new JTable(model);
 		ResultTable.setEnabled(false);
 		ResultTable.setFillsViewportHeight(true);
+		
 		fillTable(rAnalysis);
 		
+		Comparator<String> percentageComparator = new Comparator<String>() {
+
+			public int compare(String o1, String o2) {
+				// Get rid of percentage signs and compare the integers.
+				Integer i1 = Integer.parseInt(o1.substring(0, o1.length() - 2));
+				Integer i2 = Integer.parseInt(o2.substring(0, o2.length() - 2));
+				return i1.compareTo(i2);
+			}
+		};
+		
+		Comparator<Double> doubleComparator = new Comparator<Double>() {
+			public int compare(Double o1, Double o2) {
+				return Double.compare(o1, o2);
+			}
+		};
+		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(ResultTable.getModel());
+		ResultTable.setRowSorter(sorter);
+		sorter.setComparator(5, percentageComparator);
+		sorter.setComparator(1, doubleComparator);
+		sorter.setComparator(2, doubleComparator);
+		
+		List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(4, SortOrder.ASCENDING));
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
 		//add(ResultTable, BorderLayout.CENTER);
 		
 		JScrollPane scrollPane = new JScrollPane(ResultTable);
@@ -192,15 +251,16 @@ public class AnalyzerVisualUI extends JPanel{
 	}
 	
 	public void fillTable(RunnerAnalysis rAnalysis) {
-		model.getDataVector().removeAllElements();
+		model.setRowCount(0);
 		DecimalFormat df2 = new DecimalFormat("#.###");
 		
 		for( infoPerNode sa : rAnalysis.sortedAnalysis) {
+			int allTracesCount = rAnalysis.vertexAnalysis.get(sa.nodeName).getIncomingTraces().size() + rAnalysis.vertexAnalysis.get(sa.nodeName).getOutgoingTraces().size();
 			int total = 0;
 			total += calculateValuesWithThreshold(thresholdValue, rAnalysis.vertexAnalysis.get(sa.nodeName).getIncomingTraces());
 			total += calculateValuesWithThreshold(thresholdValue, rAnalysis.vertexAnalysis.get(sa.nodeName).getOutgoingTraces());
 			
-			model.addRow(new Object[] {sa.nodeName, df2.format(sa.averageTotal), df2.format(sa.averageIncoming), df2.format(sa.averageOutgoing), total});
+			model.addRow(new Object[] {sa.nodeName, sa.averageTotal, sa.averageIncoming, sa.averageOutgoing, total, df2.format((total * 100 / allTracesCount)) + " %"});
 		}
 		
 		
@@ -210,4 +270,6 @@ public class AnalyzerVisualUI extends JPanel{
 		int result = traces.stream().reduce(0, (sub, elem) -> sub + (elem.likelihood > threshold ? 0 : 1), Integer::sum);
 		return result;
 	}
+	
+	
 }

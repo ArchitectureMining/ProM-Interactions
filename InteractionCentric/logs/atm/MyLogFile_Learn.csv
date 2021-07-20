@@ -1,3 +1,4 @@
+source;target;message;trackingID;unknown
 atm-terminal;terminal-proxy;authenticationRequest;id-1626254316077;1626254316077
 terminal-proxy;bank-service;authenticationRequest;id-1626254316077;1626254316605
 bank-service;auth-server;autenticationRequest;id-1626254316077;1626254316764

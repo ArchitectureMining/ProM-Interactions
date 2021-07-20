@@ -106,7 +106,8 @@ bank-service;balance-service;withdrawalRequest;id-1626699165713;1626699165716
 atm-terminal;terminal-proxy;withdrawalRequest;id-1626699167752;1626699167752
 terminal-proxy;bank-service;withdrawalRequest;id-1626699167752;1626699167755
 bank-service;balance-service;withdrawalRequest;id-1626699167752;1626699167757
-atm-terminal;bank-service;printReceipt;id-1626699168865;1626699168865atm-terminal;bank-service;checkBalance;id-1626702858194;1626702858194
+atm-terminal;bank-service;printReceipt;id-1626699168865;1626699168865
+atm-terminal;bank-service;checkBalance;id-1626702858194;1626702858194
 bank-service;balance-service;checkBalance;id-1626702858194;1626702858204
 atm-terminal;bank-service;checkBalance;id-1626702858961;1626702858961
 bank-service;balance-service;checkBalance;id-1626702858961;1626702858964

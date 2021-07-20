@@ -169,6 +169,7 @@ public class TraceRunnerPlugin {
 						minimalProbability = 0.2;					
 					timesProbability *= 0.1;
 					addedProbability += 0;
+					passedNodesCounter++;
 				}
 					
 			}
@@ -207,7 +208,7 @@ public class TraceRunnerPlugin {
 					thresholdValue = ent.getValue() > (Math.pow(0.6, edgemap.edges.size() - 2)); // amount of nodes 
 					break;
 				case "customProbability":
-					thresholdValue = ent.getValue() > 0.25;
+					thresholdValue = ent.getValue() > (Math.pow(0.7, edgemap.edges.size() - 2));
 					break;
 				case "minimalProbability":
 					thresholdValue = ent.getValue() > 0.2;

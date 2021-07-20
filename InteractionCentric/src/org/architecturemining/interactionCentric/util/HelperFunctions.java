@@ -143,7 +143,6 @@ public class HelperFunctions {
         mxGraph graphVisual = component.getGraph();
         graphVisual.setAllowDanglingEdges(false);
         graphVisual.setCellsEditable(true);
-        
         // positioning via jgraphx layouts
         mxFastOrganicLayout layout = new mxFastOrganicLayout(jgxAdapter);  
         
@@ -170,8 +169,8 @@ public class HelperFunctions {
         edgeStyle.put(mxConstants.STYLE_FONTSIZE, 16);
 
         layout.execute(jgxAdapter.getDefaultParent());  
-        graphVisual.setCellsResizable(false);
-        graphVisual.setAutoSizeCells(false);
+        graphVisual.setCellsResizable(true);
+        graphVisual.setAutoSizeCells(true);
         
         //repaint the event cells
         Object[] x = graphVisual.getChildVertices(graphVisual.getDefaultParent());

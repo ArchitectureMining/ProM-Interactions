@@ -8,10 +8,10 @@ import org.deckfour.xes.model.XTrace;
 public class SingleLikelihood {
 
 	
-	EdgeMap edgeMap;
+	public EdgeMap edgeMap;
 	public Map<String, Double> likelihoods;
-	Map<String, Double> edgeProbabilities;
-	Map<String, Boolean> behaviour;
+	public Map<String, Double> edgeProbabilities;
+	public Map<String, Boolean> behaviour;
 	public String trackingID;
 	
 	public SingleLikelihood() {

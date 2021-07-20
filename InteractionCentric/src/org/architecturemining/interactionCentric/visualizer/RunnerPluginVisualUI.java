@@ -8,20 +8,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -53,10 +53,11 @@ public class RunnerPluginVisualUI extends JPanel {
 	private final JPanel topbar = new JPanel();
 	private boolean showEnd, showStart;
 	private boolean statisticalAnalysisSelected;
-	private String selectedCostFunction = "addedProbability";
+	private List<String> selectedCostFunctions = new ArrayList<String>(Arrays.asList("addedProbability"));
 	private TracesLikelihood tL;
 	private Double statisticalThresholdValue;
 	private JTextField textField_1;
+	private String[] costFunctions = new String[] {"addedProbability", "minimalProbability", "timesProbability", "customProbability"};
 	public RunnerPluginVisualUI(PluginContext context, TracesLikelihood tL) {
 		this.tL = tL;
 		topbar.setBackground(Color.GRAY);		
@@ -83,13 +84,20 @@ public class RunnerPluginVisualUI extends JPanel {
                       setText("Trace "+ (index + 1));
                       
                       if(statisticalAnalysisSelected) {
-                    	  if(listItem.getLikelihood(selectedCostFunction) > statisticalThresholdValue)
+                    	  if(listItem.getLikelihood(selectedCostFunctions.get(0)) > statisticalThresholdValue)
                     		  setBackground(new Color(103, 194, 93)); // light green
                     	  else{
                     		  setBackground(new Color(194, 74, 66)); // light red
                     	  }
-                      }else {	                      
-	                      if (listItem.getBehaviour().get(selectedCostFunction)) {
+                      }else {
+                    	  boolean faulty = true;
+                    	  for(String cFunc : selectedCostFunctions) {
+                    		  if(listItem.getBehaviour().get(cFunc)) {
+                    			  faulty = false;
+                    		  }
+                    	  }
+                    	  
+	                      if (!faulty) {
 	                    	  setBackground(new Color(103, 194, 93)); // light green
 	                      } else {
 	                    	  setBackground(new Color(194, 74, 66)); // light red
@@ -196,19 +204,22 @@ public class RunnerPluginVisualUI extends JPanel {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		functionSelectionPanel.add(lblNewLabel_2, BorderLayout.NORTH);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {		
-				if(e.getStateChange() == ItemEvent.SELECTED) {
-					System.out.println(comboBox.getSelectedItem());
-					selectedCostFunction = (String) comboBox.getSelectedItem();
+		DefaultListModel<String> costfunc = new DefaultListModel<String>();
+		costfunc.addAll(Arrays.asList(costFunctions));
+		JList<String> functionsListSelection = new JList<String>(costfunc);
+		functionsListSelection.setToolTipText("Multiple selected items will classify anomalies when all functions score below threshold.");
+		functionsListSelection.setSelectedIndex(0);
+		functionsListSelection.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				selectedCostFunctions.clear();
+				for(int i : functionsListSelection.getSelectedIndices()) {				
+					selectedCostFunctions.add(functionsListSelection.getModel().getElementAt(i));
 					tracesList.repaint();
 					tracesList.updateUI();
 				}
 			}
 		});
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"addedProbability", "minimalProbability", "timesProbability", "customProbability"}));
-		functionSelectionPanel.add(comboBox, BorderLayout.CENTER);
+		functionSelectionPanel.add(functionsListSelection, BorderLayout.CENTER);
 		
 		JPanel panel = new JPanel();
 		functionSelectionPanel.add(panel, BorderLayout.SOUTH);
@@ -368,13 +379,11 @@ public class RunnerPluginVisualUI extends JPanel {
 	}
 	protected void computeStatisticalAnalysis(int parseInt) {
 		if(statisticalAnalysisSelected) {
-			List<Double> currentList = tL.traces.stream().map(sl -> sl.getLikelihood(selectedCostFunction)).collect(Collectors.toList());
+			List<Double> currentList = tL.traces.stream().map(sl -> sl.getLikelihood(selectedCostFunctions.get(0))).collect(Collectors.toList());
 			Collections.sort(currentList);		
 			int thresholdIndex = (int) Math.ceil((double)parseInt * currentList.size() / 100);
-			System.out.println(thresholdIndex);
 			thresholdIndex = thresholdIndex > currentList.size()-1 ? currentList.size()-1 : thresholdIndex; 
 			statisticalThresholdValue = currentList.get(thresholdIndex - 1);
-			System.out.println(statisticalThresholdValue);
 		}
 	}
 }
