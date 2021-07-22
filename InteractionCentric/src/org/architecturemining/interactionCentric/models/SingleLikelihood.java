@@ -13,18 +13,20 @@ public class SingleLikelihood {
 	public Map<String, Double> edgeProbabilities;
 	public Map<String, Boolean> behaviour;
 	public String trackingID;
+	public int passedNodesCounter;
 	
 	public SingleLikelihood() {
 		super();
 	}
 	
-	public SingleLikelihood(EdgeMap edgeMap, Map<String, Double> likelihoods, Map<String, Double> edgeProbabilities, XTrace trace, Map<String, Boolean> behaviour) {
+	public SingleLikelihood(EdgeMap edgeMap, Map<String, Double> likelihoods, Map<String, Double> edgeProbabilities, XTrace trace, Map<String, Boolean> behaviour, int passedNodesCounter) {
 		super();
 		this.edgeMap = edgeMap;
 		this.likelihoods = likelihoods;
 		this.behaviour = behaviour;
 		this.edgeProbabilities = edgeProbabilities;
 		this.trackingID = trace.getAttributes().get("concept:name").toString();
+		this.passedNodesCounter = passedNodesCounter;
 	}
 	
 	

@@ -37,9 +37,9 @@ public class TraceRunnerResultAnalzyer {
 		
 		context.getProgress().setMinimum(0);
         context.getProgress().setMaximum(tLikelihood.traces.size());
-        context.getProgress().setCaption("amount of trace");
+        context.getProgress().setCaption("amount of traces");
         context.getProgress().setIndeterminate(false);	
-		context.getProgress().inc();
+		
 			
 		Map<String, SingleVertexAnalysis> vertexAnalysis = new HashMap<String, SingleVertexAnalysis>();
 		
@@ -72,6 +72,7 @@ public class TraceRunnerResultAnalzyer {
 					}
 				}
 			}
+			context.getProgress().inc();
 		}
 		
 		return new RunnerAnalysis(vertexAnalysis, tLikelihood.traces.size(), totalInteractions);
