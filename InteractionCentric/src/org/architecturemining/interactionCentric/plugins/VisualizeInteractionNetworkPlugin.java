@@ -11,8 +11,6 @@ import org.architecturemining.interactionCentric.models.ParameterSettings;
 import org.architecturemining.interactionCentric.models.LinkedListEdgesSet.EdgeMap;
 import org.architecturemining.interactionCentric.util.HelperFunctions;
 import org.architecturemining.interactionCentric.util.XESFunctions;
-import org.deckfour.xes.model.XAttributeLiteral;
-import org.deckfour.xes.model.XAttributeMap;
 import org.deckfour.xes.model.XEvent;
 import org.deckfour.xes.model.XTrace;
 import org.processmining.contexts.uitopia.UIPluginContext;
@@ -28,7 +26,7 @@ import org.processmining.framework.plugin.annotations.Plugin;
  * 
  * 
 */
-public class ModelDiscoveryPlugin {
+public class VisualizeInteractionNetworkPlugin {
 	@Plugin(
 			name = "Interaction model plugin",
 			parameterLabels = { "Parameter Settings(Xlog included)"},
@@ -43,10 +41,10 @@ public class ModelDiscoveryPlugin {
             email = "w.d.verhaar@students.uu.nl"
     )
 	public static InteractionModel modelDiscovery(final UIPluginContext context, ParameterSettings iSettings) {	
-
-		ArrayList<String> s = uniqueEntities(iSettings);
+		XESFunctions xes = new XESFunctions(iSettings.callerTag, iSettings.calleeTag, iSettings.getEventTypeTag());
+		ArrayList<String> s = uniqueEntities(iSettings, !iSettings.getEventTypeTag().equals("(empty)"), xes);
 		InteractionModel iModel = new InteractionModel(s, iSettings);
-		iModel.setConnectionMatrix(createMatrix(iModel.entities, iSettings));
+		iModel.setConnectionMatrix(createVisualizationModel(iModel.entities, iSettings, xes));
 		iModel.computeProbabilityMatrix(entityCounter);
 		return iModel;
 		
@@ -57,19 +55,17 @@ public class ModelDiscoveryPlugin {
 	public static Map<String, Integer> entityCounter = new HashMap<String, Integer>();
 	// build the matrix and fill it by counting the connections between nodes. 
 	// The start and end node connections are made outside of the loop.
-	private static int[][] createMatrix(Map<String, Integer> entities, ParameterSettings iSettings) {
-		XESFunctions xes = new XESFunctions(iSettings.callerTag, iSettings.calleeTag, iSettings.getEventTypeTag());
-		
-		
+	private static int[][] createVisualizationModel(Map<String, Integer> entities, ParameterSettings iSettings, XESFunctions xes) {
+				
 		int source, sink;
 		int[][] cMatrix = new int[entities.size()][entities.size()];	
 		for(String x: entities.keySet()) {
 			entityCounter.put(x, 0);
 		}
 		for (XTrace trace : iSettings.log) {
-			EdgeMap edgie = HelperFunctions.buildEdgeMap(trace, xes, iSettings.getEventTypeTag() != "(empty)");
+			EdgeMap edgie = HelperFunctions.buildEdgeMap(trace, xes, !iSettings.getEventTypeTag().equals("(empty)"));
 			
-			for(String node: entities.keySet()) {
+			for(String node: edgie.edges.keySet()) {
 				if(edgie.edges.containsKey(node)) {
 					int sourceNodeCount = entityCounter.get(node);
 					entityCounter.put(node, sourceNodeCount + 1);
@@ -88,26 +84,20 @@ public class ModelDiscoveryPlugin {
 	}
 
 	// Compute all unique entities from an event log by looping over all events and saving the unique values encountered.
-	public static ArrayList<String> uniqueEntities(ParameterSettings iSettings) {
+	public static ArrayList<String> uniqueEntities(ParameterSettings iSettings, boolean messageTypesUsed, XESFunctions xes) {
 		Set<String> list = new LinkedHashSet<String>();
 		list.add("start");
 		for (XTrace trace : iSettings.log) {
-			Set<String> traceList = uniqueEntitiesPerTrace(trace,iSettings);
-	        list.addAll(traceList);
+			for (XEvent event : trace) {
+				if(messageTypesUsed) {
+					list.add(xes.getEventType(event) + "_event");
+				}
+				list.add(xes.getCaller(event));
+				list.add(xes.getCallee(event));
+			}
 		}
 		list.add("end");
-		return new ArrayList<>(list);
-	}
-	
-	public static Set<String> uniqueEntitiesPerTrace(XTrace trace, ParameterSettings iSettings) {
-		Set<String> list = new LinkedHashSet<String>();
-		for (XEvent event : trace) {
-			XAttributeMap attributes = event.getAttributes();
-			XAttributeLiteral callerAttribute = (XAttributeLiteral) attributes.get(iSettings.callerTag);
-			XAttributeLiteral calleeAttribute = (XAttributeLiteral) attributes.get(iSettings.calleeTag);
-			list.add(callerAttribute.toString());
-			list.add(calleeAttribute.toString());
-		}
-		return list;
+		System.out.println(list.size());
+		return new ArrayList<>(list);	
 	}
 }

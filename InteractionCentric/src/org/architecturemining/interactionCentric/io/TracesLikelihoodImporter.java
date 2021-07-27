@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Plugin(
 		name = "Import TracesLikelihood",
 		parameterLabels = { "Filename" },
-		returnLabels = { "TracesLikelihood" },
+		returnLabels = { "Likelihood per Trace" },
 		returnTypes = { TracesLikelihood.class })
 @UIImportPlugin(description = "TracesLikelihood importer", extensions = {"tsl"})
 public class TracesLikelihoodImporter extends AbstractImportPlugin{

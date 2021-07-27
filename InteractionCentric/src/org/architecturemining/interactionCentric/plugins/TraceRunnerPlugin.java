@@ -53,13 +53,15 @@ public class TraceRunnerPlugin {
         
 		List<SingleLikelihood> computations = new ArrayList<SingleLikelihood>();
 		XESFunctions xes = new XESFunctions(iSettings.callerTag, iSettings.calleeTag, iSettings.getEventTypeTag());
+		int cnt = 1;
 		for(XTrace trace: iSettings.log) {
 			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iSettings.getEventTypeTag() != "(empty)");
 			TraceInformation traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);
 			Map<String, Boolean> analysisResults = analyzeBehaviour(traceLikelihood.likelihoods, edgeMap, traceLikelihood.passedNodesCounter);
 			computations.add(new SingleLikelihood(edgeMap, traceLikelihood.likelihoods, traceLikelihood.edgeProbability, trace, analysisResults, traceLikelihood.passedNodesCounter));
-			
+			System.out.println("Trace " + cnt + " has " + traceLikelihood.passedNodesCounter + " interactions");
 			context.getProgress().inc();
+			cnt++;
 		}
 				
 		return new TracesLikelihood(computations, xes);
@@ -120,12 +122,7 @@ public class TraceRunnerPlugin {
 						for(LinkedListSetOfEdges lis : network.traceNodes.get(currentNode).outgoingEdgesSets.get(prevNode)) {
 							if(lis.targetNodes.equals(edgeMap.edges.get(currentNode))) {
 								float interactionProbability = (float)lis.occurenceCounter / totalTraces;		
-								
-								//correction for non existing traces in the learning model (mostly already differ at the start).
-								if(interactionProbability < 0.1 && prevNode.equals("start")){
-									interactionProbability = (float) 0.8;
-								}
-								
+
 								timesProbability *= interactionProbability;
 								addedProbability += Math.pow(interactionProbability,3); // pennalize bad interactions	
 								
@@ -149,7 +146,7 @@ public class TraceRunnerPlugin {
 							if(0.2 < minimalProbability)
 								minimalProbability = 0.2;
 							
-							timesProbability *= 0.1;
+							timesProbability *= 0.05;
 							addedProbability += 0;
 
 						}

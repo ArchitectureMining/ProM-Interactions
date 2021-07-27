@@ -588,3 +588,6 @@ bank-service;balance-service;withdrawalRequest;id-1626254535230;1626254535235
 atm-terminal;terminal-proxy;withdrawalRequest;id-1626254536347;1626254536347
 terminal-proxy;bank-service;withdrawalRequest;id-1626254536347;1626254536350
 bank-service;balance-service;withdrawalRequest;id-1626254536347;1626254536352
+atm-terminal;terminal-proxy;anomalyRequest;id-1626699157898;1626699157898
+terminal-proxy;anomaly-server;anomalyRequest;id-1626699157898;1626699157902
+atm-terminal;anomaly-server;anomalyRequest;id-1626699151170;1626699151170
