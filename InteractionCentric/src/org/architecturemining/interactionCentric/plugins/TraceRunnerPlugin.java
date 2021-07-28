@@ -59,7 +59,6 @@ public class TraceRunnerPlugin {
 			TraceInformation traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);
 			Map<String, Boolean> analysisResults = analyzeBehaviour(traceLikelihood.likelihoods, edgeMap, traceLikelihood.passedNodesCounter);
 			computations.add(new SingleLikelihood(edgeMap, traceLikelihood.likelihoods, traceLikelihood.edgeProbability, trace, analysisResults, traceLikelihood.passedNodesCounter));
-			System.out.println("Trace " + cnt + " has " + traceLikelihood.passedNodesCounter + " interactions");
 			context.getProgress().inc();
 			cnt++;
 		}
@@ -147,6 +146,7 @@ public class TraceRunnerPlugin {
 								minimalProbability = 0.2;
 							
 							timesProbability *= 0.05;
+							customProbability *= 0.05;
 							addedProbability += 0;
 
 						}
@@ -158,8 +158,10 @@ public class TraceRunnerPlugin {
 					if(0.2 < minimalProbability)
 						minimalProbability = 0.2;					
 					timesProbability *= 0.1;
+					customProbability *= 0.1; 
 					addedProbability += 0;
 					passedNodesCounter++;
+					
 				}
 					
 			}
@@ -173,7 +175,7 @@ public class TraceRunnerPlugin {
 		returnMap.put("timesProbability", timesProbability);
 		returnMap.put("minimalProbability", minimalProbability);
 		
-		customProbability = customMatchFailedCounter > 0 ? Math.pow(0.1, customMatchFailedCounter) : customProbability;
+		//customProbability = customMatchFailedCounter > 0 ? Math.pow(0.1, customMatchFailedCounter) : customProbability;
 		// the customprobability is overruled if there exist a non existing path, which results in 0.1^customMatchFailedCounter.
 		
 		returnMap.put("customProbability", customProbability);
