@@ -1,14 +1,11 @@
 package org.architecturemining.interactionCentric.models.LinkedListEdgesSet;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.architecturemining.interactionCentric.util.HelperFunctions;
 import org.architecturemining.interactionCentric.util.XESFunctions;
 import org.deckfour.xes.model.XEvent;
 import org.deckfour.xes.model.XLog;
@@ -34,13 +31,15 @@ public class CustomLinkedList {
 	
 	public void computeNetwork(XLog log) {
 		
+		System.out.println(log.size() + " traces in total");
+		int totalEvents = 0;
 		this.nodeNames = uniqueEntities(log);
 		
 		for(String s: nodeNames) {
 			traceNodes.put(s, new LinkedListNode(s));
 		}
 		for(XTrace trace: log) {	
-			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, eventTypesUsed);
+			/*EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, eventTypesUsed);
 			String prevNode;
 			for(Map.Entry<String, Set<String>> node: edgeMap.edges.entrySet()) {
 				if(node.getValue().size() > 0) {
@@ -53,8 +52,10 @@ public class CustomLinkedList {
 					}
 					traceNodes.get(node.getKey()).addOutgoingNodeSet(prevNode, node.getValue());
 				}
-			}
-		}		
+			}*/
+			totalEvents += trace.size();
+		}	
+		System.out.println(totalEvents + " events");
 	}
 	
 	public ArrayList<String> uniqueEntities(XLog log) {

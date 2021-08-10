@@ -126,7 +126,7 @@ public class TraceRunnerPlugin {
 								addedProbability += Math.pow(interactionProbability,3); // pennalize bad interactions	
 								
 								// implements a weighted probability that is slow to react.
-								customProbability *= ((customProbability * 5 + interactionProbability) / 6);
+								customProbability = ((customProbability * 2.5 + interactionProbability) / 3.5);
 								if(interactionProbability < minimalProbability)
 									minimalProbability = interactionProbability;
 								passedNodesCounter++;
@@ -155,8 +155,8 @@ public class TraceRunnerPlugin {
 			}else {
 				if(currentNode != "end") {
 					customMatchFailedCounter++;
-					if(0.2 < minimalProbability)
-						minimalProbability = 0.2;					
+					if(0.1 < minimalProbability)
+						minimalProbability = 0.1;					
 					timesProbability *= 0.1;
 					customProbability *= 0.1; 
 					addedProbability += 0;
@@ -200,10 +200,10 @@ public class TraceRunnerPlugin {
 					thresholdValue = ent.getValue() > (Math.pow(0.5, passedNodesCounter)); // amount of nodes 
 					break;
 				case "customProbability":
-					thresholdValue = ent.getValue() > (Math.pow(0.5, passedNodesCounter));
+					thresholdValue = ent.getValue() > (Math.pow(0.6, passedNodesCounter));
 					break;
 				case "minimalProbability":
-					thresholdValue = ent.getValue() > 0.2;
+					thresholdValue = ent.getValue() > 0.1;
 				
 			}
 			
