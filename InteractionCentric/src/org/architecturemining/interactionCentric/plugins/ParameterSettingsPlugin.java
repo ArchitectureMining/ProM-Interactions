@@ -2,8 +2,10 @@ package org.architecturemining.interactionCentric.plugins;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Set;
 
 import org.architecturemining.interactionCentric.models.ParameterSettings;
+import org.architecturemining.interactionCentric.util.XAttributeLiteralValues;
 import org.architecturemining.interactionCentric.wizard.ParameterSettingsWizardBuilder;
 import org.deckfour.xes.model.XLog;
 import org.processmining.contexts.uitopia.UIPluginContext;
@@ -56,7 +58,7 @@ public class ParameterSettingsPlugin {
 		
 		ParameterSettings iSettings = new ParameterSettings(attributes, log);
 		ListWizard<ParameterSettings> wizard = new ListWizard<>(
-				new ParameterSettingsWizardBuilder(iSettings));
+				new ParameterSettingsWizardBuilder<Object>(iSettings));
 		iSettings = ProMWizardDisplay.show(context, wizard, iSettings);
 		
 		
@@ -83,22 +85,60 @@ public class ParameterSettingsPlugin {
 			conversionConfig.autoDetect();
 			
 			//Preprocessing
-			String[] columns = csvFile.readHeader(importConfig);
 			conversionConfig.setCaseColumns(Arrays.asList(iSettings.getCaseID()));
 			
 			
 			//XES conversion
 			CSVConversion converter = new CSVConversion();
 			ConversionResult<XLog> result = converter.doConvertCSVToXES(csvFile, importConfig, conversionConfig);
+			converter.setMaxSortingMemory(0);
 			
 			System.out.println(result.getConversionErrors());
 			
 			return result.getResult();
 			
-		} catch (CSVConversionException | IOException e) {
+		} catch (CSVConversionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	
+	
+	//Additional option to import an XES file instead of .csv which will prevent needing to parse the complete file again.
+	@Plugin(
+			name = "Interaction Network Parameter Settings from XES",
+			parameterLabels = { "Xlog with interactions"},
+			returnLabels = { "Parameter Settings" },
+			returnTypes = { ParameterSettings.class },
+			userAccessible = true,
+			help = "This plugin takes a XES file and requests the input parameters. "
+	)
+	@UITopiaVariant(
+            affiliation = "Utrecht University", 
+            author = "Arnout Verhaar", 
+            email = "w.d.verhaar@students.uu.nl"
+    )
+	public static ParameterSettings parameterPluginXes(final UIPluginContext context, XLog log) {	
+
+		String[] attributes = getAttributeValues(log); 	
+		ParameterSettings iSettings = new ParameterSettings(attributes, log);
+		ListWizard<ParameterSettings> wizard = new ListWizard<>(
+				new ParameterSettingsWizardBuilder<Object>(iSettings));
+		iSettings = ProMWizardDisplay.show(context, wizard, iSettings);		
+		if (iSettings == null) {
+			context.getFutureResult(0).cancel(true);
+			return null;
+		}		
+		return iSettings;	
+	}
+	
+	private static String[] getAttributeValues(XLog log) {
+    	XAttributeLiteralValues attributeValues = new XAttributeLiteralValues(log);
+    	Set<String> attributeKeySet = attributeValues.getAllAttributeKeys();	    	
+    	String[] attributes = attributeKeySet.toArray(new String[attributeKeySet.size()]);
+	
+    	return attributes;
 	}
 }

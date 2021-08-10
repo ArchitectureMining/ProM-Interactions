@@ -33,7 +33,6 @@ public class InteractionModelExporter {
 			email = "w.d.verhaar@students.uu.nl")
 	@PluginVariant(requiredParameterLabels = { 0, 1 })
 	public void exportModel(UIPluginContext context, InteractionModel onto, File file) throws IOException {
-		System.out.println("inhere");
 		FileWriter writer = new FileWriter(file);
 		PrintWriter pwriter = new PrintWriter(writer);
 		// write object as a json object.

@@ -24,7 +24,7 @@ public class InteractionNetworkImporter extends AbstractImportPlugin{
 		ObjectMapper objectReader = new ObjectMapper();
 		InteractionNetwork i = objectReader.readValue(input, InteractionNetwork.class);	
 		System.out.println("Imported Interaction Network:");
-		System.out.println(i.network.traceNodes.toString());
+		System.out.println(i.network.traceNodes.size());
 		return i;
 	}
 

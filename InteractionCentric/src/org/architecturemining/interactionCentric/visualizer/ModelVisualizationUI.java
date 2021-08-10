@@ -39,6 +39,7 @@ public class ModelVisualizationUI extends JPanel {
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		JPanel optionsPanel = new JPanel();
 		JPanel graph_wrapper = new JPanel();
+		graph_wrapper.setBackground(Color.WHITE);
 		
 		this.setBackground(Color.white);
 				
@@ -53,7 +54,7 @@ public class ModelVisualizationUI extends JPanel {
 		
 		// Compose panel
 		graphPanel = HelperFunctions.createGraphPanel(graph, hideStart, hideEnd);
-			
+		
 		mainPanel.add(optionsPanel, BorderLayout.WEST);
 		
 		JCheckBox hideStartCheckbox = new JCheckBox("Hide 'start' node");
@@ -110,7 +111,9 @@ public class ModelVisualizationUI extends JPanel {
 		optionsPanel.setLayout(gl_optionsPanel);	
 		graph_wrapper.setLayout(new BorderLayout(0, 0));
 		graph_wrapper.add(graphPanel);
+		graphPanel.setBackground(Color.WHITE);
 		mainPanel.add(graph_wrapper, BorderLayout.CENTER);
+		mainPanel.setBackground(Color.WHITE);
 		this.add(mainPanel, BorderLayout.CENTER);
 	}
 }

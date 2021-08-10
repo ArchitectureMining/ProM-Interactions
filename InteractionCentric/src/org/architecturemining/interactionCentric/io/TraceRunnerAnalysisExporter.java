@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.architecturemining.interactionCentric.models.TracesLikelihood;
+import org.architecturemining.interactionCentric.models.RunnerAnalysis;
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UIExportPlugin;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
@@ -16,29 +16,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 @Plugin( 
-		name="TracesLikelihood Exporter", 
+		name="RunnerAnalysis Exporter", 
 		returnLabels = {}, 
 		returnTypes = {}, 
-		parameterLabels = {"TracesLikelihood", "File"}, 
+		parameterLabels = {"RunnerAnalysis", "File"}, 
 		userAccessible= true
 	)
 	@UIExportPlugin( 
-			description="TracesLikelihood Exporter", 
-	        extension = "tsl"
+			description="RunnerAnalysis Exporter", 
+	        extension = "ra"
 	)
-public class TracesLikelihoodExporter {
-
+public class TraceRunnerAnalysisExporter {	
 	@UITopiaVariant(affiliation = "Utrecht University",
 			author = "W.D. Verhaar",
 			email = "w.d.verhaar@students.uu.nl")
 	@PluginVariant(requiredParameterLabels = { 0, 1 })
-	public void exportModel(UIPluginContext context, TracesLikelihood TL, File file) throws IOException {
+	public void exportModel(UIPluginContext context, RunnerAnalysis onto, File file) throws IOException {
 		FileWriter writer = new FileWriter(file);
 		PrintWriter pwriter = new PrintWriter(writer);
 		// write object as a json object.
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		ow.writeValue(file, TL);
-		
+		String json = ow.writeValueAsString(onto);
+		pwriter.print(json);
+		pwriter.close();
 	}
-	
 }

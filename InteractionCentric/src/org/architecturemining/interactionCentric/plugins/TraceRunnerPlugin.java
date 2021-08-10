@@ -1,7 +1,6 @@
 package org.architecturemining.interactionCentric.plugins;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -53,19 +52,24 @@ public class TraceRunnerPlugin {
         System.out.println("Er zijn traces: " + iSettings.log.size());
         
 		List<SingleLikelihood> computations = new ArrayList<SingleLikelihood>();
-		XESFunctions xes = new XESFunctions(iNetwork.callerTag, iNetwork.calleeTag);
+		XESFunctions xes = new XESFunctions(iSettings.callerTag, iSettings.calleeTag, iSettings.getEventTypeTag());
+		int cnt = 1;
 		for(XTrace trace: iSettings.log) {
-			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iNetwork.nodes);
-			Map<String, Double> traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);
-			computations.add(new SingleLikelihood(edgeMap.edges, traceLikelihood, trace));
+			EdgeMap edgeMap = HelperFunctions.buildEdgeMap(trace, xes, iSettings.getEventTypeTag() != "(empty)");
+			TraceInformation traceLikelihood = computeLikelihoodsForSingleTrace(edgeMap, iNetwork.network);
+			Map<String, Boolean> analysisResults = analyzeBehaviour(traceLikelihood.likelihoods, edgeMap, traceLikelihood.passedNodesCounter);
+			computations.add(new SingleLikelihood(edgeMap, traceLikelihood.likelihoods, traceLikelihood.edgeProbability, trace, analysisResults, traceLikelihood.passedNodesCounter));
 			context.getProgress().inc();
+			cnt++;
 		}
 				
-		return new TracesLikelihood(computations);
+		return new TracesLikelihood(computations, xes);
 	}
-	
-	
-	private static Map<String, Double> computeLikelihoodsForSingleTrace(EdgeMap edgeMap, CustomLinkedList network) {
+
+
+	private static TraceInformation computeLikelihoodsForSingleTrace(EdgeMap edgeMap, CustomLinkedList network) {
+		
+		Map<String, Double> edgeProbabilities = new HashMap<String, Double>();
 		
 		Stack<String> nodeStack = new Stack<String>();
 		nodeStack.push("start");
@@ -74,6 +78,10 @@ public class TraceRunnerPlugin {
 		double timesProbability = 1;
 		double addedProbability = 0;
 		double customProbability = 1;
+		double minimalProbability = 1;
+		
+		int customMatchFailedCounter = 0;
+		
 		int passedNodesCounter = 0;
 		List<String> passedNodes = new ArrayList<String>();
 		
@@ -96,55 +104,66 @@ public class TraceRunnerPlugin {
 			}
 			
 			int totalTraces = 1;
+			
+			for(String node: edgeMap.edges.get(currentNode)) {
+				if(!passedNodes.contains(node)) {
+					nodeStack.add(node);
+					passedNodes.add(node);
+				}
+			}
+			
 			if(traces.containsKey(prevNode)) {
-				totalTraces = traces.get(prevNode).stream().mapToInt(x -> x.getOccurenceCounter()).sum();
-				passedNodesCounter++;
-				if(network.traceNodes.get(currentNode).outgoingEdgesSets.containsKey(prevNode)) {
-					boolean matchFound = false;
-					for(LinkedListSetOfEdges lis : network.traceNodes.get(currentNode).outgoingEdgesSets.get(prevNode)) {
-						if(lis.targetNodes.equals(edgeMap.edges.get(currentNode))) {
-							timesProbability *= (float)lis.occurenceCounter / totalTraces;
-							addedProbability += (float)lis.occurenceCounter / totalTraces;
-							for(String node: edgeMap.edges.get(currentNode)) {
-								if(!passedNodes.contains(node)) {
-									nodeStack.add(node);
-									passedNodes.add(node);
-								}
-							}
-							matchFound = true;
-						}
-						
-					}	
-					if(!matchFound) {
-						
-						System.out.println("match not found");
-						//only lower probability when it follows a path that is not in the learning set.
-						int minimalDistance = 1000000;
+				totalTraces = traces.get(prevNode).stream().mapToInt(x -> x.getOccurenceCounter()).sum();							
+				if(currentNode != "start") { 
+					// do not take the start to first service into account. (this probability is often low because of many different options.)					
+					if(network.traceNodes.get(currentNode).outgoingEdgesSets.containsKey(prevNode)) {
+						boolean matchFound = false;
 						for(LinkedListSetOfEdges lis : network.traceNodes.get(currentNode).outgoingEdgesSets.get(prevNode)) {
+							if(lis.targetNodes.equals(edgeMap.edges.get(currentNode))) {
+								float interactionProbability = (float)lis.occurenceCounter / totalTraces;		
+
+								timesProbability *= interactionProbability;
+								addedProbability += Math.pow(interactionProbability,3); // pennalize bad interactions	
+								
+								// implements a weighted probability that is slow to react.
+								customProbability = ((customProbability * 2.5 + interactionProbability) / 3.5);
+								if(interactionProbability < minimalProbability)
+									minimalProbability = interactionProbability;
+								passedNodesCounter++;
+								
+								matchFound = true;
+								for(String node: edgeMap.edges.get(currentNode)) {								
+									edgeProbabilities.put(currentNode + "_" + node, (double) interactionProbability);
+								}
+							}					
+						}	
+						if(!matchFound) {
+							passedNodesCounter++;
+							customMatchFailedCounter++;
+							//only lower probability when it follows a path that is not in the learning set.
+														
+							if(0.2 < minimalProbability)
+								minimalProbability = 0.2;
 							
-							Object[] first = lis.targetNodes.toArray();
-							Arrays.sort(first);
-							Object[] second =  edgeMap.edges.get(currentNode).toArray();
-							Arrays.sort(second);
-							
-							
-							System.out.println(lis.targetNodes.toString());
-							System.out.println(edgeMap.edges.get(currentNode).toString());
-							System.out.println(setEditDistance(Arrays.asList(first), Arrays.asList(second)));	
-							int dist = setEditDistance(Arrays.asList(first), Arrays.asList(second));
-							if(dist < minimalDistance)
-								minimalDistance = dist;
+							timesProbability *= 0.05;
+							customProbability *= 0.05;
+							addedProbability += 0;
+
 						}
-						
-						if(minimalDistance > edgeMap.edges.get(currentNode).size())
-							minimalDistance = edgeMap.edges.get(currentNode).size();
-						
-						customProbability *= 1 - (edgeMap.edges.get(currentNode).size() / minimalDistance == 1 ? 0.95 : edgeMap.edges.get(currentNode).size() / minimalDistance);
-						timesProbability *= 0.1;
-						addedProbability += 0;
-						nodeStack.addAll(edgeMap.edges.get(currentNode));
 					}
 				}
+			}else {
+				if(currentNode != "end") {
+					customMatchFailedCounter++;
+					if(0.1 < minimalProbability)
+						minimalProbability = 0.1;					
+					timesProbability *= 0.1;
+					customProbability *= 0.1; 
+					addedProbability += 0;
+					passedNodesCounter++;
+					
+				}
+					
 			}
 			
 		}
@@ -154,10 +173,43 @@ public class TraceRunnerPlugin {
 		
 		returnMap.put("addedProbability", addedProbability / passedNodesCounter);
 		returnMap.put("timesProbability", timesProbability);
+		returnMap.put("minimalProbability", minimalProbability);
+		
+		//customProbability = customMatchFailedCounter > 0 ? Math.pow(0.1, customMatchFailedCounter) : customProbability;
+		// the customprobability is overruled if there exist a non existing path, which results in 0.1^customMatchFailedCounter.
+		
 		returnMap.put("customProbability", customProbability);
 		
-		return returnMap;
 		
+		TraceInformation result = new TraceInformation(returnMap, edgeProbabilities, passedNodesCounter);
+		
+		return result;
+		
+	}
+	
+	private static Map<String, Boolean> analyzeBehaviour(Map<String, Double> traceLikelihood, EdgeMap edgemap, int passedNodesCounter) {
+		Map<String, Boolean> analysis = new HashMap<String, Boolean>();
+		
+		for(Map.Entry<String, Double> ent: traceLikelihood.entrySet()) {
+			boolean thresholdValue = false;
+			switch(ent.getKey()) {
+				case "addedProbability":
+					thresholdValue = ent.getValue() > 0.6;
+					break;
+				case "timesProbability":
+					thresholdValue = ent.getValue() > (Math.pow(0.5, passedNodesCounter)); // amount of nodes 
+					break;
+				case "customProbability":
+					thresholdValue = ent.getValue() > (Math.pow(0.6, passedNodesCounter));
+					break;
+				case "minimalProbability":
+					thresholdValue = ent.getValue() > 0.1;
+				
+			}
+			
+			analysis.put(ent.getKey(), thresholdValue);
+		}
+		return analysis;
 	}
 	
 	private static int setEditDistance(List<Object> a, List<Object> b) {
@@ -174,4 +226,28 @@ public class TraceRunnerPlugin {
 				setEditDistance(a.subList(0, a.size()-1), b));							// Deletion
 	}
 	
+	private static int stepsFromStart(EdgeMap edgie, String a) {
+		String currentNode = a;
+		int counter = 0;
+		while(!currentNode.equals("start")) {
+			currentNode = (String) edgie.prevNodes.get(currentNode).toArray()[0];
+			counter++;
+		}
+		
+		return counter;
+	}
+	
+	// used to combine a return result
+	static private class TraceInformation {
+		Map<String, Double> likelihoods;
+		Map<String, Double> edgeProbability;
+		int passedNodesCounter;
+			
+		public TraceInformation(Map<String, Double> likelihoods, Map<String, Double> edgeProbability, int passedNodesCounter) {
+			super();
+			this.likelihoods = likelihoods;
+			this.edgeProbability = edgeProbability;
+			this.passedNodesCounter = passedNodesCounter;
+		}
+	}
 }

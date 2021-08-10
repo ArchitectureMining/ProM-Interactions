@@ -15,12 +15,10 @@ public class GraphNode{
 	private NodeID id;
 	// The FQN including ID of the object represented in this node. The label is more concise
 	public String fullName;
-
 	
-	public GraphNode(String name) {
+	public GraphNode(String name) {		
 		this.fullName = name;
-		this.id = new NodeID();
-	
+		this.id = new NodeID();	
 	}
 	
 	public NodeID getId() {
@@ -32,9 +30,6 @@ public class GraphNode{
 	}
 	
 	public String toString() {
-		return   "<html><b style='color:white'>" + this.fullName + "</b></html>";
+		return   "<html><b style='color:white'>" + this.fullName.replace("_event", "") + "</b></html>";
 	}
-
-
-
 }

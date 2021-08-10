@@ -1,5 +1,6 @@
 package org.architecturemining.interactionCentric.util;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import com.mxgraph.view.mxGraph;
 
 public class HelperFunctions {
 
-	public static EdgeMap buildEdgeMap(XTrace trace, XESFunctions xes, List<String> nodeNames){
+	public static EdgeMap buildEdgeMap(XTrace trace, XESFunctions xes, boolean incorporateMessageTypes){
 		
 		Set<String> sourceValues = xes.getSourceAttributeValues(trace);
 		Set<String> sinkValues = xes.getSinkAttributeValues(trace);
@@ -37,18 +38,45 @@ public class HelperFunctions {
 		
 		Map<String, Set<String>> edges = new HashMap<String, Set<String>>();
 		Map<String, Set<String>> prevNodes =  new HashMap<String, Set<String>>();
-		for(String node: nodeNames) {
+		for(String node: uniquevalues) {
 			edges.put(node, new HashSet<String>());
 		}
-
+		edges.put("start", new HashSet<String>());
+		edges.put("end", new HashSet<String>());
+		
+		// add an empty list of outgoing edges for every message type if event types are incorporated.
+		if(incorporateMessageTypes) {
+			for(String eventType: xes.getAllMessageTypes(trace)) {
+				edges.put(eventType, new HashSet<String>());
+			}
+		}
+		
 		for(XEvent ev: trace) {
-			edges.get(xes.getCaller(ev)).add(xes.getCallee(ev));
 			
-			if(prevNodes.containsKey(xes.getCallee(ev)))
-				prevNodes.get(xes.getCallee(ev)).add(xes.getCaller(ev));
-			else
-				prevNodes.put(xes.getCallee(ev), new HashSet<String>(Arrays.asList(xes.getCaller(ev))));
-			
+			String caller = xes.getCaller(ev);
+			String callee = xes.getCallee(ev);
+			String message;
+			if(incorporateMessageTypes) {
+				message = xes.getEventType(ev) + "_event";
+				edges.get(caller).add(message);
+				edges.get(message).add(callee);
+				
+				if(prevNodes.containsKey(message))
+					prevNodes.get(message).add(caller);
+				else
+					prevNodes.put(message, new HashSet<String>(Arrays.asList(caller)));
+				
+				if(prevNodes.containsKey(callee))
+					prevNodes.get(callee).add(message);
+				else
+					prevNodes.put(callee, new HashSet<String>(Arrays.asList(message)));
+			}else {
+				edges.get(caller).add(callee);
+				if(prevNodes.containsKey(callee))
+					prevNodes.get(callee).add(caller);
+				else
+					prevNodes.put(callee, new HashSet<String>(Arrays.asList(caller)));
+			}	
 		}
 		
 		for(String x: xes.getStarterNodes(sinkValues, uniquevalues)) {		
@@ -109,18 +137,19 @@ public class HelperFunctions {
 		
         JGraphXAdapter<GraphNode, GraphEdge> jgxAdapter = new JGraphXAdapter<GraphNode, GraphEdge>(ddg);
         HashMap<mxICell, GraphNode> cellToNodeMap = jgxAdapter.getCellToVertexMap();
+        HashMap<GraphEdge, mxICell> edgeToCellMap = jgxAdapter.getEdgeToCellMap();
         mxGraphComponent component = new mxGraphComponent(jgxAdapter);
         component.setConnectable(false);
         mxGraph graphVisual = component.getGraph();
         graphVisual.setAllowDanglingEdges(false);
         graphVisual.setCellsEditable(true);
-        
         // positioning via jgraphx layouts
         mxFastOrganicLayout layout = new mxFastOrganicLayout(jgxAdapter);  
         
         layout.setForceConstant(150); // the higher, the more separated
         layout.setMinDistanceLimit(5);
         layout.setMaxIterations(10000);
+      
                 
         Map<String, Object> nodeStyle = graphVisual.getStylesheet().getDefaultVertexStyle();
         graphVisual.setHtmlLabels(true);
@@ -133,17 +162,32 @@ public class HelperFunctions {
         edgeStyle.put(mxConstants.STYLE_STROKEWIDTH, 4);
         edgeStyle.put(mxConstants.STYLE_STARTSIZE, 8);
         edgeStyle.put(mxConstants.STYLE_ENDSIZE, 8);
+        edgeStyle.put(mxConstants.STYLE_VERTICAL_ALIGN, "top");
+        edgeStyle.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, "bottom");
+        edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#ffffff");
+        edgeStyle.put(mxConstants.STYLE_LABEL_BACKGROUNDCOLOR, "#afb83B");
+        edgeStyle.put(mxConstants.STYLE_FONTSIZE, 16);
 
         layout.execute(jgxAdapter.getDefaultParent());  
-        graphVisual.setCellsResizable(false);
-        graphVisual.setAutoSizeCells(false);
+        graphVisual.setCellsResizable(true);
+        graphVisual.setAutoSizeCells(true);
         
         //repaint the event cells
         Object[] x = graphVisual.getChildVertices(graphVisual.getDefaultParent());
         Object[] eventNodes = Arrays.asList(x).stream().filter(v -> StringUtils.containsIgnoreCase(cellToNodeMap.get(v).fullName, "_event")).collect(Collectors.toList()).toArray();
         graphVisual.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#cbb57f", eventNodes);
         
-        
+        //repaint the bad arrows...
+        List<mxICell> edgesCellList = new ArrayList<mxICell>();
+        for(GraphEdge ge: ddg.edgeSet()) {
+        	if(ge.getStrength() < 0.2 && !ge.getSource().getLabel().equals("start")) {
+        		edgesCellList.add(edgeToCellMap.get(ge));
+        	}
+        }
+ 
+        graphVisual.setCellStyles(mxConstants.STYLE_STROKECOLOR, "#ff0000", edgesCellList.toArray());
+        component.getViewport().setOpaque(true);
+        component.getViewport().setBackground(Color.white);
         return component;
 	}
 	

@@ -13,6 +13,10 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 */
 public class GraphEdge extends DefaultWeightedEdge{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GraphNode source, target;
 	private double strength;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
@@ -29,7 +33,7 @@ public class GraphEdge extends DefaultWeightedEdge{
 		if(strength > 0) {
 			return df2.format(strength);
 		}else
-			return "";//df2.format(strength);
+			return source.getLabel().equals("start") ? "" : "0";//df2.format(strength);
 		//return source.getLabel() + " -> " + target.getLabel();
 	}
 

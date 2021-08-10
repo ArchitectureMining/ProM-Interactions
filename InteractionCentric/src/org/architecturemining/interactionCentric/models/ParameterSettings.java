@@ -11,9 +11,10 @@ import org.processmining.log.csv.CSVFile;
  * Model containing all parameter settings needed for parsing an event log by the Discovery Plugin
 */
 public class ParameterSettings {
+	public String caseID;
 	public String callerTag;
 	public String calleeTag;
-	public String caseID;
+	public String eventTypeTag;
 	public String[] possibleOptions;
 	public CSVFile csvLog;
 	public XLog log;
@@ -21,6 +22,11 @@ public class ParameterSettings {
 	public ParameterSettings(String[] attributes, CSVFile csvLog) {
 		this.possibleOptions = attributes;
 		this.csvLog = csvLog;
+	}
+	
+	public ParameterSettings(String[] attributes, XLog log) {
+		this.possibleOptions = attributes;
+		this.log = log;
 	}
 
 	public String getCallerTag() {
@@ -62,5 +68,15 @@ public class ParameterSettings {
 	public void setCaseID(String caseID) {
 		this.caseID = caseID;
 	}
+
+	public String getEventTypeTag() {
+		return eventTypeTag;
+	}
+
+	public void setEventTypeTag(String eventTypeTag) {
+		this.eventTypeTag = eventTypeTag;
+	}
+	
+	
 	
 }

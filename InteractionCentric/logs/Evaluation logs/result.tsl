@@ -1,0 +1,1499 @@
+{
+  "traces" : [ {
+    "edgeMap" : {
+      "edges" : {
+        "auth-server" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "auth-server" ]
+      },
+      "prevNodes" : {
+        "auth-server" : [ "bank-service" ],
+        "end" : [ "auth-server" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8125,
+      "minimalProbability" : 0.25,
+      "timesProbability" : 0.25,
+      "customProbability" : 0.7838541666666667
+    },
+    "edgeProbabilities" : {
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "bank-service_auth-server" : 0.25,
+      "auth-server_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254579217",
+    "likelihood" : {
+      "addedProbability" : 0.8125,
+      "minimalProbability" : 0.25,
+      "timesProbability" : 0.25,
+      "customProbability" : 0.7838541666666667
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254586527",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "end" ]
+      },
+      "prevNodes" : {
+        "end" : [ "bank-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.71875,
+      "minimalProbability" : 0.15625,
+      "timesProbability" : 0.15625,
+      "customProbability" : 0.859375
+    },
+    "edgeProbabilities" : {
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "bank-service_end" : 0.15625
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254587508",
+    "likelihood" : {
+      "addedProbability" : 0.71875,
+      "minimalProbability" : 0.15625,
+      "timesProbability" : 0.15625,
+      "customProbability" : 0.859375
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254589053",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254590480",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254592028",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254592909",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "auth-server" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "auth-server" ]
+      },
+      "prevNodes" : {
+        "auth-server" : [ "bank-service" ],
+        "end" : [ "auth-server" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8125,
+      "minimalProbability" : 0.25,
+      "timesProbability" : 0.25,
+      "customProbability" : 0.7838541666666667
+    },
+    "edgeProbabilities" : {
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "bank-service_auth-server" : 0.25,
+      "auth-server_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254594820",
+    "likelihood" : {
+      "addedProbability" : 0.8125,
+      "minimalProbability" : 0.25,
+      "timesProbability" : 0.25,
+      "customProbability" : 0.7838541666666667
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254595685",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254596594",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254597369",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254597755",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "end" ]
+      },
+      "prevNodes" : {
+        "end" : [ "bank-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.71875,
+      "minimalProbability" : 0.15625,
+      "timesProbability" : 0.15625,
+      "customProbability" : 0.859375
+    },
+    "edgeProbabilities" : {
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "bank-service_end" : 0.15625
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254598465",
+    "likelihood" : {
+      "addedProbability" : 0.71875,
+      "minimalProbability" : 0.15625,
+      "timesProbability" : 0.15625,
+      "customProbability" : 0.859375
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "auth-server" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "auth-server" ]
+      },
+      "prevNodes" : {
+        "auth-server" : [ "bank-service" ],
+        "end" : [ "auth-server" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8125,
+      "minimalProbability" : 0.25,
+      "timesProbability" : 0.25,
+      "customProbability" : 0.7838541666666667
+    },
+    "edgeProbabilities" : {
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "bank-service_auth-server" : 0.25,
+      "auth-server_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254599702",
+    "likelihood" : {
+      "addedProbability" : 0.8125,
+      "minimalProbability" : 0.25,
+      "timesProbability" : 0.25,
+      "customProbability" : 0.7838541666666667
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254600902",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254602592",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254603773",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254604374",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "end" ]
+      },
+      "prevNodes" : {
+        "end" : [ "bank-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.0,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : { },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254605366",
+    "likelihood" : {
+      "addedProbability" : 0.0,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "auth-server" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "auth-server" ]
+      },
+      "prevNodes" : {
+        "auth-server" : [ "bank-service" ],
+        "end" : [ "auth-server" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "auth-server_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254606590",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "end" ]
+      },
+      "prevNodes" : {
+        "end" : [ "bank-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.71875,
+      "minimalProbability" : 0.15625,
+      "timesProbability" : 0.15625,
+      "customProbability" : 0.859375
+    },
+    "edgeProbabilities" : {
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "bank-service_end" : 0.15625
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254607715",
+    "likelihood" : {
+      "addedProbability" : 0.71875,
+      "minimalProbability" : 0.15625,
+      "timesProbability" : 0.15625,
+      "customProbability" : 0.859375
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254608870",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254609898",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254610794",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254612738",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "end" ]
+      },
+      "prevNodes" : {
+        "end" : [ "bank-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.0,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : { },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254613108",
+    "likelihood" : {
+      "addedProbability" : 0.0,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254614252",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254616298",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254617421",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "auth-server" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "auth-server" ]
+      },
+      "prevNodes" : {
+        "auth-server" : [ "bank-service" ],
+        "end" : [ "auth-server" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "auth-server_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254619112",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "end" ]
+      },
+      "prevNodes" : {
+        "end" : [ "bank-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.0,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : { },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254619672",
+    "likelihood" : {
+      "addedProbability" : 0.0,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254621210",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254622628",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "terminal-proxy" ],
+        "terminal-proxy" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "terminal-proxy" : [ "atm-terminal" ],
+        "bank-service" : [ "terminal-proxy" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    },
+    "edgeProbabilities" : {
+      "bank-service_balance-service" : 0.59375,
+      "atm-terminal_terminal-proxy" : 1.0,
+      "terminal-proxy_bank-service" : 1.0,
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : true,
+      "minimalProbability" : true,
+      "timesProbability" : true,
+      "customProbability" : true
+    },
+    "trackingID" : "id-1626254623776",
+    "likelihood" : {
+      "addedProbability" : 0.8984375,
+      "minimalProbability" : 0.59375,
+      "timesProbability" : 0.59375,
+      "customProbability" : 0.879688404224537
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254626016",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "end" ]
+      },
+      "prevNodes" : {
+        "end" : [ "bank-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.0,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : { },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254626532",
+    "likelihood" : {
+      "addedProbability" : 0.0,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  }, {
+    "edgeMap" : {
+      "edges" : {
+        "balance-service" : [ "end" ],
+        "start" : [ "atm-terminal" ],
+        "end" : [ ],
+        "atm-terminal" : [ "bank-service" ],
+        "bank-service" : [ "balance-service" ]
+      },
+      "prevNodes" : {
+        "balance-service" : [ "bank-service" ],
+        "end" : [ "balance-service" ],
+        "atm-terminal" : [ "start" ],
+        "bank-service" : [ "atm-terminal" ]
+      }
+    },
+    "likelihoods" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    },
+    "edgeProbabilities" : {
+      "balance-service_end" : 1.0
+    },
+    "behaviour" : {
+      "addedProbability" : false,
+      "minimalProbability" : false,
+      "timesProbability" : false,
+      "customProbability" : false
+    },
+    "trackingID" : "id-1626254627261",
+    "likelihood" : {
+      "addedProbability" : 0.5,
+      "minimalProbability" : 0.2,
+      "timesProbability" : 0.010000000000000002,
+      "customProbability" : 0.010000000000000002
+    }
+  } ],
+  "xes" : {
+    "callerTag" : "Source",
+    "calleeTag" : "Target",
+    "eventTypeTag" : "(empty)"
+  }
+}

@@ -37,7 +37,7 @@ public class PointerList {
 	}
 	
 	public PointerList(XTrace trace, String callerTag, String calleeTag, Map<String, Double> likelihoods) {
-		XESFunctions xes = new XESFunctions(callerTag, calleeTag);
+		XESFunctions xes = new XESFunctions(callerTag, calleeTag, null);
 		this.callerTag = callerTag;
 		this.calleeTag = calleeTag;
 		

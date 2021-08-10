@@ -1,5 +1,9 @@
 package org.architecturemining.interactionCentric.wizard;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.JComponent;
 
 import org.architecturemining.interactionCentric.models.ParameterSettings;
@@ -13,11 +17,13 @@ import org.processmining.framework.util.ui.wizard.ProMWizardStep;
  * email: w.d.verhaar@students.uu.nl
  * 
  * Class for implementing the wizard used by the ParameterSettingsPlugin.
+ * @param <ProMCheckBox>
  *  
 */
 
-public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterSettings>{
+public class ParameterSettingsWizardBuilder<ProMCheckBox> implements ProMWizardStep<ParameterSettings>{
 	public UIPluginContext context;
+	public boolean chooseEventType = true;
 	
 	public ParameterSettingsWizardBuilder(ParameterSettings config) {
 		super();
@@ -35,9 +41,9 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 		
 		String caller = model.getCallerTag();
 		String callee = model.getCalleeTag();
-		
-		// TODO Auto-generated method stub
-		return caller != null && callee != null && !caller.equals(callee);
+		String caseField = model.getCaseID();
+		String eventType = model.getEventTypeTag();
+		return caller != null && callee != null && !caller.equals(callee) && caseField != null && eventType != null;
 	}
 
 	public JComponent getComponent(ParameterSettings config) {
@@ -57,15 +63,19 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 		private ProMComboBox<String> caller;
 		private ProMComboBox<String> callee;
 		private ProMComboBox<String> caseField;
+		private ProMComboBox<String> eventField;
 		private ParameterSettings config;
 
 
 		public ParameterWizard(ParameterSettings config) {
 			super(getTitle());
-			this.caller = this.addComboBox("Caller", config.possibleOptions);
-			this.callee = this.addComboBox("Callee", config.possibleOptions);
 			this.caseField = this.addComboBox("Tracking ID", config.possibleOptions);
+			this.caller = this.addComboBox("Caller", config.possibleOptions);
+			this.callee = this.addComboBox("Callee", config.possibleOptions);				
+			List<String> optionalOption = new ArrayList<String>(Arrays.asList(config.possibleOptions));
+			optionalOption.add(0, "(empty)");
 			
+			this.eventField = this.addComboBox("Event Type (optional)", optionalOption);			
 			this.caller = setComboBoxValueIfExists(caller, "Caller");
 	        this.callee = setComboBoxValueIfExists(callee, "Callee");
 	        
@@ -77,6 +87,8 @@ public class ParameterSettingsWizardBuilder implements ProMWizardStep<ParameterS
 			config.setCallerTag((String) caller.getSelectedItem());
         	config.setCalleeTag((String) callee.getSelectedItem());  
         	config.setCaseID((String) caseField.getSelectedItem());
+        	config.setEventTypeTag((String) eventField.getSelectedItem());
+
 			return config;
 		}
 
