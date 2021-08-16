@@ -1,0 +1,79 @@
+{
+  "network" : {
+    "nodeNames" : [ "start", "atm-terminal", "terminal-proxy", "bank-service", "auth-server", "balance-service", "end" ],
+    "traceNodes" : {
+      "balance-service" : {
+        "current" : "balance-service",
+        "outgoingEdgesSets" : {
+          "bank-service" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 19
+          } ]
+        }
+      },
+      "auth-server" : {
+        "current" : "auth-server",
+        "outgoingEdgesSets" : {
+          "bank-service" : [ {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 8
+          } ]
+        }
+      },
+      "start" : {
+        "current" : "start",
+        "outgoingEdgesSets" : {
+          "prev" : [ {
+            "targetNodes" : [ "atm-terminal" ],
+            "occurenceCounter" : 32
+          } ]
+        }
+      },
+      "end" : {
+        "current" : "end",
+        "outgoingEdgesSets" : { }
+      },
+      "atm-terminal" : {
+        "current" : "atm-terminal",
+        "outgoingEdgesSets" : {
+          "start" : [ {
+            "targetNodes" : [ "terminal-proxy" ],
+            "occurenceCounter" : 32
+          } ]
+        }
+      },
+      "terminal-proxy" : {
+        "current" : "terminal-proxy",
+        "outgoingEdgesSets" : {
+          "atm-terminal" : [ {
+            "targetNodes" : [ "bank-service" ],
+            "occurenceCounter" : 32
+          } ]
+        }
+      },
+      "bank-service" : {
+        "current" : "bank-service",
+        "outgoingEdgesSets" : {
+          "terminal-proxy" : [ {
+            "targetNodes" : [ "auth-server" ],
+            "occurenceCounter" : 8
+          }, {
+            "targetNodes" : [ "balance-service" ],
+            "occurenceCounter" : 19
+          }, {
+            "targetNodes" : [ "end" ],
+            "occurenceCounter" : 5
+          } ]
+        }
+      }
+    },
+    "xes" : {
+      "callerTag" : "Source",
+      "calleeTag" : "Target",
+      "eventTypeTag" : "(empty)"
+    },
+    "eventTypesUsed" : false
+  },
+  "callerTag" : "Source",
+  "calleeTag" : "Target"
+}

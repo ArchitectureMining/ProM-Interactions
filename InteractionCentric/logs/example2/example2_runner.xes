@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file has been generated with the OpenXES library. It conforms -->
+<!-- to the XML serialization of the XES standard for log storage and -->
+<!-- management. -->
+<!-- XES standard version: 1.0 -->
+<!-- OpenXES library version: 1.0RC7 -->
+<!-- OpenXES is available from http://www.openxes.org/ -->
+<log xes.version="1.0" xes.features="">
+	<extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext"/>
+	<extension name="Lifecycle" prefix="lifecycle" uri="http://www.xes-standard.org/lifecycle.xesext"/>
+	<extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext"/>
+	<string key="concept:name" value="XES Event Log"/>
+	<trace>
+		<string key="concept:name" value="trace1"/>
+		<event>
+			<string key="Target" value="b"/>
+			<string key="concept:name" value="x"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+		<event>
+			<string key="Target" value="c"/>
+			<string key="concept:name" value="x"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+		<event>
+			<string key="Target" value="d"/>
+			<string key="concept:name" value="x"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="trace2"/>
+		<event>
+			<string key="Target" value="b"/>
+			<string key="concept:name" value="y"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+		<event>
+			<string key="Target" value="c"/>
+			<string key="concept:name" value="y"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="b"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="trace3"/>
+		<event>
+			<string key="Target" value="b"/>
+			<string key="concept:name" value="x"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+		<event>
+			<string key="Target" value="c"/>
+			<string key="concept:name" value="x"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="trace4"/>
+		<event>
+			<string key="Target" value="b"/>
+			<string key="concept:name" value="z"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+		<event>
+			<string key="Target" value="c"/>
+			<string key="concept:name" value="z"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="trace5"/>
+		<event>
+			<string key="Target" value="d"/>
+			<string key="concept:name" value="x"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<string key="Source" value="a"/>
+		</event>
+	</trace>
+</log>

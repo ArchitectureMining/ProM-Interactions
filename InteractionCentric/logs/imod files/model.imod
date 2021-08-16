@@ -1,0 +1,25 @@
+{
+  "entities" : {
+    "balance-service" : 5,
+    "auth-server" : 4,
+    "start" : 0,
+    "end" : 6,
+    "atm-terminal" : 1,
+    "terminal-proxy" : 2,
+    "bank-service" : 3
+  },
+  "entitiesIndexMapping" : {
+    "0" : "start",
+    "1" : "atm-terminal",
+    "2" : "terminal-proxy",
+    "3" : "bank-service",
+    "4" : "auth-server",
+    "5" : "balance-service",
+    "6" : "end"
+  },
+  "nodeList" : [ "start", "atm-terminal", "terminal-proxy", "bank-service", "auth-server", "balance-service", "end" ],
+  "connectionMatrix" : [ [ 0, 15, 0, 0, 0, 0, 0 ], [ 0, 0, 15, 0, 0, 0, 0 ], [ 0, 0, 0, 15, 0, 0, 0 ], [ 0, 0, 0, 0, 5, 7, 3 ], [ 0, 0, 0, 0, 0, 0, 5 ], [ 0, 0, 0, 0, 0, 0, 7 ], [ 0, 0, 0, 0, 0, 0, 0 ] ],
+  "probabilityMatrix" : [ [ 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.3333333333333333, 0.4666666666666667, 0.2 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 ], [ "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN" ] ],
+  "callerTag" : "Source",
+  "calleeTag" : "Callee"
+}
